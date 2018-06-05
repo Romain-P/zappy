@@ -1,6 +1,7 @@
 .idea
 idea
 cmake-build-debug
+CMakeFiles
 *~
 *#
 *.o
