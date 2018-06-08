@@ -25,7 +25,7 @@ int main(int ac, char **args) {
     server_config_t config = {
             .host = INADDR_ANY,
             .port = atoi(args[1]),
-            .packet_delimiter = ZAPPY_PACKET_DELIMITER,
+            .packet_delimiter = ZAPPY_ARG_DELIMITER,
             .packet_max_size = ZAPPY_BUFFER_SIZE,
             .configure_handlers = &configure_client_handler,
             .on_server_close = &on_server_close

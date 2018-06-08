@@ -6,7 +6,7 @@
 # define ZAPPY_H_
 
 # define ZAPPY_BUFFER_SIZE        (512)
-# define ZAPPY_PACKET_DELIMITER   ("\r\n")
+# define ZAPPY_ARG_DELIMITER   ("\r\n")
 # define ZAPPY_PARAM_SEPARATOR    (" ")
 
 # include "network.h"

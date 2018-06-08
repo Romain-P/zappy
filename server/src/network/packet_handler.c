@@ -13,7 +13,7 @@ static message_t const messages[] = {
                 (deserialize_t) &msg_example_deserialize,
                 (handler_t) &msg_example_handler
         },
-        { NULL, NULL }
+        { NULL }
 };
 
 void send_packet(network_client_t *client, char const *named, void *msg) {
@@ -27,19 +27,19 @@ void send_packet(network_client_t *client, char const *named, void *msg) {
         }
     }
     if (message == NULL) return;
-
     message->serialize(msg, &buffer);
     char *packet = strdup(named);
     size_t pos = strlen(packet);
-
     for (iter_t *it = iter_begin(&buffer); it; iter_next(it)) {
         char *arg = it->data;
         size_t len = strlen(arg) + 1;
         packet = realloc(packet, len);
-        strcpy(packet, " ");
-        strcpy(packet, arg);
+        strcpy(packet + pos, ZAPPY_ARG_DELIMITER);
+        strcpy(packet + pos + 1, arg);
         pos += len;
     }
+    packet = realloc(packet, strlen(packet) + 1);
+    packet[pos] = '\n';
     send(client->id, packet, strlen(packet), 0);
     free(packet);
 }
