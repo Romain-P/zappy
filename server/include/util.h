@@ -21,4 +21,6 @@ void str_free_array(char **array);
 
 bool parse_int(char const *str, int64_t *ptr);
 
+char *to_string(int i);
+
 #endif //MYIRC_UTIL_H

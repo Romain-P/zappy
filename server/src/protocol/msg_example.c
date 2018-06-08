@@ -11,6 +11,10 @@ void msg_example_handler(player_t *player, packet_example_t *msg) {
     msg->some;
     msg->shiet;
     //etc
+    //si tu veux envoyer un packet
+
+    packet_example_t sample = {.some = 10, .shiet = 12, .str = "lol"};
+    send_packet(player->client, "example", &sample);
 }
 
 packet_example_t *msg_example_deserialize(char **args) {
@@ -25,6 +29,8 @@ packet_example_t *msg_example_deserialize(char **args) {
     return (packet);
 }
 
-char *msg_example_serialize(packet_example_t *msg) {
-
+void msg_example_serialize(packet_example_t *msg, list_t *buffer) {
+    list_add(buffer, to_string((msg->some)));
+    list_add(buffer, strdup(msg->str));
+    list_add(buffer, to_string(msg->shiet));
 }

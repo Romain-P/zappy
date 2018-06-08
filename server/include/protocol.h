@@ -16,6 +16,6 @@ struct packet_example_s {
 
 void msg_example_handler(player_t *player, packet_example_t *msg);
 packet_example_t *msg_example_deserialize(char **args);
-char *msg_example_serialize(packet_example_t *msg);
+void msg_example_serialize(packet_example_t *msg, list_t *buffer);
 
 #endif //ZAPPY_PROTOCOL_H

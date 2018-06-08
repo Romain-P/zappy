@@ -68,3 +68,11 @@ bool parse_int(char const *str, int64_t *ptr)
     *ptr = (int64_t) strtol(str, &end, 0);
     return end == str + strlen(str);
 }
+
+char *to_string(int i) {
+    char str[100];
+    sprintf(str, "%d", i);
+    char *allocated = malloc(sizeof(char) * strlen(str));
+    strcpy(allocated, str);
+    return allocated;
+}

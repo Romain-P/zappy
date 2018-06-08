@@ -27,7 +27,7 @@ struct zappy_instance_s {
 };
 
 typedef void (*handler_t)(player_t *, void *);
-typedef char *(*serialize_t)(void *msg);
+typedef void (*serialize_t)(void *msg, list_t *buffer);
 typedef void *(*deserialize_t)(char **args);
 
 struct command_s {
@@ -40,6 +40,8 @@ struct command_s {
 void configure_client_handler(client_handler_t *handler);
 
 void parse_packet(network_client_t *client, char const *packet, size_t len);
+
+void send_packet(network_client_t *client, char const *named, void *msg);
 
 player_t *find_player(network_client_t *client);
 
