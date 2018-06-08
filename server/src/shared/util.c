@@ -70,7 +70,7 @@ bool parse_int(char const *str, int64_t *ptr)
 }
 
 char *to_string(int i) {
-    char str[100];
+    static char str[100];
     sprintf(str, "%d", i);
     char *allocated = malloc(sizeof(char) * strlen(str));
     strcpy(allocated, str);
