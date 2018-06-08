@@ -43,8 +43,4 @@ void parse_packet(network_client_t *client, char const *packet, size_t len);
 
 player_t *find_player(network_client_t *client);
 
-void send_message(player_t *player, char const *msg);
-
-void kick_player(player_t *player, char *msg);
-
 #endif //ZAPPY_H_
