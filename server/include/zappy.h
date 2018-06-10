@@ -24,6 +24,12 @@ struct player_s {
 
 struct zappy_instance_s {
     list_t players;
+    int port;
+    int width;
+    int height;
+    char *name;
+    int nb_clients;
+    int freq;
 };
 
 typedef void (*handler_t)(player_t *, void *);

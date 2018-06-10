@@ -5,6 +5,7 @@
 #include "stderr.h"
 #include "network.h"
 #include "zappy.h"
+#include "arguments.h"
 
 zappy_instance_t server = {
         .players = list_init
@@ -15,13 +16,9 @@ static void on_server_close() {
 }
 
 int main(int ac, char **args) {
-    if (ac != 2) {
-        eprintf("USAGE: %s [port]\n", *args);
-        return 84;
-    }
+    get_arguments(ac, args);
 
     network_server_t server;
-
     server_config_t config = {
             .host = INADDR_ANY,
             .port = atoi(args[1]),
