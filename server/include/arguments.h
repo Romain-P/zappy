@@ -16,5 +16,6 @@
 	void get_arguments(int, char**);
 	static void print_usage(void);
 	static int set_argument(int);
+	static void initialize_options(void);
 
 #endif /* !ARGUMENTS_H_ */

@@ -13,6 +13,7 @@ void get_arguments(int ac, char **av)
 	int c;
 	int argument;
 
+	initialize_options();
 	c = getopt(ac, av, "p:x:y:n:c:f:");
 	while (c != -1) {
 		argument = set_argument(c);
@@ -20,6 +21,16 @@ void get_arguments(int ac, char **av)
 			print_usage();
 		c = getopt(ac, av, "p:x:y:n:c:f:");
 	}
+}
+
+static void initialize_options(void)
+{
+	server.port = 5050;
+	server.width = 50;
+	server.height = 50;
+	server.name = NULL;
+	server.nb_clients = 50;
+	server.freq = 50;
 }
 
 static void print_usage(void)
