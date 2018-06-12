@@ -9,9 +9,29 @@
 
 static message_t const messages[] = {
         { "example",
-                (serialize_t ) &msg_example_serialize,
+                (serialize_t) &msg_example_serialize,
                 (deserialize_t) &msg_example_deserialize,
                 (handler_t) &msg_example_handler
+        },
+        { "msz",
+                (serialize_t) &msz_serialize,
+                (deserialize_t) &msz_deserialize,
+                (handler_t) &msz_handler
+        },
+        { "bct",
+                (serialize_t) &bct_tile_serialize,
+                (deserialize_t) &bct_tile_deserialize,
+                (handler_t) &bct_tile_handler
+        },
+        { "mct",
+                (serialize_t) &bct_all_serialize,
+                (deserialize_t) &bct_all_deserialize,
+                (handler_t) &bct_all_handler
+        },
+        { "tna",
+                (serialize_t) &tna_serialize,
+                (deserialize_t) &tna_deserialize,
+                (handler_t) &tna_handler
         },
         { NULL }
 };
