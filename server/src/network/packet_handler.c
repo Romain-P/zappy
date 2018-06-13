@@ -33,6 +33,116 @@ static message_t const messages[] = {
                 (deserialize_t) &tna_deserialize,
                 (handler_t) &tna_handler
         },
+        { "ppo",
+                (serialize_t) &ppo_serialize,
+                (deserialize_t) &ppo_deserialize,
+                (handler_t) &ppo_handler
+        },
+        { "plv",
+                (serialize_t) &plv_serialize,
+                (deserialize_t) &plv_deserialize,
+                (handler_t) &plv_handler
+        },
+        { "pin",
+                (serialize_t) &pin_serialize,
+                (deserialize_t) &pin_deserialize,
+                (handler_t) &pin_handler
+        },
+        { "pnw",
+                (serialize_t) &pnw_serialize,
+                NULL,
+                (handler_t) &pnw_handler
+        },
+        { "pex",
+                (serialize_t) &pex_serialize,
+                NULL,
+                (handler_t) &pex_handler
+        },
+        { "pbc",
+                (serialize_t) &pbc_serialize,
+                NULL,
+                (handler_t) &pbc_handler
+        },
+        { "pic",
+                (serialize_t) &pic_serialize,
+                NULL,
+                (handler_t) &pic_handler
+        },
+        { "pie",
+                (serialize_t) &pie_serialize,
+                NULL,
+                (handler_t) &pie_handler
+        },
+        { "pfk",
+                (serialize_t) &pfk_serialize,
+                NULL,
+                (handler_t) &pfk_handler
+        },
+        { "pdr",
+                (serialize_t) &pdr_serialize,
+                NULL,
+                (handler_t) &pdr_handler
+        },
+        { "pgt",
+                (serialize_t) &pgt_serialize,
+                NULL,
+                (handler_t) &pgt_handler
+        },
+        { "pdi",
+                (serialize_t) &pdi_serialize,
+                NULL,
+                (handler_t) &pdi_handler
+        },
+        { "enw",
+                (serialize_t) &enw_serialize,
+                NULL,
+                (handler_t) &enw_handler
+        },
+        { "eht",
+                (serialize_t) &eht_serialize,
+                NULL,
+                (handler_t) &eht_handler
+        },
+        { "ebo",
+                (serialize_t) &ebo_serialize,
+                NULL,
+                (handler_t) &ebo_handler
+        },
+        { "edi",
+                (serialize_t) &edi_serialize,
+                NULL,
+                (handler_t) &edi_handler
+        },
+        { "sgt",
+                (serialize_t) &sgt_serialize,
+                (deserialize_t) &sgt_deserialize,
+                (handler_t) &sgt_handler
+        },
+        { "sst",
+                (serialize_t) &sst_serialize,
+                (deserialize_t) &sst_deserialize,
+                (handler_t) &sst_handler
+        },
+        { "seg",
+                (serialize_t) &seg_serialize,
+                NULL,
+                (handler_t) &seg_handler
+        },
+        { "smg",
+                (serialize_t) &smg_serialize,
+                NULL,
+                (handler_t) &smg_handler
+        },
+        { "suc",
+                (serialize_t) &smg_serialize,
+                NULL,
+                (handler_t) &smg_handler
+        },
+        { "sbp",
+                (serialize_t) &sbp_serialize,
+                NULL,
+                (handler_t) &sbp_handler
+        },
         { NULL }
 };
 
