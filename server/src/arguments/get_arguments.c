@@ -6,6 +6,7 @@
 */
 
 #include "zappy.h"
+#include "util.h"
 #include "arguments.h"
 
 void get_arguments(int ac, char **av)
@@ -21,6 +22,18 @@ void get_arguments(int ac, char **av)
 			print_usage();
 		c = getopt(ac, av, "p:x:y:n:c:f:");
 	}
+	set_team();
+}
+
+static void set_team(void)
+{
+	int i = 0;
+	char **split = charset_split(server.name, strlen(server.name), " ");
+
+	while (split[i] != NULL) {
+		add_team(split[i]);
+		i++;
+	}
 }
 
 static void initialize_options(void)
@@ -28,7 +41,7 @@ static void initialize_options(void)
 	server.port = 5050;
 	server.width = 50;
 	server.height = 50;
-	server.name = NULL;
+	server.name = strdup("Team 1 Team2 Team3 Team4");
 	server.nb_clients = 50;
 	server.freq = 50;
 }

@@ -35,6 +35,7 @@ struct network_client_s {
     char *buffer;
     buffer_state_t bstate;
     size_t length;
+    int status;
     network_server_t *server;
     bool closed;
 };

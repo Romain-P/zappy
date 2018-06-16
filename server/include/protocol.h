@@ -33,6 +33,7 @@ typedef struct packet_seg_s packet_seg_t;
 typedef struct packet_smg_s packet_smg_t;
 typedef struct packet_suc_s packet_suc_t;
 typedef struct packet_sbp_s packet_sbp_t;
+typedef struct packet_team_s packet_team_t;
 
 struct packet_example_s {
     int64_t some;
@@ -177,6 +178,11 @@ struct suc_s {
 struct sbp_s {
 };
 
+struct packet_team_s {
+    char team[1024];
+    int status;
+};
+
 void msg_example_handler(player_t *player, packet_example_t *msg);
 packet_example_t *msg_example_deserialize(char **args);
 void msg_example_serialize(packet_example_t *msg, list_t *buffer);
@@ -269,6 +275,12 @@ void edi_serialize(packet_edi_t *, list_t *);
 void sgt_handler(player_t *, packet_sgt_t *);
 void sgt_serialize(packet_sgt_t *, list_t *);
 packet_sgt_t *sgt_deserialize(char **);
+
+// TEAM COMMAND
+void team_handler(player_t *, packet_team_t *);
+void team_serialize(packet_team_t *, list_t *);
+packet_team_t *team_deserialize(char **);
+static int check_free_team(char *);
 
 // SST COMMAND
 void sst_handler(player_t *, packet_sst_t *);

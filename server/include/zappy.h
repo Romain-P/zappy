@@ -9,17 +9,24 @@
 # define ZAPPY_ARG_DELIMITER   ("\r\n")
 # define ZAPPY_PARAM_SEPARATOR    (" ")
 
-# include "network.h"
+#include "network.h"
+#include "team.h"
 
 typedef struct command_s message_t;
 typedef struct zappy_instance_s zappy_instance_t;
 typedef struct player_s player_t;
+typedef struct team_s team_t;
 
 extern zappy_instance_t server;
 
 struct player_s {
     network_client_t *client;
     char *name;
+};
+
+struct team_s {
+    char *name;
+    int player;
 };
 
 struct zappy_instance_s {
@@ -30,6 +37,7 @@ struct zappy_instance_s {
     char *name;
     int nb_clients;
     int freq;
+    list_t teams;
 };
 
 typedef void (*handler_t)(player_t *, void *);

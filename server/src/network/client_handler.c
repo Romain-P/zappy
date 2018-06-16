@@ -14,7 +14,7 @@ static void on_connect(network_client_t *client) {
     player->name = strdup("undefined");
 
     list_add(&server.players, player);
-
+    dprintf(client->id, "WELCOME\n");
     eprintf("[Client %d] connected\n", client->id);
 }
 

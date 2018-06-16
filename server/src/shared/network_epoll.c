@@ -29,6 +29,7 @@ void epoll_listen(session_t epoll_instance, on_data_received callback, void *net
     while (epoll_wait(epoll_instance, &ev, 1, -1) > 0) {
         int client_notifier = ev.data.fd;
 
+        puts("lol");
         if (client_notifier == signal_fd) {
             if (read(signal_fd, &info, sizeof(info)) != sizeof(info))
                 continue;

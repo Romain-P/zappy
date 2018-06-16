@@ -48,6 +48,11 @@ static message_t const messages[] = {
                 (deserialize_t) &pin_deserialize,
                 (handler_t) &pin_handler
         },
+        { "team",
+                (serialize_t) &team_serialize,
+                (deserialize_t) &team_deserialize,
+                (handler_t) &team_handler
+        },
         { "pnw",
                 (serialize_t) &pnw_serialize,
                 NULL,
