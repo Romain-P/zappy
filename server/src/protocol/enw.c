@@ -12,18 +12,22 @@
 #include <stdio.h>
 #include <string.h>
 
-void enw_handler(packet_enw_t *packet)
+void enw_handler(player_t *player, packet_enw_t *packet)
 {
-	player_t *player;
+	player_t *list;
+	egg_t *egg = malloc(sizeof(egg_t));
 	iter_t *it;
 
-	packet->player_number = 0;
-	packet->egg = 0;
-	packet->x = 0;
-	packet->y = 0;
+	egg->x = packet->x;
+	egg->y = packet->y;
+	egg->id = server.number_egg;
+	server.number_egg++;
+	packet->player_number = (player->client)->id;
+	packet->egg = egg->id;
+	list_add(&player->eggs, egg);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
-		player = it->data;
-		send_packet(player->client, "enw", &packet);
+		list = it->data;
+		send_packet(list->client, "enw", &packet);
 	}
 }
 

@@ -30,7 +30,7 @@ packet_plv_t *plv_deserialize(char **args)
 
 void plv_handler(player_t *player, packet_plv_t *packet)
 {
-	packet->level = 0;
+	player_get_level(packet->player_number, packet);
 	send_packet(player->client, "plv", &packet);
 }
 
@@ -38,4 +38,18 @@ void plv_serialize(packet_plv_t *packet, list_t *buffer)
 {
 	list_add(buffer, to_string(packet->player_number));
 	list_add(buffer, to_string(packet->level));
+}
+
+static void player_get_level(int nb, packet_plv_t *packet)
+{
+	player_t *player;
+	iter_t *it;
+
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		player = it->data;
+		if ((player->client)->id == nb) {
+			packet->level = player->level;
+			return;
+		}
+	}
 }

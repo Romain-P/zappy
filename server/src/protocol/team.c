@@ -25,7 +25,7 @@ packet_team_t *team_deserialize(char **args)
 
 void team_handler(player_t *player, packet_team_t *packet)
 {
-	if (check_free_team(packet->team) == 1)
+	if (check_free_team(player, packet->team) == 1)
 		packet->status = 1;
 	else
 		packet->status = 0;
@@ -37,7 +37,7 @@ void team_serialize(packet_team_t *packet, list_t *buffer)
     list_add(buffer, to_string(packet->status));
 }
 
-static int check_free_team(char *name)
+static int check_free_team(player_t *player, char *name)
 {
 	team_t *team;
 	iter_t *it;
@@ -45,9 +45,19 @@ static int check_free_team(char *name)
 	for (it = iter_begin(&server.teams); it; iter_next(it)) {
 		team = it->data;
 		if (!strcmp(team->name, name) && team->player > 0) {
+			init_player_join(player, team);
 			team->player--;
 			return (1);
 		}
 	}
 	return (0);
+}
+
+static void init_player_join(player_t *player, team_t *team)
+{
+	player->x = rand() % (server.map).width;
+	player->y = rand() % (server.map).height;
+	player->team = *team;
+	player->orientation = (rand() % 4) + 1;
+	player->level = 0;
 }

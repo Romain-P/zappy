@@ -187,14 +187,19 @@ void msg_example_handler(player_t *player, packet_example_t *msg);
 packet_example_t *msg_example_deserialize(char **args);
 void msg_example_serialize(packet_example_t *msg, list_t *buffer);
 
+// MSZ COMMAND
 void msz_handler(player_t *, packet_msz_t *);
 packet_msz_t *msz_deserialize(char **);
 void msz_serialize(packet_msz_t *, list_t *);
 
+// BCT COMMAND (One Tile)
 packet_bct_tile_t *bct_tile_deserialize(char **);
 void bct_tile_handler(player_t *, packet_bct_tile_t *);
 void bct_tile_serialize(packet_bct_tile_t *, list_t *);
+void init_bct_tile_packet(packet_bct_tile_t *packet);
+void get_ressource_tile(size_t, packet_bct_tile_t *);
 
+// BCT COMMAND (All Tile)
 packet_bct_tile_t *bct_all_deserialize(char **);
 void bct_all_handler(player_t *, packet_bct_tile_t *);
 void bct_all_serialize(packet_bct_tile_t *, list_t *);
@@ -205,30 +210,34 @@ void tna_handler(player_t *, packet_tna_t *);
 void tna_serialize(packet_tna_t *, list_t *);
 
 // PNW COMMAND
-void pnw_handler(packet_pnw_t *);
+void pnw_handler(player_t *, packet_pnw_t *);
 void pnw_serialize(packet_pnw_t *, list_t *);
 
 // PPO COMMAND
 packet_ppo_t *ppo_deserialize(char **);
 void ppo_handler(player_t *, packet_ppo_t *);
 void ppo_serialize(packet_ppo_t *, list_t *);
+static void get_information_player(int, packet_ppo_t *);
 
 // PLV COMMAND
 packet_plv_t *plv_deserialize(char **);
 void plv_handler(player_t *, packet_plv_t *);
 void plv_serialize(packet_plv_t *, list_t *);
+static void player_get_level(int, packet_plv_t *);
 
 // PIN COMMAND
 packet_pin_t *pin_deserialize(char **);
 void pin_handler(player_t *, packet_pin_t *);
 void pin_serialize(packet_pin_t *, list_t *);
+static void get_inventory_player(int, packet_pin_t *);
+static void set_inventory_player(packet_pin_t *, player_t *);
 
 // PEX COMMAND
-void pex_handler(packet_pex_t *);
+void pex_handler(player_t *player, packet_pex_t *);
 void pex_serialize(packet_pex_t *, list_t *);
 
 // PBC COMMAND
-void pbc_handler(packet_pbc_t *);
+void pbc_handler(player_t *player, packet_pbc_t *);
 void pbc_serialize(packet_pbc_t *, list_t *);
 
 // PIC COMMAND
@@ -244,19 +253,21 @@ void pfk_handler(packet_pfk_t *);
 void pfk_serialize(packet_pfk_t *, list_t *);
 
 // PDR COMMAND
-void pdr_handler(packet_pdr_t *);
+void pdr_handler(player_t *player, packet_pdr_t *);
 void pdr_serialize(packet_pdr_t *, list_t *);
+static void delete_ressource(player_t *, size_t);
 
 // PGT COMMAND
-void pgt_handler(packet_pgt_t *);
+void pgt_handler(player_t *, packet_pgt_t *);
 void pgt_serialize(packet_pgt_t *, list_t *);
+static void add_ressource(player_t *, size_t);
 
 // PDI COMMAND
-void pdi_handler(packet_pdi_t *);
+void pdi_handler(player_t *player, packet_pdi_t *);
 void pdi_serialize(packet_pdi_t *, list_t *);
 
 // ENW COMMAND
-void enw_handler(packet_enw_t *);
+void enw_handler(player_t *player, packet_enw_t *);
 void enw_serialize(packet_enw_t *, list_t *);
 
 // EHT COMMAND
@@ -280,7 +291,8 @@ packet_sgt_t *sgt_deserialize(char **);
 void team_handler(player_t *, packet_team_t *);
 void team_serialize(packet_team_t *, list_t *);
 packet_team_t *team_deserialize(char **);
-static int check_free_team(char *);
+static int check_free_team(player_t *, char *);
+static void init_player_join(player_t *, team_t *);
 
 // SST COMMAND
 void sst_handler(player_t *, packet_sst_t *);

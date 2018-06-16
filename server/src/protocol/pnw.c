@@ -12,15 +12,20 @@
 #include <stdio.h>
 #include <string.h>
 
-void pnw_handler(packet_pnw_t *packet)
+void pnw_handler(player_t *player, packet_pnw_t *packet)
 {
-	player_t *player;
+	player_t *list;
 	iter_t *it;
 
-	sprintf(packet->player_number, "#%d", 5); // Player Number
+	sprintf(packet->player_number, "#%d", (player->client)->id);
+	packet->x = player->x;
+	packet->y = player->y;
+	packet->orientation = player->orientation;
+	packet->level = player->level;
+	strcpy(packet->name_team, (player->team).name);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
-		player = it->data;
-		send_packet(player->client, "pnw", &packet);
+		list = it->data;
+		send_packet(list->client, "pnw", &packet);
 	}
 }
 

@@ -8,6 +8,7 @@
 #include "zappy.h"
 #include "util.h"
 #include "arguments.h"
+#include "map.h"
 
 void get_arguments(int ac, char **av)
 {
@@ -23,6 +24,8 @@ void get_arguments(int ac, char **av)
 		c = getopt(ac, av, "p:x:y:n:c:f:");
 	}
 	set_team();
+	set_max_ressource_map();
+	generate_ressource();
 }
 
 static void set_team(void)
@@ -39,8 +42,8 @@ static void set_team(void)
 static void initialize_options(void)
 {
 	server.port = 5050;
-	server.width = 50;
-	server.height = 50;
+	(server.map).width = 50;
+	(server.map).height = 50;
 	server.name = strdup("Team 1 Team2 Team3 Team4");
 	server.nb_clients = 50;
 	server.freq = 50;
@@ -64,9 +67,9 @@ static int set_argument(int c)
 	if (c == 'p')
 		server.port = atoi(optarg);
 	if (c == 'x')
-		server.width = atoi(optarg);
+		set_width_map(atoi(optarg));
 	if (c == 'y')
-		server.height = atoi(optarg);
+		set_height_map(atoi(optarg));
 	if (c == 'n')
 		server.name = strdup(optarg);
 	if (c == 'c')

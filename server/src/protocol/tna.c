@@ -21,13 +21,13 @@ packet_tna_t *tna_deserialize(char **args)
 
 void tna_handler(player_t *player, packet_tna_t *packet)
 {
-	int i = 0;
-	char **tab = charset_split(server.name, strlen(server.name), " ");
+	team_t *team;
+	iter_t *it;
 
-	while (tab[i] != NULL) {
-		strcpy(packet->name, tab[i]);
+	for (it = iter_begin(&server.teams); it; iter_next(it)) {
+		team = it->data;
+		strcpy(packet->name, team->name);
 		send_packet(player->client, "tna", &packet);
-		i++;
 	}
 }
 

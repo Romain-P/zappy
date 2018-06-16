@@ -21,20 +21,17 @@ packet_bct_tile_t *bct_all_deserialize(char **args)
 
 void bct_all_handler(player_t *player, packet_bct_tile_t *packet)
 {
-	/*
-		Loop sur chaque Tile
-		& Send le packet
-	*/
-	packet->x = 5; // Coordonnées
-	packet->y = 5; // du Tile
-	packet->q0 = 10;
-	packet->q1 = 10;
-	packet->q2 = 10;
-	packet->q3 = 10;
-	packet->q4 = 10;
-	packet->q5 = 10;
-	packet->q6 = 10;
-	send_packet(player->client, "bct", &packet);
+	ressource_t *ressource;
+	iter_t *it;
+
+	for (it = iter_begin(&(server.map).ressources); it; iter_next(it)) {
+		ressource = it->data;
+		init_bct_tile_packet(packet);
+		get_ressource_tile(ressource->ressource_number, packet);
+		packet->x = ressource->x;
+		packet->y = ressource->y;
+		send_packet(player->client, "bct", &packet);
+	}
 }
 
 void bct_all_serialize(packet_bct_tile_t *packet, list_t *buffer)

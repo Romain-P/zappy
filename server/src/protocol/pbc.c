@@ -13,16 +13,15 @@
 #include <stdio.h>
 #include <string.h>
 
-void pbc_handler(packet_pbc_t *packet)
+void pbc_handler(player_t *player, packet_pbc_t *packet)
 {
-	player_t *player;
+	player_t *list;
 	iter_t *it;
 
-	packet->player_number = 0;
-	strcpy(packet->message, "COUOU");
+	packet->player_number = (player->client)->id;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
-		player = it->data;
-		send_packet(player->client, "pbc", &packet);
+		list = it->data;
+		send_packet(list->client, "pbc", &packet);
 	}
 }
 

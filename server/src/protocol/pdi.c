@@ -12,15 +12,15 @@
 #include <stdio.h>
 #include <string.h>
 
-void pdi_handler(packet_pdi_t *packet)
+void pdi_handler(player_t *player, packet_pdi_t *packet)
 {
-	player_t *player;
+	player_t *list;
 	iter_t *it;
 
-	packet->player_number = 0;
+	packet->player_number = (player->client)->id;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
-		player = it->data;
-		send_packet(player->client, "pdi", &packet);
+		list = it->data;
+		send_packet(list->client, "pdi", &packet);
 	}
 }
 
