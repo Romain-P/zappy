@@ -64,19 +64,28 @@ static void print_usage(void)
 
 static int set_argument(int c)
 {
-	if (c == 'p')
-		server.port = atoi(optarg);
-	if (c == 'x')
-		set_width_map(atoi(optarg));
-	if (c == 'y')
-		set_height_map(atoi(optarg));
-	if (c == 'n')
-		server.name = strdup(optarg);
-	if (c == 'c')
-		server.nb_clients = atoi(optarg);
-	if (c == 'f')
-		server.freq = atoi(optarg);
-	if (c == '?')
-		return (1);
+	switch(c) {
+		case 'p':
+			server.port = atoi(optarg);
+			break;
+		case 'x':
+			set_width_map(atoi(optarg));
+			break;
+		case 'y':
+			set_height_map(atoi(optarg));
+			break;
+		case 'n':
+			server.name = strdup(optarg);
+			break;
+		case 'c':
+			server.nb_clients = atoi(optarg);
+			break;
+		case 'f':
+			server.freq = atoi(optarg);
+			break;
+		case '?':
+		default:
+			return (1);
+	}
 	return (0);
 }
