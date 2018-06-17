@@ -175,7 +175,7 @@ void send_packet(network_client_t *client, char const *named, void *msg) {
     }
     packet = realloc(packet, strlen(packet) + 1);
     packet[pos] = '\n';
-    send(client->id, packet, strlen(packet), 0);
+    network_client_send(client, packet, strlen(packet));
     free(packet);
 }
 
