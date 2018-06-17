@@ -84,8 +84,8 @@ struct ressource_s {
 struct zappy_instance_s {
     list_t players;
     int port;
-    int width;
-    int height;
+    size_t width;
+    size_t height;
     char *name;
     int nb_clients;
     int freq;
