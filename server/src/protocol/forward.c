@@ -26,7 +26,7 @@ bool forward_handler(player_t *player, packet_forward_t *packet)
 	size_t tile = get_valid_direction(player, player->orientation);
 
 	if (tile == 0)
-		send_unwrapped(player->client, "ko");
+		send_unwrapped(player->client, "ok");
 	else
 		send_unwrapped(player->client, "ko");
 	return true;
