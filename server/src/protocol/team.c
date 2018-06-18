@@ -23,13 +23,14 @@ packet_team_t *team_deserialize(char **args)
 	return (packet);
 }
 
-void team_handler(player_t *player, packet_team_t *packet)
+bool team_handler(player_t *player, packet_team_t *packet)
 {
 	if (check_free_team(player, packet->team) == 1)
 		packet->status = 1;
 	else
 		packet->status = 0;
-	send_packet(player->client, "team", &packet);
+	send_packet(player->client, &packet);
+	return true;
 }
 
 void team_serialize(packet_team_t *packet, list_t *buffer)

@@ -28,10 +28,11 @@ packet_ppo_t *ppo_deserialize(char **args)
 	return (packet);
 }
 
-void ppo_handler(player_t *player, packet_ppo_t *packet)
+bool ppo_handler(player_t *player, packet_ppo_t *packet)
 {
 	get_information_player(packet->player_number, packet);
-	send_packet(player->client, "ppo", &packet);
+	send_packet(player->client, &packet);
+	return true;
 }
 
 void ppo_serialize(packet_ppo_t *packet, list_t *buffer)

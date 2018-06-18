@@ -8,13 +8,14 @@
 #include "arguments.h"
 
 zappy_instance_t server = {
-        .players = list_init
+        .players = list_init,
+        .teams = list_init,
+        .waiting_commands = list_init
 };
 
 static void on_server_close() {
     //free anything we want (players already freed by network see @on_disconnect)
 }
-
 int main(int ac, char **args) {
     get_arguments(ac, args);
     srand(time(NULL));
@@ -25,7 +26,8 @@ int main(int ac, char **args) {
             .packet_delimiter = ZAPPY_ARG_DELIMITER,
             .packet_max_size = ZAPPY_BUFFER_SIZE,
             .configure_handlers = &configure_client_handler,
-            .on_server_close = &on_server_close
+            .on_server_close = &on_server_close,
+            .on_unblocked = &check_delayed_tasks
     };
     network_server_start(&server, &config);
     return 0;

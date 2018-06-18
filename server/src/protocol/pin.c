@@ -28,10 +28,11 @@ packet_pin_t *pin_deserialize(char **args)
 	return (packet);
 }
 
-void pin_handler(player_t *player, packet_pin_t *packet)
+bool pin_handler(player_t *player, packet_pin_t *packet)
 {
 	get_inventory_player(packet->player_number, packet);
-	send_packet(player->client, "pin", &packet);
+	send_packet(player->client, &packet);
+	return true;
 }
 
 void pin_serialize(packet_pin_t *packet, list_t *buffer)

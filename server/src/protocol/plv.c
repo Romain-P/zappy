@@ -28,10 +28,11 @@ packet_plv_t *plv_deserialize(char **args)
 	return (packet);
 }
 
-void plv_handler(player_t *player, packet_plv_t *packet)
+bool plv_handler(player_t *player, packet_plv_t *packet)
 {
 	player_get_level(packet->player_number, packet);
-	send_packet(player->client, "plv", &packet);
+	send_packet(player->client, &packet);
+	return true;
 }
 
 void plv_serialize(packet_plv_t *packet, list_t *buffer)

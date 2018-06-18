@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void smg_handler(packet_smg_t *packet)
+bool smg_handler(packet_smg_t *packet)
 {
 	player_t *player;
 	iter_t *it;
@@ -20,8 +20,9 @@ void smg_handler(packet_smg_t *packet)
 	strcpy(packet->message, "cc c le server");
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		player = it->data;
-		send_packet(player->client, "smg", &packet);
+		send_packet(player->client, &packet);
 	}
+	return true;
 }
 
 void smg_serialize(packet_smg_t *packet, list_t *buffer)

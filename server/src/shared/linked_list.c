@@ -72,10 +72,11 @@ ptr_t list_at(list_t *list, size_t index) {
     else if (index == list->size - 1)
         return list->end->data;
 
-    size_t i = 0;
-    for(iter_t *it = list->begin; it; it = it->next)
-        if (i++ == index)
-            return it->data;
+    iter_t *it = iter_begin(list);
+    for (size_t i = 0; i < index; ++i)
+        iter_next(it);
+    return it->data;
+
     error:
     raise_error(ERROR_OUTOFBOUND, index, list->size);
 }
@@ -95,6 +96,34 @@ void list_clear(list_t *list, free_callback_t free_it) {
     list->begin = NULL;
     list->end = NULL;
     list->size = 0;
+}
+
+void list_insert(list_t *list, ptr_t data, predicate_t predicate) {
+    check_nullity(list);
+    check_data_nullity(data);
+
+    iter_t *before = NULL;
+    iter_t *current = NULL;
+    for (iter_t *it = iter_begin(list); it; before = it, iter_next(it)) {
+        if (predicate(it->data)) {
+            current = it;
+            break;
+        }
+    }
+    if (!list->size || current == NULL || current->next == list->end) {
+        list_add(list, data);
+        return;
+    }
+    iter_t *new = malloc(sizeof(*new));
+    if (!new)
+        raise_errnum("list_insert", ENOMEM);
+    new->data = data;
+    new->next = current;
+    if (!before)
+        list->begin = new;
+    else
+        before->next = new;
+    list->size++;
 }
 
 bool list_exists(list_t *list, ptr_t data) {

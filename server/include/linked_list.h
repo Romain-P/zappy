@@ -8,6 +8,7 @@ typedef struct list_s list_t;
 typedef struct iter_s iter_t;
 typedef void *ptr_t;
 typedef void (*free_callback_t)(ptr_t);
+typedef bool (*predicate_t)(void *data);
 
 #define iter_begin(list_ptr)    ((list_ptr)->begin)
 #define iter_next(it_ptr)       ((it) = (it)->next)
@@ -33,7 +34,7 @@ void    list_add(list_t *list, ptr_t elem);
 void    list_remove(list_t *list, ptr_t elem);
 ptr_t   list_at(list_t *list, size_t index);
 void    list_clear(list_t *list, free_callback_t free_it);
-bool    list_exists(list_t *list, ptr_t elem);
+void    list_insert(list_t *list, ptr_t data, predicate_t callback);
 
 
 #endif //MYIRC_LIST_H

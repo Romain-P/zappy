@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void pnw_handler(player_t *player, packet_pnw_t *packet)
+bool pnw_handler(player_t *player, packet_pnw_t *packet)
 {
 	player_t *list;
 	iter_t *it;
@@ -25,8 +25,9 @@ void pnw_handler(player_t *player, packet_pnw_t *packet)
 	strcpy(packet->name_team, (player->team).name);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_packet(list->client, "pnw", &packet);
+		send_packet(list->client, &packet);
 	}
+	return true;
 }
 
 void pnw_serialize(packet_pnw_t *packet, list_t *buffer)

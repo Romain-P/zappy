@@ -7,14 +7,23 @@
 #include <string.h>
 #include <zappy.h>
 
-void msg_example_handler(player_t *player, packet_example_t *msg) {
-    msg->some;
-    msg->shiet;
-    //etc
-    //si tu veux envoyer un packet
+//delay of 10 tics
+static size_t const DELAY = 10;
 
-    packet_example_t sample = {.some = 10, .shiet = 12, .str = "lol"};
-    send_packet(player->client, "example", &sample);
+bool msg_example_handler(player_t *player, packet_example_t *msg) {
+    //packet received from network, delay it!
+    if (!msg->delayed) {
+        msg->some;
+        msg->shiet;
+
+        delay(msg, (handler_t) &msg_example_handler, player, DELAY);
+
+        //packet received from delayManager, execute it now :)
+    } else {
+        packet_example_t to_send = {.shiet = 10, .some = 99};
+        send_packet(player->client, &to_send);
+    }
+    return false;
 }
 
 packet_example_t *msg_example_deserialize(char **args) {

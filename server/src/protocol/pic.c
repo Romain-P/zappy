@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void pic_handler(packet_pic_t *packet)
+bool pic_handler(packet_pic_t *packet)
 {
 	player_t *player;
 	iter_t *it;
@@ -22,8 +22,9 @@ void pic_handler(packet_pic_t *packet)
 	packet->y = 0;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		player = it->data;
-		send_packet(player->client, "pic", &packet);
+		send_packet(player->client, &packet);
 	}
+	return true;
 }
 
 void pic_serialize(packet_pic_t *packet, list_t *buffer)

@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void pfk_handler(packet_pfk_t *packet)
+bool pfk_handler(packet_pfk_t *packet)
 {
 	player_t *player;
 	iter_t *it;
@@ -20,8 +20,9 @@ void pfk_handler(packet_pfk_t *packet)
 	packet->player_number = 0;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		player = it->data;
-		send_packet(player->client, "pfk", &packet);
+		send_packet(player->client, &packet);
 	}
+	return true;
 }
 
 void pfk_serialize(packet_pfk_t *packet, list_t *buffer)

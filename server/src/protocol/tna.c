@@ -19,7 +19,7 @@ packet_tna_t *tna_deserialize(char **args)
 	return (packet);
 }
 
-void tna_handler(player_t *player, packet_tna_t *packet)
+bool tna_handler(player_t *player, packet_tna_t *packet)
 {
 	team_t *team;
 	iter_t *it;
@@ -27,8 +27,9 @@ void tna_handler(player_t *player, packet_tna_t *packet)
 	for (it = iter_begin(&server.teams); it; iter_next(it)) {
 		team = it->data;
 		strcpy(packet->name, team->name);
-		send_packet(player->client, "tna", &packet);
+		send_packet(player->client, &packet);
 	}
+	return true;
 }
 
 void tna_serialize(packet_tna_t *packet, list_t *buffer)

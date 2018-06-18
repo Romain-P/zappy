@@ -12,6 +12,7 @@ static void on_connect(network_client_t *client) {
     player_t *player = malloc(sizeof(player_t));
     player->client = client;
     player->name = strdup("undefined");
+    player->waiting_commands = 0;
 
     list_add(&server.players, player);
     dprintf(client->id, "WELCOME\n");

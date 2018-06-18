@@ -151,9 +151,10 @@ static message_t const messages[] = {
         { NULL }
 };
 
-void send_packet(network_client_t *client, char const *named, void *msg) {
+void send_packet(network_client_t *client, void *msg) {
     list_t buffer = list_init;
     message_t const *message = NULL;
+    char const *named = ((network_packet_t *) msg)->cmd;
 
     for (int i = 0; messages[i].named; ++i) {
         if (!strcmp(messages[i].named, named)) {
@@ -185,12 +186,17 @@ void parse_packet(network_client_t *client, char const *packet, size_t len) {
     for (int i = 0; messages[i].named; ++i) {
         message_t const *message = messages + i;
 
-        if (!strcmp(message->named, split[0])) {
+        char const *cmd = split[0];
+        if (!strcmp(message->named, cmd)) {
             void *data = message->deserialize(split + 1);
 
             if (!data) return;
+            network_packet_t *casted = data;
+            casted->cmd = cmd;
+            casted->delayed = false;
 
-            message->handler(find_player(client), data);
+            if (message->handler(find_player(client), data))
+                free(data);
             break;
         }
     }

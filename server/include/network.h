@@ -10,12 +10,16 @@
 #include <stdint.h>
 #include <netinet/in.h>
 #include "linked_list.h"
+#include "network_epoll.h"
 
 #ifndef NETWORK_READ_SIZE
     #define NETWORK_READ_SIZE   (1024)
 #endif
 
 #define ERROR               (-1)
+#define PACKET_HEADER      \
+    char const *cmd;       \
+    bool delayed
 
 typedef struct network_client_s network_client_t;
 typedef struct network_server_s network_server_t;
@@ -23,11 +27,16 @@ typedef int session_t;
 typedef struct server_config_s server_config_t;
 typedef struct client_handler_s client_handler_t;
 typedef enum buffer_state_e buffer_state_t;
+typedef struct network_packet_s network_packet_t;
 
 enum buffer_state_e {
     FREED,
     INCOMPLETE,
     READY
+};
+
+struct __attribute__((__packed__)) network_packet_s {
+    PACKET_HEADER;
 };
 
 struct network_client_s {
@@ -62,6 +71,8 @@ struct server_config_s {
     size_t packet_max_size;
     void (*on_server_close)();
     void (*configure_handlers)(client_handler_t *);
+    int epoll_timeout;
+    on_epoll_unblocked on_unblocked;
 };
 
 void network_server_start(network_server_t *server, server_config_t *config);

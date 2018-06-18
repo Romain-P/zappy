@@ -78,6 +78,8 @@ static void on_client_ready(session_t client, void *server_ptr) {
 
 void network_server_start(network_server_t *server, server_config_t *config) {
     server->config = config;
+    server->config->epoll_timeout = -1;
+
     config_socket(server);
 
     if ((server->epoll_id = (session_t) epoll_create_instance(server->id)) == ERROR)
@@ -86,5 +88,5 @@ void network_server_start(network_server_t *server, server_config_t *config) {
     server->clients = list_init;
     server->config->configure_handlers(&server->client_handler);
 
-    epoll_listen(server->epoll_id, &on_client_ready, server);
+    epoll_listen(server->epoll_id, (epoll_config_t) {&on_client_ready, server->config->on_unblocked}, server);
 }

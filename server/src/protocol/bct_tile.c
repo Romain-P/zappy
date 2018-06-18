@@ -26,18 +26,19 @@ packet_bct_tile_t *bct_tile_deserialize(char **args)
 	return (packet);
 }
 
-void bct_tile_handler(player_t *player, packet_bct_tile_t *packet)
+bool bct_tile_handler(player_t *player, packet_bct_tile_t *packet)
 {
-    ressource_t *ressource;
+    resource_t *ressource;
 	iter_t *it;
 
     init_bct_tile_packet(packet);
     for (it = iter_begin(&(server.map).ressources); it; iter_next(it)) {
         ressource = it->data;
         if (packet->x == ressource->x && packet->y == ressource->y)
-            get_ressource_tile(ressource->ressource_number, packet);
+            get_ressource_tile(ressource->type, packet);
 	}
-    send_packet(player->client, "bct", &packet);
+    send_packet(player->client, &packet);
+    return true;
 }
 
 void bct_tile_serialize(packet_bct_tile_t *packet, list_t *buffer)

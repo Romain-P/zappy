@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void enw_handler(player_t *player, packet_enw_t *packet)
+bool enw_handler(player_t *player, packet_enw_t *packet)
 {
 	player_t *list;
 	egg_t *egg = malloc(sizeof(egg_t));
@@ -27,8 +27,9 @@ void enw_handler(player_t *player, packet_enw_t *packet)
 	list_add(&player->eggs, egg);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_packet(list->client, "enw", &packet);
+		send_packet(list->client, &packet);
 	}
+	return true;
 }
 
 void enw_serialize(packet_enw_t *packet, list_t *buffer)

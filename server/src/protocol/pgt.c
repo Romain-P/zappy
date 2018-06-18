@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void pgt_handler(player_t *player, packet_pgt_t *packet)
+bool pgt_handler(player_t *player, packet_pgt_t *packet)
 {
 	player_t *list;
 	iter_t *it;
@@ -21,8 +21,9 @@ void pgt_handler(player_t *player, packet_pgt_t *packet)
 	add_ressource(player, packet->ressource);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_packet(list->client, "pgt", &packet);
+		send_packet(list->client, &packet);
 	}
+	return true;
 }
 
 void pgt_serialize(packet_pgt_t *packet, list_t *buffer)

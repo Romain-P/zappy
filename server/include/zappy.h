@@ -18,9 +18,11 @@ typedef struct zappy_instance_s zappy_instance_t;
 typedef struct player_s player_t;
 typedef struct team_s team_t;
 typedef struct map_s map_t;
-typedef struct ressource_s ressource_t;
+typedef struct resource resource_t;
 typedef struct inventory_s inventory_t;
 typedef struct egg_s egg_t;
+typedef struct waiting_s waiting_t;
+typedef enum resource_type_e resource_type_t;
 
 extern zappy_instance_t server;
 
@@ -49,6 +51,7 @@ struct player_s {
     team_t team;
     inventory_t inventory;
     list_t eggs;
+    size_t waiting_commands;
 };
 
 struct map_s {
@@ -65,20 +68,20 @@ struct egg_s {
     size_t y;
 };
 
-/*
-    Ressource Number:
-        Food: 0
-        Linemate: 1
-        Deraumere: 2
-        Sibur 3
-        Mendiane 4
-        Phiras 5
-        Thystame 6
-*/
-struct ressource_s {
+enum resource_type_e {
+    FOOD = 0,
+    LINEMATE,
+    DERAUMERE,
+    SIBUR,
+    MENDIANE,
+    PHIRAS,
+    THYSTAME
+};
+
+struct resource {
     size_t x;
     size_t y;
-    size_t ressource_number;
+    resource_type_t type;
 };
 
 struct zappy_instance_s {
@@ -92,11 +95,19 @@ struct zappy_instance_s {
     list_t teams;
     map_t map;
     size_t number_egg;
+    list_t waiting_commands;
 };
 
-typedef void (*handler_t)(player_t *, void *);
+typedef bool (*handler_t)(player_t *, void *);
 typedef void (*serialize_t)(void *msg, list_t *buffer);
 typedef void *(*deserialize_t)(char **args);
+
+struct waiting_s {
+    player_t *player;
+    time_t exec_time;
+    handler_t command_handler;
+    void *packet;
+};
 
 struct command_s {
     char const *named;
@@ -109,8 +120,14 @@ void configure_client_handler(client_handler_t *handler);
 
 void parse_packet(network_client_t *client, char const *packet, size_t len);
 
-void send_packet(network_client_t *client, char const *named, void *msg);
+void send_packet(network_client_t *client, void *msg);
 
 player_t *find_player(network_client_t *client);
+
+int to_seconds(int tics);
+
+bool delay(void *packet, handler_t handler, player_t *player, int tics);
+
+void check_delayed_tasks();
 
 #endif //ZAPPY_H_

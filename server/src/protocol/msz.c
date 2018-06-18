@@ -10,11 +10,12 @@
 #include <zappy.h>
 #include <stdlib.h>
 
-void msz_handler(player_t *player, packet_msz_t *packet)
+bool msz_handler(player_t *player, packet_msz_t *packet)
 {
     packet_msz_t sample = {.x = server.width, .y = server.height};
 
-    send_packet(player->client, "msz", &sample);
+    send_packet(player->client, &sample);
+    return true;
 }
 
 packet_msz_t *msz_deserialize(char **args)

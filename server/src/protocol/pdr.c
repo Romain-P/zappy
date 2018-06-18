@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void pdr_handler(player_t *player, packet_pdr_t *packet)
+bool pdr_handler(player_t *player, packet_pdr_t *packet)
 {
 	player_t *list;
 	iter_t *it;
@@ -21,8 +21,9 @@ void pdr_handler(player_t *player, packet_pdr_t *packet)
 	delete_ressource(player, packet->ressource);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_packet(list->client, "pdr", &packet);
+		send_packet(list->client, &packet);
 	}
+	return true;
 }
 
 void pdr_serialize(packet_pdr_t *packet, list_t *buffer)

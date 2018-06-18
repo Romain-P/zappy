@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void pbc_handler(player_t *player, packet_pbc_t *packet)
+bool pbc_handler(player_t *player, packet_pbc_t *packet)
 {
 	player_t *list;
 	iter_t *it;
@@ -21,8 +21,9 @@ void pbc_handler(player_t *player, packet_pbc_t *packet)
 	packet->player_number = (player->client)->id;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_packet(list->client, "pbc", &packet);
+		send_packet(list->client, &packet);
 	}
+	return true;
 }
 
 void pbc_serialize(packet_pbc_t *packet, list_t *buffer)

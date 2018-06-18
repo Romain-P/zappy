@@ -26,7 +26,7 @@ void generate_ressource(void)
 
 static void set_ressource_in_map(size_t x, size_t y, size_t nb)
 {
-	ressource_t *node = malloc(sizeof(ressource_t));
+	resource_t *node = malloc(sizeof(resource_t));
 
 	if (node == NULL) {
 		puts("Malloc of Node FAIL");
@@ -34,6 +34,6 @@ static void set_ressource_in_map(size_t x, size_t y, size_t nb)
 	}
 	node->x = x;
 	node->y = y;
-	node->ressource_number = nb;
+	node->type = (resource_type_t) nb;
 	list_add(&(server.map).ressources, node);
 }

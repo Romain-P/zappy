@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void pdi_handler(player_t *player, packet_pdi_t *packet)
+bool pdi_handler(player_t *player, packet_pdi_t *packet)
 {
 	player_t *list;
 	iter_t *it;
@@ -20,8 +20,9 @@ void pdi_handler(player_t *player, packet_pdi_t *packet)
 	packet->player_number = (player->client)->id;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_packet(list->client, "pdi", &packet);
+		send_packet(list->client, &packet);
 	}
+	return true;
 }
 
 void pdi_serialize(packet_pdi_t *packet, list_t *buffer)

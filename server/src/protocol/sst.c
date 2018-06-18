@@ -26,10 +26,11 @@ packet_sst_t *sst_deserialize(char **args)
 	return (packet);
 }
 
-void sst_handler(player_t *player, packet_sst_t *packet)
+bool sst_handler(player_t *player, packet_sst_t *packet)
 {
     packet->time = 0;
-    send_packet(player->client, "sst", &packet);
+    send_packet(player->client, &packet);
+    return true;
 }
 
 void sst_serialize(packet_sst_t *packet, list_t *buffer)

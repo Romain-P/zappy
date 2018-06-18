@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void edi_handler(packet_edi_t *packet)
+bool edi_handler(packet_edi_t *packet)
 {
 	player_t *player;
 	iter_t *it;
@@ -20,8 +20,9 @@ void edi_handler(packet_edi_t *packet)
 	packet->egg = 0;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		player = it->data;
-		send_packet(player->client, "edi", &packet);
+		send_packet(player->client, &packet);
 	}
+	return true;
 }
 
 void edi_serialize(packet_edi_t *packet, list_t *buffer)

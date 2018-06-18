@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void pie_handler(packet_pie_t *packet)
+bool pie_handler(packet_pie_t *packet)
 {
 	player_t *player;
 	iter_t *it;
@@ -23,8 +23,9 @@ void pie_handler(packet_pie_t *packet)
 	packet->result = 0;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		player = it->data;
-		send_packet(player->client, "pie", &packet);
+		send_packet(player->client, &packet);
 	}
+	return true;
 }
 
 void pie_serialize(packet_pie_t *packet, list_t *buffer)
