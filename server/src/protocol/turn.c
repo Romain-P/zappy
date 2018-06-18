@@ -22,7 +22,7 @@ packet_turn_t *turn_deserialize(char **args)
 	return (packet);
 }
 
-void turn_handler(player_t *player, packet_turn_t *packet)
+bool turn_handler(player_t *player, packet_turn_t *packet)
 {
 	if (!strcmp(packet->orientation, "right"))
 		player->orientation++;
@@ -32,7 +32,8 @@ void turn_handler(player_t *player, packet_turn_t *packet)
 		player->orientation = 4;
 	if (player->orientation == 5)
 		player->orientation = 1;
-	send_packet(player->client, "ok", &packet);
+	send_unwrapped(player->client, "ok");
+	return true;
 }
 
 void turn_serialize(packet_turn_t *packet, list_t *buffer)

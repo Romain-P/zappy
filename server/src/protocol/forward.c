@@ -19,16 +19,17 @@ packet_forward_t *forward_deserialize(char **args)
 	return (packet);
 }
 
-void forward_handler(player_t *player, packet_forward_t *packet)
+bool forward_handler(player_t *player, packet_forward_t *packet)
 {
 	size_t x = player->x;
 	size_t y = player->y;
 	size_t tile = get_valid_direction(player, player->orientation);
 
 	if (tile == 0)
-		send_packet(player->client, "ok", &packet);
+		send_unwrapped(player->client, "ko");
 	else
-		send_packet(player->client, "ko", &packet);
+		send_unwrapped(player->client, "ko");
+	return true;
 }
 
 void forward_serialize(packet_forward_t *packet, list_t *buffer)

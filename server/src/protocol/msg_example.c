@@ -22,6 +22,7 @@ bool msg_example_handler(player_t *player, packet_example_t *msg) {
     } else {
         packet_example_t to_send = {.shiet = 10, .some = 99};
         send_packet(player->client, &to_send);
+        send_unwrapped(player->client, "ok"); // packet delimiter automatically handled, dont put any \n
     }
     return false;
 }

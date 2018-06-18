@@ -122,6 +122,8 @@ void parse_packet(network_client_t *client, char const *packet, size_t len);
 
 void send_packet(network_client_t *client, void *msg);
 
+void send_unwrapped(network_client_t *client, char *unwrapped);
+
 player_t *find_player(network_client_t *client);
 
 int to_seconds(int tics);

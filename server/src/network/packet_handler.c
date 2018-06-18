@@ -195,6 +195,14 @@ void send_packet(network_client_t *client, void *msg) {
     free(packet);
 }
 
+void send_unwrapped(network_client_t *client, char *unwrapped) {
+    size_t len = strlen(unwrapped);
+    char cmd[len + 1];
+    strcpy(cmd, unwrapped);
+    cmd[len] = '\n';
+    network_client_send(client, cmd, len + 1);
+}
+
 void parse_packet(network_client_t *client, char const *packet, size_t len) {
     char **split = charset_split(packet, len, ZAPPY_PARAM_SEPARATOR);
 
