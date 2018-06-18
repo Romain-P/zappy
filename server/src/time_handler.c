@@ -23,7 +23,7 @@ bool delay(void *packet, handler_t handler, player_t *player, int tics) {
     player->waiting_commands++;
     waiting_t *waiting = malloc(sizeof(*waiting));
     waiting->player = player;
-    waiting->exec_time = to_seconds(tics);
+    waiting->exec_time = exec_time;
     waiting->command_handler = handler;
     waiting->packet = packet;
     list_insert(&server.waiting_commands, waiting, (predicate_t) &inserter);
