@@ -30,7 +30,7 @@ void epoll_listen(session_t epoll_instance, epoll_config_t config, void *network
         int rdy = epoll_wait(epoll_instance, &ev, 1, 10);
         config.on_unblocked();
         if (!rdy)
-            break;
+            continue;
 
         int client_notifier = ev.data.fd;
 
