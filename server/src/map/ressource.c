@@ -8,6 +8,20 @@
 #include "map.h"
 #include "zappy.h"
 
+static void set_ressource_in_map(size_t x, size_t y, size_t nb)
+{
+	resource_t *node = malloc(sizeof(resource_t));
+
+	if (node == NULL) {
+		puts("Malloc of Node FAIL");
+		exit(84);
+	}
+	node->x = x;
+	node->y = y;
+	node->type = (resource_type_t) nb;
+	list_add(&(server.map).ressources, node);
+}
+
 void generate_ressource(void)
 {
 	size_t nb = 0;
@@ -22,18 +36,4 @@ void generate_ressource(void)
 		set_ressource_in_map(x, y, nb);
 		map.nb_ressource++;
 	}
-}
-
-static void set_ressource_in_map(size_t x, size_t y, size_t nb)
-{
-	resource_t *node = malloc(sizeof(resource_t));
-
-	if (node == NULL) {
-		puts("Malloc of Node FAIL");
-		exit(84);
-	}
-	node->x = x;
-	node->y = y;
-	node->type = (resource_type_t) nb;
-	list_add(&(server.map).ressources, node);
 }

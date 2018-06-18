@@ -29,7 +29,7 @@ bool enw_handler(player_t *player, packet_enw_t *packet)
 		list = it->data;
 		send_packet(list->client, &packet);
 	}
-	return true;
+	return (true);
 }
 
 void enw_serialize(packet_enw_t *packet, list_t *buffer)

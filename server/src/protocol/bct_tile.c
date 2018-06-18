@@ -19,7 +19,8 @@ packet_bct_tile_t *bct_tile_deserialize(char **args)
 	packet = malloc(sizeof(*packet));
 	if (packet == NULL)
 		return (NULL);
-	if (!parse_int(args[0], &packet->x) || !parse_int(args[1], &packet->y)) {
+	if (!parse_int(args[0], (int64_t *) ((ssize_t) packet->x))
+    || !parse_int(args[1], (int64_t *) ((ssize_t) packet->y))) {
 		free(packet);
 		return (NULL);
 	}

@@ -276,20 +276,16 @@ void pnw_serialize(packet_pnw_t *, list_t *);
 packet_ppo_t *ppo_deserialize(char **);
 bool ppo_handler(player_t *, packet_ppo_t *);
 void ppo_serialize(packet_ppo_t *, list_t *);
-static void get_information_player(int, packet_ppo_t *);
 
 // PLV COMMAND
 packet_plv_t *plv_deserialize(char **);
 bool plv_handler(player_t *, packet_plv_t *);
 void plv_serialize(packet_plv_t *, list_t *);
-static void player_get_level(int, packet_plv_t *);
 
 // PIN COMMAND
 packet_pin_t *pin_deserialize(char **);
 bool pin_handler(player_t *, packet_pin_t *);
 void pin_serialize(packet_pin_t *, list_t *);
-static void get_inventory_player(int, packet_pin_t *);
-static void set_inventory_player(packet_pin_t *, player_t *);
 
 // PEX COMMAND
 bool pex_handler(player_t *player, packet_pex_t *);
@@ -314,12 +310,10 @@ void pfk_serialize(packet_pfk_t *, list_t *);
 // PDR COMMAND
 bool pdr_handler(player_t *player, packet_pdr_t *);
 void pdr_serialize(packet_pdr_t *, list_t *);
-static void delete_ressource(player_t *, size_t);
 
 // PGT COMMAND
 bool pgt_handler(player_t *, packet_pgt_t *);
 void pgt_serialize(packet_pgt_t *, list_t *);
-static void add_ressource(player_t *, size_t);
 
 // PDI COMMAND
 bool pdi_handler(player_t *player, packet_pdi_t *);
@@ -350,8 +344,6 @@ packet_sgt_t *sgt_deserialize(char **);
 bool team_handler(player_t *, packet_team_t *);
 void team_serialize(packet_team_t *, list_t *);
 packet_team_t *team_deserialize(char **);
-static int check_free_team(player_t *, char *);
-static void init_player_join(player_t *, team_t *);
 
 // SST COMMAND
 bool sst_handler(player_t *, packet_sst_t *);

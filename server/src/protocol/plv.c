@@ -10,6 +10,20 @@
 #include <zappy.h>
 #include <stdlib.h>
 
+static void player_get_level(int nb, packet_plv_t *packet)
+{
+	player_t *player;
+	iter_t *it;
+
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		player = it->data;
+		if ((player->client)->id == nb) {
+			packet->level = player->level;
+			return;
+		}
+	}
+}
+
 packet_plv_t *plv_deserialize(char **args)
 {
 	packet_plv_t *packet;
@@ -21,7 +35,7 @@ packet_plv_t *plv_deserialize(char **args)
 		return (NULL);
 	if (args[0][0] == '#')
 		args[0]++;
-	if (!parse_int(args[0], &packet->player_number)) {
+	if (!parse_int(args[0], (int64_t *) ((ssize_t) packet->player_number))) {
 		free(packet);
 		return (NULL);
 	}
@@ -39,18 +53,4 @@ void plv_serialize(packet_plv_t *packet, list_t *buffer)
 {
 	list_add(buffer, to_string(packet->player_number));
 	list_add(buffer, to_string(packet->level));
-}
-
-static void player_get_level(int nb, packet_plv_t *packet)
-{
-	player_t *player;
-	iter_t *it;
-
-	for (it = iter_begin(&server.players); it; iter_next(it)) {
-		player = it->data;
-		if ((player->client)->id == nb) {
-			packet->level = player->level;
-			return;
-		}
-	}
 }
