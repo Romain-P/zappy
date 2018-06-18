@@ -34,6 +34,9 @@ typedef struct packet_smg_s packet_smg_t;
 typedef struct packet_suc_s packet_suc_t;
 typedef struct packet_sbp_s packet_sbp_t;
 typedef struct packet_team_s packet_team_t;
+typedef struct packet_forward_s packet_forward_t;
+typedef struct packet_turn_s packet_turn_t;
+typedef struct packet_inventory_s packet_inventory_t;
 
 struct __attribute__((__packed__)) packet_example_s {
     PACKET_HEADER;
@@ -206,6 +209,23 @@ struct __attribute__((__packed__)) sbp_s {
 
 struct __attribute__((__packed__)) packet_team_s {
     PACKET_HEADER;
+
+struct __attribute__((__packed__)) packet_forward_s {
+    PACKET_HEADER;
+};
+
+struct __attribute__((__packed__)) packet_inventory_s {
+    PACKET_HEADER;
+    char result[2048];
+};
+
+struct __attribute__((__packed__)) packet_turn_s {
+    PACKET_HEADER;
+    char orientation[6];
+};
+
+struct __attribute__((__packed__)) packet_team_s {
+    PACKET_HEADER;
     char team[1024];
     int status;
 };
@@ -213,6 +233,21 @@ struct __attribute__((__packed__)) packet_team_s {
 bool msg_example_handler(player_t *player, packet_example_t *msg);
 packet_example_t *msg_example_deserialize(char **args);
 void msg_example_serialize(packet_example_t *msg, list_t *buffer);
+
+// FORWARD COMMAND
+void forward_handler(player_t *, packet_forward_t *);
+packet_forward_t *forward_deserialize(char **);
+void forward_serialize(packet_forward_t *, list_t *);
+
+// TURN COMMAND
+void turn_handler(player_t *, packet_turn_t *);
+packet_turn_t *turn_deserialize(char **);
+void turn_serialize(packet_turn_t *, list_t *);
+
+// IVENTORY COMMAND
+void inventory_handler(player_t *, packet_inventory_t *);
+packet_inventory_t *inventory_deserialize(char **);
+void inventory_serialize(packet_inventory_t *, list_t *);
 
 // MSZ COMMAND
 bool msz_handler(player_t *, packet_msz_t *);

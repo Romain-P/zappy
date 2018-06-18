@@ -53,6 +53,21 @@ static message_t const messages[] = {
                 (deserialize_t) &team_deserialize,
                 (handler_t) &team_handler
         },
+        { "forward",
+                (serialize_t) &forward_serialize,
+                (deserialize_t) &forward_deserialize,
+                (handler_t) &forward_handler
+        },
+        { "turn",
+                (serialize_t) &turn_serialize,
+                (deserialize_t) &turn_deserialize,
+                (handler_t) &turn_handler
+        },
+        { "inventory",
+                (serialize_t) &inventory_serialize,
+                (deserialize_t) &inventory_deserialize,
+                (handler_t) &inventory_handler
+        },
         { "pnw",
                 (serialize_t) &pnw_serialize,
                 NULL,
