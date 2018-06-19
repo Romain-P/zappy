@@ -12,8 +12,7 @@
 #include <stdio.h>
 #include <string.h>
 
-bool pfk_handler(packet_pfk_t *packet)
-{
+bool pfk_handler(packet_pfk_t *packet) {
 	player_t *player;
 	iter_t *it;
 

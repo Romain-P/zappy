@@ -211,14 +211,17 @@ void parse_packet(network_client_t *client, char const *packet, size_t len) {
 
         char const *cmd = split[0];
         if (!strcmp(message->named, cmd)) {
-            void *data = message->deserialize(split + 1);
+            void *data = NULL;
 
-            if (!data) return;
-            network_packet_t *casted = data;
-            casted->cmd = cmd;
-            casted->delayed = false;
+            if (message->deserialize)
+                data = message->deserialize(split + 1);
 
-            if (message->handler(find_player(client), data))
+            if (data) {
+                network_packet_t *casted = data;
+                casted->cmd = cmd;
+                casted->delayed = false;
+            }
+            if (message->handler(find_player(client), data) && data)
                 free(data);
             break;
         }
