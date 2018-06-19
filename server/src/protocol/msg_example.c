@@ -13,8 +13,8 @@ static size_t const DELAY = 10;
 bool msg_example_handler(player_t *player, packet_example_t *msg) {
     //packet received from network, delay it!
     if (!msg->delayed) {
-        msg->some;
-        msg->shiet;
+        //msg->some;
+        //msg->shiet;
 
         delay(msg, (handler_t) &msg_example_handler, player, DELAY);
 

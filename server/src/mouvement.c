@@ -21,7 +21,7 @@ int get_valid_direction(player_t *player, size_t direction)
 	return (0);
 }
 
-int increment_direction(size_t *x, size_t *y, size_t direction)
+void increment_direction(size_t *x, size_t *y, size_t direction)
 {
 	if (direction == 1)
 		y++;

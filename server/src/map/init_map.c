@@ -25,5 +25,4 @@ void set_max_ressource_map(void)
 	(server.map).max =
 		((x * y) - (x));
 	(server.map).nb_ressource = 0;
-	printf("%d\n", (server.map).max);
 }
