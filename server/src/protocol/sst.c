@@ -19,7 +19,7 @@ packet_sst_t *sst_deserialize(char **args)
 	packet = malloc(sizeof(*packet));
 	if (packet == NULL)
 		return (NULL);
-	if (!parse_int(args[0], (int64_t *) ((ssize_t) packet->time))) {
+	if (!parse_int(args[0], (int64_t *) &packet->time)) {
 		free(packet);
 		return (NULL);
 	}

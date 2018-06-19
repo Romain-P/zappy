@@ -12,7 +12,7 @@
 
 bool msz_handler(player_t *player, packet_msz_t *packet)
 {
-    packet_msz_t sample = {.x = server.width, .y = server.height};
+    packet_msz_t sample = {.cmd = "msz", .x = server.width, .y = server.height};
 
     send_packet(player->client, &sample);
     return true;

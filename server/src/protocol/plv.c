@@ -35,7 +35,7 @@ packet_plv_t *plv_deserialize(char **args)
 		return (NULL);
 	if (args[0][0] == '#')
 		args[0]++;
-	if (!parse_int(args[0], (int64_t *) ((ssize_t) packet->player_number))) {
+	if (!parse_int(args[0], (int64_t *) &packet->player_number)) {
 		free(packet);
 		return (NULL);
 	}

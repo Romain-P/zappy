@@ -30,7 +30,7 @@ static void add_ressource(player_t *player, size_t ressource)
 		player->inventory.q6++;
 }
 
-bool pgt_handler(player_t *player, packet_pgt_t *packet)
+bool pgt_handler(player_t *player, packet_pgt_t *packet) //packet = NULL car pas de fonction désérialize
 {
 	player_t *list;
 	iter_t *it;

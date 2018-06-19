@@ -65,7 +65,7 @@ bool parse_int(char const *str, int64_t *ptr)
 {
     char *end;
 
-    *ptr = (int64_t) strtol(str, &end, 0);
+    *ptr = strtol(str, &end, 0);
     return end == str + strlen(str);
 }
 

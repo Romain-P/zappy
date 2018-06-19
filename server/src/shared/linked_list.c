@@ -110,7 +110,7 @@ void list_insert(list_t *list, ptr_t data, predicate_t predicate) {
             break;
         }
     }
-    if (!list->size || current == NULL || current->next == list->end) {
+    if (!list->size || current == NULL || current == list->end) {
         list_add(list, data);
         return;
     }
