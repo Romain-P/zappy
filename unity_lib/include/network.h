@@ -13,7 +13,7 @@
 #include "network_epoll.h"
 
 #ifndef NETWORK_READ_SIZE
-    #define NETWORK_READ_SIZE   (1024)
+    #define NETWORK_READ_SIZE   (2048)
 #endif
 
 #define ERROR               (-1)

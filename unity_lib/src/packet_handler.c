@@ -185,7 +185,7 @@ void send_packet(session_t id, void *msg) {
         char *arg = it->data;
         size_t len = strlen(arg) + 1;
         packet = realloc(packet, len);
-        strcpy(packet + pos, ZAPPY_ARG_DELIMITER);
+        strcpy(packet + pos, ZAPPY_PARAM_SEPARATOR);
         strcpy(packet + pos + 1, arg);
         pos += len;
     }
