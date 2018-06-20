@@ -64,8 +64,8 @@ static message_t const messages[] = {
                 NULL
         },
         { "pnw",
-                (serialize_t) &pnw_serialize,
                 NULL,
+                (deserialize_t) &deserialize_pnw,
                 (handler_t *) &zappy_instance.handlers.on_player_connected
         },
         { "pex",

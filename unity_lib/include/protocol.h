@@ -38,3 +38,6 @@ void serialize_bct(packet_bct_tile_t *msg, list_t *buffer);
 //PACKET TNA
 packet_tna_t *deserialize_tna(char **args);
 void serialize_tna(packet_tna_t *packet, list_t *buffer);
+
+//PACKET PNW
+packet_pnw_t *deserialize_pnw(char **args);
