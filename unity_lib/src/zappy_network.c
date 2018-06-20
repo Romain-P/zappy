@@ -38,12 +38,12 @@ session_t zappy_new_connection() {
 }
 
 void zappy_sync_poll() {
-    pthread_mutex_lock(&zappy_instance.locker);
     list_t *queue = &zappy_instance.waiting;
-    pthread_mutex_unlock(&zappy_instance.locker);
     if (queue->size == 0)
         return;
+    pthread_mutex_lock(&zappy_instance.locker);
     waiting_t *popped = list_pop(queue);
+    pthread_mutex_unlock(&zappy_instance.locker);
     popped->handler(popped->client_id, popped->packet);
     free(popped->packet);
     free(popped);
