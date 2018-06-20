@@ -71,7 +71,7 @@ struct __attribute__((__packed__)) packet_tna_s {
 
 struct __attribute__((__packed__)) packet_pnw_s {
 	PACKET_HEADER;
-	char player_number[42];
+	size_t player_number;
 	size_t x;
 	size_t y;
 	size_t orientation;
