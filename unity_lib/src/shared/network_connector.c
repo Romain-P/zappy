@@ -83,7 +83,7 @@ bool network_connector_start(network_instance_t *instance, network_config_t *con
     instance->clients = list_init;
     instance->config->configure_handlers(&instance->client_handler);
     if ((instance->epoll_id = (session_t) epoll_create(1) == ERROR))
-        raise_error("Network epoll error: can't create epoll instance\n");
+        raise_error("Network epoll error: can't create epoll net\n");
     if (!network_new_connection(instance)) {
         close(instance->epoll_id);
         return false;

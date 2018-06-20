@@ -11,9 +11,9 @@ typedef struct zappy_instance_s zappy_instance_t;
 typedef struct waiting_s waiting_t;
 
 struct zappy_instance_s {
-    network_instance_t instance;
+    network_instance_t net;
     network_handlers_t handlers;
-    list_t waiting;
+    list_t pending;
     bool thread_sync;
     pthread_mutex_t locker;
 };

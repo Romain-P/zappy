@@ -191,7 +191,7 @@ void send_packet(session_t id, void *msg) {
     }
     packet = realloc(packet, strlen(packet) + 1);
     packet[pos] = '\n';
-    network_client_t *client = network_client_find(&zappy_instance.instance.clients, id);
+    network_client_t *client = network_client_find(&zappy_instance.net.clients, id);
     network_client_send(client, packet, strlen(packet));
     free(packet);
 }
@@ -201,7 +201,7 @@ void send_unwrapped(session_t id, char *unwrapped) {
     char cmd[len + 1];
     strcpy(cmd, unwrapped);
     cmd[len] = '\n';
-    network_client_t *client = network_client_find(&zappy_instance.instance.clients, id);
+    network_client_t *client = network_client_find(&zappy_instance.net.clients, id);
     network_client_send(client, cmd, len + 1);
 }
 

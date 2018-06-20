@@ -6,7 +6,7 @@
 #include <pthread.h>
 
 zappy_instance_t zappy_instance = {
-        .waiting = list_init,
+        .pending = list_init,
         .locker = (pthread_mutex_t) PTHREAD_MUTEX_INITIALIZER
 };
 
@@ -30,15 +30,15 @@ bool zappy_init_connector(char *address, uint16_t port, bool thread_sync, networ
     };
     zappy_instance.thread_sync = thread_sync;
     zappy_instance.handlers = *handlers;
-    return network_connector_start(&zappy_instance.instance, &config);
+    return network_connector_start(&zappy_instance.net, &config);
 }
 
 session_t zappy_new_connection() {
-    return network_new_connection(&zappy_instance.instance)->id;
+    return network_new_connection(&zappy_instance.net)->id;
 }
 
 void zappy_sync_poll() {
-    list_t *queue = &zappy_instance.waiting;
+    list_t *queue = &zappy_instance.pending;
     if (queue->size == 0)
         return;
     pthread_mutex_lock(&zappy_instance.locker);
@@ -55,6 +55,6 @@ void zappy_sync_push(session_t client_id, handler_t handler, void *packet) {
     waiting->handler = handler;
     waiting->packet = packet;
     pthread_mutex_lock(&zappy_instance.locker);
-    list_add(&zappy_instance.waiting, waiting);
+    list_add(&zappy_instance.pending, waiting);
     pthread_mutex_unlock(&zappy_instance.locker);
 }
