@@ -8,20 +8,27 @@
 #include "protocol.h"
 #include "util.h"
 #include "zappy.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
-bool pfk_handler(packet_pfk_t *packet) {
-	player_t *player;
+packet_pfk_t *pfk_deserialize(char **args)
+{
+	packet_pfk_t *packet = malloc(sizeof(*packet));
+
+	if (packet == NULL)
+		return (NULL);
+	return (packet);
+}
+
+
+bool pfk_handler(player_t *player, packet_pfk_t *packet) {
+	player_t *list;
 	iter_t *it;
 
 	packet->player_number = 0;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
-		player = it->data;
-		send_packet(player->client, &packet);
+		list = it->data;
+		send_packet(list->client, &packet);
 	}
-	return true;
+	return (true);
 }
 
 void pfk_serialize(packet_pfk_t *packet, list_t *buffer)

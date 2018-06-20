@@ -5,25 +5,30 @@
 ** PIE Command
 */
 
-
 #include "protocol.h"
 #include "util.h"
 #include "zappy.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
-bool pie_handler(packet_pie_t *packet)
+packet_pie_t *pie_deserialize(char **args)
 {
-	player_t *player;
+	packet_pie_t *packet = malloc(sizeof(*packet));
+
+	if (packet == NULL)
+		return (NULL);
+	return (packet);
+}
+
+bool pie_handler(player_t *player, packet_pie_t *packet)
+{
+	player_t *list;
 	iter_t *it;
 
 	packet->x = 0;
 	packet->y = 0;
 	packet->result = 0;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
-		player = it->data;
-		send_packet(player->client, &packet);
+		list = it->data;
+		send_packet(list->client, &packet);
 	}
 	return true;
 }

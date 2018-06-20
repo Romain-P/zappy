@@ -5,10 +5,9 @@
 ** SST Command
 */
 
-#include <protocol.h>
-#include <util.h>
-#include <zappy.h>
-#include <stdlib.h>
+#include "protocol.h"
+#include "util.h"
+#include "zappy.h"
 
 packet_sst_t *sst_deserialize(char **args)
 {

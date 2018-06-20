@@ -9,9 +9,14 @@
 #include "protocol.h"
 #include "util.h"
 #include "zappy.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+
+packet_pbc_t *pbc_deserialize(char **args)
+{
+	packet_pbc_t *packet = malloc(sizeof(*packet));
+	if (packet == NULL)
+		return (NULL);
+	return (packet);
+}
 
 bool pbc_handler(player_t *player, packet_pbc_t *packet)
 {

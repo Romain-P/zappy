@@ -5,10 +5,9 @@
 ** MSZ Command
 */
 
-#include <protocol.h>
-#include <util.h>
-#include <zappy.h>
-#include <stdlib.h>
+#include "protocol.h"
+#include "util.h"
+#include "zappy.h"
 
 bool msz_handler(player_t *player, packet_msz_t *packet)
 {

@@ -8,7 +8,6 @@
 #include "protocol.h"
 #include "util.h"
 #include "zappy.h"
-#include <string.h>
 
 packet_tna_t *tna_deserialize(char **args)
 {

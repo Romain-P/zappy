@@ -8,7 +8,6 @@
 #include "protocol.h"
 #include "util.h"
 #include "zappy.h"
-#include <string.h>
 
 static void init_player_join(player_t *player, team_t *team)
 {
