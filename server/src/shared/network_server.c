@@ -78,7 +78,6 @@ static void on_client_ready(session_t client, void *server_ptr) {
 
 void network_server_start(network_server_t *server, server_config_t *config) {
     server->config = config;
-    server->config->epoll_timeout = -1;
 
     config_socket(server);
 

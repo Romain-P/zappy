@@ -17,14 +17,15 @@
 #endif
 
 #define ERROR               (-1)
-#define PACKET_HEADER      \
-    char const *cmd;       \
-    bool delayed
+
+#define PACKED  __attribute__((__packed__))
+
+#define PACKET_HEADER      char const *cmd
 
 typedef struct network_client_s network_client_t;
-typedef struct network_server_s network_server_t;
+typedef struct netinstance_s network_instance_t;
 typedef int session_t;
-typedef struct server_config_s server_config_t;
+typedef struct network_config_s network_config_t;
 typedef struct client_handler_s client_handler_t;
 typedef enum buffer_state_e buffer_state_t;
 typedef struct network_packet_s network_packet_t;
@@ -35,7 +36,7 @@ enum buffer_state_e {
     READY
 };
 
-struct __attribute__((__packed__)) network_packet_s {
+struct PACKED network_packet_s {
     PACKET_HEADER;
 };
 
@@ -45,7 +46,7 @@ struct network_client_s {
     buffer_state_t bstate;
     size_t length;
     int status;
-    network_server_t *server;
+    network_instance_t *server;
     bool closed;
 };
 
@@ -56,16 +57,15 @@ struct client_handler_s {
     void (*on_sent)(network_client_t *client, char const *packet, size_t len);
 };
 
-struct network_server_s {
-    session_t id;
+struct netinstance_s {
     session_t epoll_id;
-    server_config_t *config;
+    network_config_t *config;
     client_handler_t client_handler;
     list_t clients;
 };
 
-struct server_config_s {
-    in_addr_t host;
+struct network_config_s {
+    char *host;
     uint16_t port;
     char *packet_delimiter;
     size_t packet_max_size;
@@ -74,9 +74,11 @@ struct server_config_s {
     on_epoll_unblocked on_unblocked;
 };
 
-void network_server_start(network_server_t *server, server_config_t *config);
+bool network_connector_start(network_instance_t *instance, network_config_t *config);
 
-void network_client_read(network_server_t *server, network_client_t *client, char *buffer, size_t length);
+network_client_t *network_new_connection(network_instance_t *instance);
+
+void network_client_read(network_instance_t *server, network_client_t *client, char *buffer, size_t length);
 
 void network_client_send(network_client_t *client, char *packet, size_t len);
 
