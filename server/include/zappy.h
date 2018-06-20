@@ -6,7 +6,7 @@
 # define ZAPPY_H_
 
 # define ZAPPY_BUFFER_SIZE        (512)
-# define ZAPPY_ARG_DELIMITER   ("\r\n")
+# define ZAPPY_ARG_DELIMITER   ("\n")
 # define ZAPPY_PARAM_SEPARATOR    (" ")
 
 #include <time.h>
@@ -95,7 +95,7 @@ struct zappy_instance_s {
     list_t teams;
     map_t map;
     size_t number_egg;
-    list_t waiting_commands;
+    list_t pending;
 };
 
 typedef bool (*handler_t)(player_t *, void *);

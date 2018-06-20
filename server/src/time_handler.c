@@ -26,20 +26,20 @@ bool delay(void *packet, handler_t handler, player_t *player, int tics) {
     waiting->exec_time = exec_time;
     waiting->command_handler = handler;
     waiting->packet = packet;
-    list_insert(&server.waiting_commands, waiting, (predicate_t) &inserter);
+    list_insert(&server.pending, waiting, (predicate_t) &inserter);
     return true;
 }
 
 void check_delayed_tasks() {
     time_t current_time = time(NULL);
 
-    for (iter_t *it = iter_begin(&server.waiting_commands); it;) {
+    for (iter_t *it = iter_begin(&server.pending); it;) {
         waiting_t *waiting = it->data;
         iter_next(it);
 
         if (current_time >= waiting->exec_time) {
             waiting->command_handler(waiting->player, waiting->packet);
-            list_remove(&server.waiting_commands, waiting);
+            list_remove(&server.pending, waiting);
             waiting->player->waiting_commands--;
             free(waiting->packet);
             free(waiting);
