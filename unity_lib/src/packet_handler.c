@@ -9,13 +9,13 @@
 
 static message_t const messages[] = {
         { "msz",
-                (serialize_t) &msz_serialize,
-                (deserialize_t) &msz_deserialize,
+                (serialize_t) &serialize_msz,
+                (deserialize_t) &deserialize_msz,
                 (handler_t *) &zappy_instance.handlers.on_map_size_reply
         },
         { "bct",
-                (serialize_t) &bct_tile_serialize,
-                (deserialize_t) &bct_tile_deserialize,
+                (serialize_t) &serialize_bct,
+                (deserialize_t) &deserialize_bct,
                 (handler_t *) &zappy_instance.handlers.on_tile_content_reply
         },
         { "mct",
@@ -24,8 +24,8 @@ static message_t const messages[] = {
                 NULL
         },
         { "tna",
-                (serialize_t) &tna_serialize,
-                (deserialize_t) &tna_deserialize,
+                (serialize_t) &serialize_tna,
+                (deserialize_t) &deserialize_tna,
                 (handler_t *) &zappy_instance.handlers.on_team_name_reply
         },
         { "ppo",

@@ -48,13 +48,6 @@ typedef struct packet_forward_s packet_forward_t;
 typedef struct packet_turn_s packet_turn_t;
 typedef struct packet_inventory_s packet_inventory_t;
 
-struct PACKED packet_example_s {
-    PACKET_HEADER;
-    int64_t some;
-    char str[100];
-    int64_t shiet;
-};
-
 struct PACKED packet_msz_s {
     PACKET_HEADER;
     size_t x;
