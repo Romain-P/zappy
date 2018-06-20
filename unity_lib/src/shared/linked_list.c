@@ -81,6 +81,18 @@ ptr_t list_at(list_t *list, size_t index) {
     raise_error(ERROR_OUTOFBOUND, index, list->size);
 }
 
+ptr_t list_pop(list_t *list) {
+    check_nullity(list);
+    if (list->size == 0)
+        return NULL;
+    iter_t *pop = iter_begin(list);
+    list->begin = pop->next;
+    ptr_t data = pop->data;
+    free(pop);
+    list->size--;
+    return (data);
+}
+
 void list_clear(list_t *list, free_callback_t free_it) {
     check_nullity(list);
     iter_t *it = list->begin;

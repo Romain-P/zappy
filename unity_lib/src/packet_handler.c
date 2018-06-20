@@ -222,7 +222,14 @@ void parse_packet(network_client_t *client, char const *packet, size_t len) {
                 network_packet_t *casted = data;
                 casted->cmd = cmd;
             }
-            if ((*message->handler)(client->id, data) && data)
+            handler_t handler = *message->handler;
+            if (handler) {
+                if (!zappy_instance.thread_sync)
+                    handler(client->id, data);
+                else
+                    zappy_sync_push(client->id, handler, data);
+            }
+            if (data)
                 free(data);
             break;
         }

@@ -273,8 +273,9 @@ struct network_handlers_s {
     void (*on_command_param_wrong)(session_t id, packet_sbp_t *);
 };
 
-EXPORT bool zappy_init_connector(char *address, uint16_t port, network_handlers_t handlers);
+EXPORT bool zappy_init_connector(char *address, uint16_t port, bool thread_sync, network_handlers_t *handlers);
 EXPORT session_t zappy_new_connection();
+EXPORT void zappy_sync_poll();
 EXPORT void send_packet(session_t id, void *msg);
 
 #endif

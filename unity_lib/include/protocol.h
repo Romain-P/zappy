@@ -11,7 +11,7 @@
 #include "network.h"
 
 # define ZAPPY_BUFFER_SIZE        (512)
-# define ZAPPY_ARG_DELIMITER   ("\r\n")
+# define ZAPPY_ARG_DELIMITER   ("\n")
 # define ZAPPY_PARAM_SEPARATOR    (" ")
 
 typedef struct command_s message_t;
