@@ -5,7 +5,7 @@
 #ifndef ZAPPY_H_
 # define ZAPPY_H_
 
-# define ZAPPY_BUFFER_SIZE        (512)
+# define ZAPPY_BUFFER_SIZE        (2048)
 # define ZAPPY_ARG_DELIMITER   ("\n")
 # define ZAPPY_PARAM_SEPARATOR    (" ")
 
