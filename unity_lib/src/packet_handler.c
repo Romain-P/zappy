@@ -29,8 +29,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_team_name_reply
         },
         { "ppo",
-                (serialize_t) &ppo_serialize,
-                (deserialize_t) &ppo_deserialize,
+                (serialize_t) &serialize_ppo,
+                (deserialize_t) &deserialize_ppo,
                 (handler_t *) &zappy_instance.handlers.on_player_position_update
         },
         { "plv",

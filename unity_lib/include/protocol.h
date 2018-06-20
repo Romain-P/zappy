@@ -41,3 +41,10 @@ void serialize_tna(packet_tna_t *packet, list_t *buffer);
 
 //PACKET PNW
 packet_pnw_t *deserialize_pnw(char **args);
+
+//PACKET PPO
+packet_ppo_t *deserialize_ppo(char **args);
+void serialize_ppo(packet_ppo_t *msg, list_t *buffer)
+
+
+
