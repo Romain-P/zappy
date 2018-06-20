@@ -44,7 +44,11 @@ packet_pnw_t *deserialize_pnw(char **args);
 
 //PACKET PPO
 packet_ppo_t *deserialize_ppo(char **args);
-void serialize_ppo(packet_ppo_t *msg, list_t *buffer)
+void serialize_ppo(packet_ppo_t *msg, list_t *buffer);
+
+//PACKET PLV
+packet_plv_t *deserialize_plv(char **args);
+void serialize_plv(packet_plv_t *msg, list_t *buffer);
 
 
 

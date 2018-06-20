@@ -34,8 +34,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_player_position_update
         },
         { "plv",
-                (serialize_t) &plv_serialize,
-                (deserialize_t) &plv_deserialize,
+                (serialize_t) &serialize_plv,
+                (deserialize_t) &deserialize_plv,
                 (handler_t *) &zappy_instance.handlers.on_player_level_update
         },
         { "pin",
