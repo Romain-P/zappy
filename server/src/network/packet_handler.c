@@ -185,10 +185,11 @@ void send_packet(network_client_t *client, void *msg) {
         char *arg = it->data;
         size_t len = strlen(arg) + 1;
         packet = realloc(packet, len);
-        strcpy(packet + pos, ZAPPY_ARG_DELIMITER);
+        strcpy(packet + pos, ZAPPY_PARAM_SEPARATOR);
         strcpy(packet + pos + 1, arg);
         pos += len;
     }
+    list_clear(&buffer, &free);
     packet = realloc(packet, strlen(packet) + 1);
     packet[pos] = '\n';
     network_client_send(client, packet, strlen(packet));
