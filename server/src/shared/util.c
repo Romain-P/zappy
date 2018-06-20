@@ -70,9 +70,24 @@ bool parse_int(char const *str, int64_t *ptr)
 }
 
 char *to_string(int i) {
-    static char str[100];
-    sprintf(str, "%d", i);
-    char *allocated = malloc(sizeof(char) * strlen(str));
-    strcpy(allocated, str);
+    static char hold[100];
+    static char const digit[] = "0123456789";
+    char *str = hold;
+    if(i<0){
+        *str++ = '-';
+        i *= -1;
+    }
+    int shifter = i;
+    do { //Move to where representation ends
+        ++str;
+        shifter = shifter/10;
+    } while(shifter);
+    *str = 0;
+    do {
+        *--str = digit[i%10];
+        i = i/10;
+    } while(i);
+    char *allocated = malloc(sizeof(char) * strlen(hold));
+    strcpy(allocated, hold);
     return allocated;
 }

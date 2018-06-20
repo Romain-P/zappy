@@ -1,6 +1,9 @@
-//
-// Created by romain on 27/05/18.
-//
+/*
+** EPITECH PROJECT, 2018
+** ZAPPY
+** File description:
+** Packet Handler
+*/
 
 #include <string.h>
 #include <protocol.h>
@@ -183,13 +186,14 @@ void send_packet(network_client_t *client, void *msg)
 	char *packet = strdup(named);
 	size_t pos = strlen(packet);
 	for (iter_t *it = iter_begin(&buffer); it; iter_next(it)) {
-	char *arg = it->data;
-	size_t len = strlen(arg) + 1;
-	packet = realloc(packet, len);
-	strcpy(packet + pos, ZAPPY_ARG_DELIMITER);
-	strcpy(packet + pos + 1, arg);
-	pos += len;
+		char *arg = it->data;
+		size_t len = strlen(arg) + 1;
+		packet = realloc(packet, len);
+		strcpy(packet + pos, ZAPPY_PARAM_SEPARATOR);
+		strcpy(packet + pos + 1, arg);
+		pos += len;
 	}
+	list_clear(&buffer, &free);
 	packet = realloc(packet, strlen(packet) + 1);
 	packet[pos] = '\n';
 	network_client_send(client, packet, strlen(packet));
