@@ -86,3 +86,7 @@ packet_ebo_t *deserialize_ebo(char **args);
 
 //PACKET EDI
 packet_edi_t *deserialize_edi(char **args);
+
+//PACKET SGT
+packet_sgt_t *deserialize_sgt(char **args);
+void serialize_sgt(packet_sgt_t *packet, list_t *buffer);

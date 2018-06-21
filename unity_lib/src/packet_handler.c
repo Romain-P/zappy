@@ -129,8 +129,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_egg_hatching_death
         },
         { "sgt",
-                (serialize_t) &sgt_serialize,
-                (deserialize_t) &sgt_deserialize,
+                (serialize_t) &serialize_sgt,
+                (deserialize_t) &deserialize_sgt,
                 (handler_t *) &zappy_instance.handlers.on_timeunit_reply
         },
         { "sst",
