@@ -106,3 +106,6 @@ packet_suc_t *deserialize_suc(char **args);
 
 //PACKET SBP
 packet_sbp_t *deserialize_sbp(char **args);
+
+//PACKET PIC
+packet_pic_t *deserialize_pic(char **args);

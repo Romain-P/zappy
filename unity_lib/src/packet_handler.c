@@ -43,26 +43,6 @@ static message_t const messages[] = {
                 (deserialize_t) &deserialize_pin,
                 (handler_t *) &zappy_instance.handlers.on_player_inventory_update
         },
-        { "team",
-                (serialize_t) &team_serialize,
-                (deserialize_t) &team_deserialize,
-                NULL
-        },
-        { "forward",
-                (serialize_t) &forward_serialize,
-                (deserialize_t) &forward_deserialize,
-                NULL
-        },
-        { "turn",
-                (serialize_t) &turn_serialize,
-                (deserialize_t) &turn_deserialize,
-                NULL
-        },
-        { "inventory",
-                (serialize_t) &inventory_serialize,
-                (deserialize_t) &inventory_deserialize,
-                NULL
-        },
         { "pnw",
                 NULL,
                 (deserialize_t) &deserialize_pnw,
@@ -79,8 +59,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_broadcast
         },
         { "pic",
-                (serialize_t) &pic_serialize,
                 NULL,
+                (deserialize_t) &deserialize_pic,
                 (handler_t *) &zappy_instance.handlers.on_player_cast_start
         },
         { "pie",

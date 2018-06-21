@@ -135,8 +135,8 @@ struct PACKED packet_pic_s {
     size_t x;
     size_t y;
     size_t incantation_level;
-    size_t player_nb1;
-    size_t player_nb2;
+    size_t players_count;
+    size_t players[100];
 };
 
 struct PACKED packet_pie_s {
