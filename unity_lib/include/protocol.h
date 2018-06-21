@@ -97,3 +97,6 @@ void serialize_sst(packet_sst_t *msg, list_t *buffer);
 
 //PACKET SEG
 packet_seg_t *deserialize_seg(char **args);
+
+//PACKET SMG
+packet_smg_t *deserialize_smg(char **args);

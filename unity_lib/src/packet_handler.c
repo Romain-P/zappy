@@ -144,8 +144,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_game_end
         },
         { "smg",
-                (serialize_t) &smg_serialize,
                 NULL,
+                (deserialize_t) &deserialize_smg,
                 NULL
         },
         { "suc",
