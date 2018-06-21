@@ -99,8 +99,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_player_drop
         },
         { "pgt",
-                (serialize_t) &pgt_serialize,
                 NULL,
+                (deserialize_t) &deserialize_pgt,
                 (handler_t *) &zappy_instance.handlers.on_player_collect
         },
         { "pdi",
