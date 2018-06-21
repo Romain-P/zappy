@@ -80,3 +80,6 @@ packet_enw_t *deserialize_enw(char **args);
 
 //PACKET EHT
 packet_eht_t *deserialize_eht(char **args);
+
+//PACKET EBO
+packet_ebo_t *deserialize_ebo(char **args);
