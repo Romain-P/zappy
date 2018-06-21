@@ -18,6 +18,7 @@
 
 typedef struct packet_example_s packet_example_t;
 typedef struct packet_msz_s packet_msz_t;
+typedef struct packet_welcome_s packet_welcome_t;
 typedef struct packet_bct_tile_s packet_bct_tile_t;
 typedef struct packet_mct_s packet_mct_t;
 typedef struct packet_tna_s packet_tna_t;
@@ -48,11 +49,8 @@ typedef struct packet_forward_s packet_forward_t;
 typedef struct packet_turn_s packet_turn_t;
 typedef struct packet_inventory_s packet_inventory_t;
 
-struct PACKED packet_example_s {
+struct PACKED packet_welcome_s {
     PACKET_HEADER;
-    int64_t some;
-    char str[100];
-    int64_t shiet;
 };
 
 struct PACKED packet_msz_s {
@@ -247,6 +245,7 @@ typedef int session_t;
 struct network_handlers_s {
     void (*on_connect)(session_t id);
     void (*on_disconnect)(session_t id);
+    void (*on_welcome)(session_t id, packet_welcome_t *);
     void (*on_map_size_reply)(session_t id, packet_msz_t *);
     void (*on_tile_content_reply)(session_t id, packet_bct_tile_t *);
     void (*on_team_name_reply)(session_t id, packet_tna_t *);

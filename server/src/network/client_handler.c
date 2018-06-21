@@ -15,7 +15,7 @@ static void on_connect(network_client_t *client) {
     player->waiting_commands = 0;
 
     list_add(&server.players, player);
-    dprintf(client->id, "WELCOME\n");
+    send_unwrapped(client, "WELCOME");
     eprintf("[Client %d] connected\n", client->id);
 }
 
