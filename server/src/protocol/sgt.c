@@ -5,10 +5,9 @@
 ** SGT Command
 */
 
-#include <protocol.h>
-#include <util.h>
-#include <zappy.h>
-#include <stdlib.h>
+#include "protocol.h"
+#include "util.h"
+#include "zappy.h"
 
 packet_sgt_t *sgt_deserialize(char **args)
 {

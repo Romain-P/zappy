@@ -2,10 +2,9 @@
 // Created by romain on 08/06/18.
 //
 
-#include <protocol.h>
-#include <util.h>
-#include <string.h>
-#include <zappy.h>
+#include "protocol.h"
+#include "util.h"
+#include "zappy.h"
 
 //delay of 10 tics
 static size_t const DELAY = 10;

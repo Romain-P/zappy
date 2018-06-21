@@ -39,192 +39,192 @@ typedef struct packet_turn_s packet_turn_t;
 typedef struct packet_inventory_s packet_inventory_t;
 
 struct __attribute__((__packed__)) packet_example_s {
-    PACKET_HEADER;
-    int64_t some;
-    char str[100];
-    int64_t shiet;
+	PACKET_HEADER;
+	int64_t some;
+	char str[100];
+	int64_t shiet;
 };
 
 struct __attribute__((__packed__)) packet_msz_s {
-    PACKET_HEADER;
-    size_t x;
-    size_t y;
+	PACKET_HEADER;
+	size_t x;
+	size_t y;
 };
 
 struct __attribute__((__packed__)) packet_bct_tile_s {
-    PACKET_HEADER;
-    size_t x;
-    size_t y;
-    size_t q0;
-    size_t q1;
-    size_t q2;
-    size_t q3;
-    size_t q4;
-    size_t q5;
-    size_t q6;
+	PACKET_HEADER;
+	size_t x;
+	size_t y;
+	size_t q0;
+	size_t q1;
+	size_t q2;
+	size_t q3;
+	size_t q4;
+	size_t q5;
+	size_t q6;
 };
 
 struct __attribute__((__packed__)) packet_tna_s {
-    PACKET_HEADER;
-    char name[1024];
+	PACKET_HEADER;
+	char name[1024];
 };
 
 struct __attribute__((__packed__)) packet_pnw_s {
-    PACKET_HEADER;
-    char player_number[42];
-    size_t x;
-    size_t y;
-    size_t orientation;
-    size_t level;
-    char name_team[1024];
+	PACKET_HEADER;
+	size_t player_number;
+	size_t x;
+	size_t y;
+	size_t orientation;
+	size_t level;
+	char name_team[1024];
 };
 
 struct __attribute__((__packed__)) packet_ppo_s {
-    PACKET_HEADER;
-    size_t player_number;
-    size_t x;
-    size_t y;
-    size_t orientation;
+	PACKET_HEADER;
+	size_t player_number;
+	size_t x;
+	size_t y;
+	size_t orientation;
 };
 
 struct __attribute__((__packed__)) packet_plv_s {
-    PACKET_HEADER;
-    size_t player_number;
-    size_t level;
+	PACKET_HEADER;
+	size_t player_number;
+	size_t level;
 };
 
 struct __attribute__((__packed__)) packet_pin_s {
-    PACKET_HEADER;
-    size_t player_number;
-    size_t x;
-    size_t y;
-    size_t q0;
-    size_t q1;
-    size_t q2;
-    size_t q3;
-    size_t q4;
-    size_t q5;
-    size_t q6;
+	PACKET_HEADER;
+	size_t player_number;
+	size_t x;
+	size_t y;
+	size_t q0;
+	size_t q1;
+	size_t q2;
+	size_t q3;
+	size_t q4;
+	size_t q5;
+	size_t q6;
 };
 
 struct __attribute__((__packed__)) packet_pex_s {
-    PACKET_HEADER;
-    size_t player_number;
+	PACKET_HEADER;
+	size_t player_number;
 };
 
 struct __attribute__((__packed__)) packet_pbc_s {
-    PACKET_HEADER;
-    size_t player_number;
-    char message[1024];
+	PACKET_HEADER;
+	size_t player_number;
+	char message[1024];
 };
 
 struct __attribute__((__packed__)) packet_pic_s {
-    PACKET_HEADER;
-    size_t x;
-    size_t y;
-    size_t incantation_level;
-    size_t player_nb1;
-    size_t player_nb2;
+	PACKET_HEADER;
+	size_t x;
+	size_t y;
+	size_t incantation_level;
+	size_t player_nb1;
+	size_t player_nb2;
 };
 
 struct __attribute__((__packed__)) packet_pie_s {
-    PACKET_HEADER;
-    size_t x;
-    size_t y;
-    size_t result;
+	PACKET_HEADER;
+	size_t x;
+	size_t y;
+	size_t result;
 };
 
 struct __attribute__((__packed__)) packet_pfk_s {
-    PACKET_HEADER;
-    size_t player_number;
+	PACKET_HEADER;
+	size_t player_number;
 };
 
 struct __attribute__((__packed__)) packet_pdr_s {
-    PACKET_HEADER;
-    size_t player_number;
-    size_t ressource;
+	PACKET_HEADER;
+	size_t player_number;
+	size_t ressource;
 };
 
 struct __attribute__((__packed__)) packet_pgt_s {
-    PACKET_HEADER;
-    size_t player_number;
-    size_t ressource;
+	PACKET_HEADER;
+	size_t player_number;
+	size_t ressource;
 };
 
 struct __attribute__((__packed__)) packet_pdi_s {
-    PACKET_HEADER;
-    size_t player_number;
+	PACKET_HEADER;
+	size_t player_number;
 };
 
 struct __attribute__((__packed__)) packet_enw_s {
-    PACKET_HEADER;
-    size_t egg;
-    size_t player_number;
-    size_t x;
-    size_t y;
+	PACKET_HEADER;
+	size_t egg;
+	size_t player_number;
+	size_t x;
+	size_t y;
 };
 
 struct __attribute__((__packed__)) packet_eht_s {
-    PACKET_HEADER;
-    size_t egg;
+	PACKET_HEADER;
+	size_t egg;
 };
 
 struct __attribute__((__packed__)) packet_ebo_s {
-    PACKET_HEADER;
-    size_t egg;
+	PACKET_HEADER;
+	size_t egg;
 };
 
 struct __attribute__((__packed__)) packet_edi_s {
-    PACKET_HEADER;
-    size_t egg;
+	PACKET_HEADER;
+	size_t egg;
 };
 
 struct __attribute__((__packed__)) packet_sgt_s {
-    PACKET_HEADER;
-    size_t time;
+	PACKET_HEADER;
+	size_t time;
 };
 
 struct __attribute__((__packed__)) packet_sst_s {
-    PACKET_HEADER;
-    size_t time;
+	PACKET_HEADER;
+	size_t time;
 };
 
 struct __attribute__((__packed__)) packet_seg_s {
-    PACKET_HEADER;
-    char team[1024];
+	PACKET_HEADER;
+	char team[1024];
 };
 
 struct __attribute__((__packed__)) packet_smg_s {
-    PACKET_HEADER;
-    char message[1024];
+	PACKET_HEADER;
+	char message[1024];
 };
 
-struct __attribute__((__packed__)) suc_s {
-    PACKET_HEADER;
+struct __attribute__((__packed__)) packet_suc_s {
+	PACKET_HEADER;
 };
 
-struct __attribute__((__packed__)) sbp_s {
-    PACKET_HEADER;
+struct __attribute__((__packed__)) packet_sbp_s {
+	PACKET_HEADER;
 };
 
 struct __attribute__((__packed__)) packet_forward_s {
-    PACKET_HEADER;
+	PACKET_HEADER;
 };
 
 struct __attribute__((__packed__)) packet_inventory_s {
-    PACKET_HEADER;
-    char result[2048];
+	PACKET_HEADER;
+	char result[2048];
 };
 
 struct __attribute__((__packed__)) packet_turn_s {
-    PACKET_HEADER;
-    char orientation[6];
+	PACKET_HEADER;
+	char orientation[6];
 };
 
 struct __attribute__((__packed__)) packet_team_s {
-    PACKET_HEADER;
-    char team[1024];
-    int status;
+	PACKET_HEADER;
+	char team[1024];
+	int status;
 };
 
 bool msg_example_handler(player_t *player, packet_example_t *msg);
@@ -269,6 +269,7 @@ bool tna_handler(player_t *, packet_tna_t *);
 void tna_serialize(packet_tna_t *, list_t *);
 
 // PNW COMMAND
+packet_pnw_t *pnw_deserialize(char **);
 bool pnw_handler(player_t *, packet_pnw_t *);
 void pnw_serialize(packet_pnw_t *, list_t *);
 
@@ -288,51 +289,63 @@ bool pin_handler(player_t *, packet_pin_t *);
 void pin_serialize(packet_pin_t *, list_t *);
 
 // PEX COMMAND
+packet_pex_t *pex_deserialize(char **);
 bool pex_handler(player_t *player, packet_pex_t *);
 void pex_serialize(packet_pex_t *, list_t *);
 
 // PBC COMMAND
+packet_pbc_t *pbc_deserialize(char **);
 bool pbc_handler(player_t *player, packet_pbc_t *);
 void pbc_serialize(packet_pbc_t *, list_t *);
 
 // PIC COMMAND
-bool pic_handler(packet_pic_t *);
+packet_pic_t *pic_deserialize(char **);
+bool pic_handler(player_t *, packet_pic_t *);
 void pic_serialize(packet_pic_t *, list_t *);
 
 // PIE COMMAND
-bool pie_handler(packet_pie_t *);
+packet_pie_t *pie_deserialize(char **);
+bool pie_handler(player_t *, packet_pie_t *);
 void pie_serialize(packet_pie_t *, list_t *);
 
 // PFK COMMAND
-bool pfk_handler(packet_pfk_t *);
+packet_pfk_t *pfk_deserialize(char **);
+bool pfk_handler(player_t *, packet_pfk_t *);
 void pfk_serialize(packet_pfk_t *, list_t *);
 
 // PDR COMMAND
+packet_pdr_t *pdr_deserialize(char **);
 bool pdr_handler(player_t *player, packet_pdr_t *);
 void pdr_serialize(packet_pdr_t *, list_t *);
 
 // PGT COMMAND
+packet_pgt_t *pgt_deserialize(char **);
 bool pgt_handler(player_t *, packet_pgt_t *);
 void pgt_serialize(packet_pgt_t *, list_t *);
 
 // PDI COMMAND
+packet_pdi_t *pdi_deserialize(char **);
 bool pdi_handler(player_t *player, packet_pdi_t *);
 void pdi_serialize(packet_pdi_t *, list_t *);
 
 // ENW COMMAND
+packet_enw_t *enw_deserialize(char **);
 bool enw_handler(player_t *player, packet_enw_t *);
 void enw_serialize(packet_enw_t *, list_t *);
 
 // EHT COMMAND
-bool eht_handler(packet_eht_t *);
+packet_eht_t *eht_deserialize(char **);
+bool eht_handler(player_t *, packet_eht_t *);
 void eht_serialize(packet_eht_t *, list_t *);
 
 // EBO COMMAND
-bool ebo_handler(packet_ebo_t *);
+packet_ebo_t *ebo_deserialize(char **);
+bool ebo_handler(player_t *, packet_ebo_t *);
 void ebo_serialize(packet_ebo_t *, list_t *);
 
 // EDI COMMAND
-bool edi_handler(packet_edi_t *);
+packet_edi_t *edi_deserialize(char **);
+bool edi_handler(player_t *, packet_edi_t *);
 void edi_serialize(packet_edi_t *, list_t *);
 
 // SGT COMMAND
@@ -351,18 +364,22 @@ void sst_serialize(packet_sst_t *, list_t *);
 packet_sst_t *sst_deserialize(char **);
 
 // SEG COMMAND
-bool seg_handler(packet_seg_t *);
+packet_seg_t *seg_deserialize(char **);
+bool seg_handler(player_t *, packet_seg_t *);
 void seg_serialize(packet_seg_t *, list_t *);
 
 // SMG COMMAND
-bool smg_handler(packet_smg_t *);
+packet_smg_t *smg_deserialize(char **);
+bool smg_handler(player_t *, packet_smg_t *);
 void smg_serialize(packet_smg_t *, list_t *);
 
 // SUC COMMAND
+packet_suc_t *suc_deserialize(char **);
 bool suc_handler(player_t *, packet_suc_t *);
 void suc_serialize(packet_suc_t *, list_t *);
 
 // SBP COMMAND
+packet_sbp_t *sbp_deserialize(char **);
 bool sbp_handler(player_t *, packet_sbp_t *);
 void sbp_serialize(packet_sbp_t *, list_t *);
 

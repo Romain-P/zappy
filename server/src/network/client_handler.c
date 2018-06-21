@@ -46,7 +46,7 @@ static void on_received(network_client_t *client, char const *packet, size_t len
 static void on_sent(network_client_t *client, char const *packet, size_t len) {
     eprintf("[Server] Sent \t-->\t[Client %d]:\t\t", client->id);
     fflush(stderr);
-    write(STDERR_FILENO, packet, len - 2);
+    write(STDERR_FILENO, packet, len - 1);
     eprintf("\n");
 }
 

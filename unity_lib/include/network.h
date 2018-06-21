@@ -13,7 +13,7 @@
 #include "network_epoll.h"
 
 #ifndef NETWORK_READ_SIZE
-    #define NETWORK_READ_SIZE   (1024)
+    #define NETWORK_READ_SIZE   (2048)
 #endif
 
 #define ERROR               (-1)
@@ -45,7 +45,6 @@ struct network_client_s {
     char *buffer;
     buffer_state_t bstate;
     size_t length;
-    int status;
     network_instance_t *server;
     bool closed;
 };

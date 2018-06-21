@@ -5,24 +5,30 @@
 ** PIC Command
 */
 
-
 #include "protocol.h"
 #include "util.h"
 #include "zappy.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
-bool pic_handler(packet_pic_t *packet)
+packet_pic_t *pic_deserialize(char **args)
 {
-	player_t *player;
+	packet_pic_t *packet = malloc(sizeof(*packet));
+
+	if (packet == NULL)
+		return (NULL);
+	return (packet);
+}
+
+
+bool pic_handler(player_t *player, packet_pic_t *packet)
+{
+	player_t *list;
 	iter_t *it;
 
 	packet->x = 0;
 	packet->y = 0;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
-		player = it->data;
-		send_packet(player->client, &packet);
+		list = it->data;
+		send_packet(list->client, &packet);
 	}
 	return true;
 }

@@ -8,11 +8,8 @@
 #include "protocol.h"
 #include "util.h"
 #include "zappy.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
-static void add_ressource(player_t *player, size_t ressource)
+/*static void add_ressource(player_t *player, size_t ressource)
 {
 	if (ressource == 0)
 		player->inventory.q0++;
@@ -28,21 +25,7 @@ static void add_ressource(player_t *player, size_t ressource)
 		player->inventory.q5++;
 	if (ressource == 6)
 		player->inventory.q6++;
-}
-
-bool pgt_handler(player_t *player, packet_pgt_t *packet) //packet = NULL car pas de fonction désérialize
-{
-	player_t *list;
-	iter_t *it;
-
-	packet->player_number = (player->client)->id;
-	add_ressource(player, packet->ressource);
-	for (it = iter_begin(&server.players); it; iter_next(it)) {
-		list = it->data;
-		send_packet(list->client, &packet);
-	}
-	return true;
-}
+}*/
 
 void pgt_serialize(packet_pgt_t *packet, list_t *buffer)
 {

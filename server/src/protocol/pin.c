@@ -5,10 +5,9 @@
 ** PIN Command
 */
 
-#include <protocol.h>
-#include <util.h>
-#include <zappy.h>
-#include <stdlib.h>
+#include "protocol.h"
+#include "util.h"
+#include "zappy.h"
 
 static void set_inventory_player(packet_pin_t *packet, player_t *player)
 {

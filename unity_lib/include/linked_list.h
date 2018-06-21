@@ -33,6 +33,7 @@ list_t  *list_new();
 void    list_add(list_t *list, ptr_t elem);
 void    list_remove(list_t *list, ptr_t elem);
 ptr_t   list_at(list_t *list, size_t index);
+ptr_t   list_pop(list_t *list);
 void    list_clear(list_t *list, free_callback_t free_it);
 void    list_insert(list_t *list, ptr_t data, predicate_t callback);
 

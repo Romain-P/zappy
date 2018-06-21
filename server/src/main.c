@@ -10,7 +10,7 @@
 zappy_instance_t server = {
         .players = list_init,
         .teams = list_init,
-        .waiting_commands = list_init
+        .pending = list_init
 };
 
 static void on_server_close() {

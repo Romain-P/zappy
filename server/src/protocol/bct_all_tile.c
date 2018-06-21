@@ -5,10 +5,9 @@
 ** BCT Command for all tile
 */
 
-#include <protocol.h>
-#include <util.h>
-#include <zappy.h>
-#include <stdlib.h>
+#include "protocol.h"
+#include "util.h"
+#include "zappy.h"
 
 packet_bct_tile_t *bct_all_deserialize(char **args)
 {
@@ -32,7 +31,7 @@ bool bct_all_handler(player_t *player, packet_bct_tile_t *packet)
 		packet->y = ressource->y;
 		send_packet(player->client, &packet);
 	}
-	return true;
+	return (true);
 }
 
 void bct_all_serialize(packet_bct_tile_t *packet, list_t *buffer)

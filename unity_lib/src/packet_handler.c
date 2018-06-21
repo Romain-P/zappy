@@ -185,13 +185,13 @@ void send_packet(session_t id, void *msg) {
         char *arg = it->data;
         size_t len = strlen(arg) + 1;
         packet = realloc(packet, len);
-        strcpy(packet + pos, ZAPPY_ARG_DELIMITER);
+        strcpy(packet + pos, ZAPPY_PARAM_SEPARATOR);
         strcpy(packet + pos + 1, arg);
         pos += len;
     }
     packet = realloc(packet, strlen(packet) + 1);
     packet[pos] = '\n';
-    network_client_t *client = network_client_find(&zappy_instance.instance.clients, id);
+    network_client_t *client = network_client_find(&zappy_instance.net.clients, id);
     network_client_send(client, packet, strlen(packet));
     free(packet);
 }
@@ -201,7 +201,7 @@ void send_unwrapped(session_t id, char *unwrapped) {
     char cmd[len + 1];
     strcpy(cmd, unwrapped);
     cmd[len] = '\n';
-    network_client_t *client = network_client_find(&zappy_instance.instance.clients, id);
+    network_client_t *client = network_client_find(&zappy_instance.net.clients, id);
     network_client_send(client, cmd, len + 1);
 }
 
@@ -222,7 +222,14 @@ void parse_packet(network_client_t *client, char const *packet, size_t len) {
                 network_packet_t *casted = data;
                 casted->cmd = cmd;
             }
-            if ((*message->handler)(client->id, data) && data)
+            handler_t handler = *message->handler;
+            if (handler) {
+                if (!zappy_instance.thread_sync)
+                    handler(client->id, data);
+                else
+                    zappy_sync_push(client->id, handler, data);
+            }
+            if (data)
                 free(data);
             break;
         }
