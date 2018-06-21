@@ -39,8 +39,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_player_level_update
         },
         { "pin",
-                (serialize_t) &pin_serialize,
-                (deserialize_t) &pin_deserialize,
+                (serialize_t) &serialize_pin,
+                (deserialize_t) &deserialize_pin,
                 (handler_t *) &zappy_instance.handlers.on_player_inventory_update
         },
         { "team",

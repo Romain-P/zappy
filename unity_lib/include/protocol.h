@@ -50,5 +50,10 @@ void serialize_ppo(packet_ppo_t *msg, list_t *buffer);
 packet_plv_t *deserialize_plv(char **args);
 void serialize_plv(packet_plv_t *msg, list_t *buffer);
 
+//PACKET PIN
+packet_pin_t *deserialize_pin(char **args)
+void serialize_pin(packet_pin_t *msg, list_t *buffer)
+
+
 
 
