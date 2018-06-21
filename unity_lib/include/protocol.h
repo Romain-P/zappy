@@ -65,3 +65,6 @@ packet_pie_t *deserialize_pie(char **args);
 
 //PACKET PFK
 packet_pfk_t *deserialize_pfk(char **args);
+
+//PACKET PDR
+packet_pdr_t *deserialize_pdr(char **args);
