@@ -211,11 +211,11 @@ struct PACKED packet_smg_s {
     char message[1024];
 };
 
-struct PACKED suc_s {
+struct PACKED packet_suc_s {
     PACKET_HEADER;
 };
 
-struct PACKED sbp_s {
+struct PACKED packet_sbp_s {
     PACKET_HEADER;
 };
 

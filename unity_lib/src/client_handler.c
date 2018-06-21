@@ -3,7 +3,6 @@
 //
 
 #include <unistd.h>
-#include <lib.h>
 #include "network.h"
 #include "stderr.h"
 #include "lib.h"
