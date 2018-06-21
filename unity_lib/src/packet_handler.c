@@ -84,8 +84,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_player_cast_start
         },
         { "pie",
-                (serialize_t) &pie_serialize,
                 NULL,
+                (deserialize_t) &deserialize_pie,
                 (handler_t *) &zappy_instance.handlers.on_player_cast_end
         },
         { "pfk",

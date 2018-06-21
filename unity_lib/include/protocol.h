@@ -59,3 +59,7 @@ packet_pex_t *deserialize_pex(char **args);
 
 //PACKET PBC
 packet_pbc_t *deserialize_pbc(char **args);
+
+//PACKET PIE
+packet_pie_t *deserialize_pie(char **args);
+
