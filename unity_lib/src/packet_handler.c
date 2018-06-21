@@ -74,8 +74,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_player_expulsed
         },
         { "pbc",
-                (serialize_t) &pbc_serialize,
                 NULL,
+                (deserialize_t) &deserialize_pbc,
                 (handler_t *) &zappy_instance.handlers.on_broadcast
         },
         { "pic",

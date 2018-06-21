@@ -56,3 +56,6 @@ void serialize_pin(packet_pin_t *msg, list_t *buffer);
 
 //PACKET PEX
 packet_pex_t *deserialize_pex(char **args);
+
+//PACKET PBC
+packet_pbc_t *deserialize_pbc(char **args);
