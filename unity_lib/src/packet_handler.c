@@ -114,8 +114,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_player_lay
         },
         { "eht",
-                (serialize_t) &eht_serialize,
                 NULL,
+                (deserialize_t) &deserialize_eht,
                 (handler_t *) &zappy_instance.handlers.on_egg_hatching
         },
         { "ebo",
