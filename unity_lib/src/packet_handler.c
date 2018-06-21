@@ -109,8 +109,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_player_death
         },
         { "enw",
-                (serialize_t) &enw_serialize,
                 NULL,
+                (deserialize_t) &deserialize_enw,
                 (handler_t *) &zappy_instance.handlers.on_player_lay
         },
         { "eht",

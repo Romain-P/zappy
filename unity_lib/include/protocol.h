@@ -74,3 +74,6 @@ packet_pgt_t *deserialize_pgt(char **args);
 
 //PACKET PDI
 packet_pdi_t *deserialize_pdi(char **args);
+
+//PACKET ENW
+packet_enw_t *deserialize_enw(char **args);
