@@ -69,8 +69,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_player_connected
         },
         { "pex",
-                (serialize_t) &pex_serialize,
                 NULL,
+                (deserialize_t) &deserialize_pex,
                 (handler_t *) &zappy_instance.handlers.on_player_expulsed
         },
         { "pbc",
