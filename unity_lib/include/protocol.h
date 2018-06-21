@@ -90,3 +90,10 @@ packet_edi_t *deserialize_edi(char **args);
 //PACKET SGT
 packet_sgt_t *deserialize_sgt(char **args);
 void serialize_sgt(packet_sgt_t *packet, list_t *buffer);
+
+//PACKET SST
+packet_sst_t *deserialize_sst(char **args);
+void serialize_sst(packet_sst_t *msg, list_t *buffer);
+
+//PACKET SEG
+packet_seg_t *deserialize_seg(char **args);

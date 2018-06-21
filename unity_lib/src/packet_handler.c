@@ -134,13 +134,13 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_timeunit_reply
         },
         { "sst",
-                (serialize_t) &sst_serialize,
-                (deserialize_t) &sst_deserialize,
+                (serialize_t) &serialize_sst,
+                (deserialize_t) &deserialize_sst,
                 (handler_t *) &zappy_instance.handlers.on_timeunit_modif_reply
         },
         { "seg",
-                (serialize_t) &seg_serialize,
                 NULL,
+                (deserialize_t) &deserialize_seg,
                 (handler_t *) &zappy_instance.handlers.on_game_end
         },
         { "smg",
