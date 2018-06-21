@@ -83,3 +83,6 @@ packet_eht_t *deserialize_eht(char **args);
 
 //PACKET EBO
 packet_ebo_t *deserialize_ebo(char **args);
+
+//PACKET EDI
+packet_edi_t *deserialize_edi(char **args);

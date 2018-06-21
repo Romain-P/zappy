@@ -124,8 +124,8 @@ static message_t const messages[] = {
                 NULL,
         },
         { "edi",
-                (serialize_t) &edi_serialize,
                 NULL,
+                (deserialize_t) &deserialize_edi,
                 (handler_t *) &zappy_instance.handlers.on_egg_hatching_death
         },
         { "sgt",
