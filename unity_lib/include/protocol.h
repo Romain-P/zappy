@@ -27,112 +27,82 @@ struct command_s {
     handler_t *handler;
 };
 
-packet_example_t *msg_example_deserialize(char **args);
-void msg_example_serialize(packet_example_t *msg, list_t *buffer);
+//PACKET MSZ
+packet_msz_t *deserialize_msz(char **args);
+void serialize_msz(packet_msz_t *msg, list_t *buffer);
 
-// FORWARD COMMAND
-packet_forward_t *forward_deserialize(char **);
-void forward_serialize(packet_forward_t *, list_t *);
+//PACKET BCT
+packet_bct_tile_t *deserialize_bct(char **args);
+void serialize_bct(packet_bct_tile_t *msg, list_t *buffer);
 
-// TURN COMMAND
-packet_turn_t *turn_deserialize(char **);
-void turn_serialize(packet_turn_t *, list_t *);
+//PACKET TNA
+packet_tna_t *deserialize_tna(char **args);
+void serialize_tna(packet_tna_t *packet, list_t *buffer);
 
-// IVENTORY COMMAND
-packet_inventory_t *inventory_deserialize(char **);
-void inventory_serialize(packet_inventory_t *, list_t *);
+//PACKET PNW
+packet_pnw_t *deserialize_pnw(char **args);
 
-// MSZ COMMAND
-packet_msz_t *msz_deserialize(char **);
-void msz_serialize(packet_msz_t *, list_t *);
+//PACKET PPO
+packet_ppo_t *deserialize_ppo(char **args);
+void serialize_ppo(packet_ppo_t *msg, list_t *buffer);
 
-// BCT COMMAND (One Tile)
-packet_bct_tile_t *bct_tile_deserialize(char **);
-void bct_tile_serialize(packet_bct_tile_t *, list_t *);
-void init_bct_tile_packet(packet_bct_tile_t *packet);
-void get_ressource_tile(size_t, packet_bct_tile_t *);
+//PACKET PLV
+packet_plv_t *deserialize_plv(char **args);
+void serialize_plv(packet_plv_t *msg, list_t *buffer);
 
-// BCT COMMAND (All Tile)
-packet_bct_tile_t *bct_all_deserialize(char **);
-void bct_all_serialize(packet_bct_tile_t *, list_t *);
+//PACKET PIN
+packet_pin_t *deserialize_pin(char **args);
+void serialize_pin(packet_pin_t *msg, list_t *buffer);
 
-// TNA COMMAND
-packet_tna_t *tna_deserialize(char **);
-void tna_serialize(packet_tna_t *, list_t *);
+//PACKET PEX
+packet_pex_t *deserialize_pex(char **args);
 
-// PNW COMMAND
-void pnw_serialize(packet_pnw_t *, list_t *);
+//PACKET PBC
+packet_pbc_t *deserialize_pbc(char **args);
 
-// PPO COMMAND
-packet_ppo_t *ppo_deserialize(char **);
-void ppo_serialize(packet_ppo_t *, list_t *);
+//PACKET PIE
+packet_pie_t *deserialize_pie(char **args);
 
-// PLV COMMAND
-packet_plv_t *plv_deserialize(char **);
-void plv_serialize(packet_plv_t *, list_t *);
+//PACKET PFK
+packet_pfk_t *deserialize_pfk(char **args);
 
-// PIN COMMAND
-packet_pin_t *pin_deserialize(char **);
-void pin_serialize(packet_pin_t *, list_t *);
+//PACKET PDR
+packet_pdr_t *deserialize_pdr(char **args);
 
-// PEX COMMAND
-void pex_serialize(packet_pex_t *, list_t *);
+//PACKET PGT
+packet_pgt_t *deserialize_pgt(char **args);
 
-// PBC COMMAND
-void pbc_serialize(packet_pbc_t *, list_t *);
+//PACKET PDI
+packet_pdi_t *deserialize_pdi(char **args);
 
-// PIC COMMAND
-void pic_serialize(packet_pic_t *, list_t *);
+//PACKET ENW
+packet_enw_t *deserialize_enw(char **args);
 
-// PIE COMMAND
-void pie_serialize(packet_pie_t *, list_t *);
+//PACKET EHT
+packet_eht_t *deserialize_eht(char **args);
 
-// PFK COMMAND
-void pfk_serialize(packet_pfk_t *, list_t *);
+//PACKET EBO
+packet_ebo_t *deserialize_ebo(char **args);
 
-// PDR COMMAND
-void pdr_serialize(packet_pdr_t *, list_t *);
+//PACKET EDI
+packet_edi_t *deserialize_edi(char **args);
 
-// PGT COMMAND
-void pgt_serialize(packet_pgt_t *, list_t *);
+//PACKET SGT
+packet_sgt_t *deserialize_sgt(char **args);
+void serialize_sgt(packet_sgt_t *packet, list_t *buffer);
 
-// PDI COMMAND
-void pdi_serialize(packet_pdi_t *, list_t *);
+//PACKET SST
+packet_sst_t *deserialize_sst(char **args);
+void serialize_sst(packet_sst_t *msg, list_t *buffer);
 
-// ENW COMMAND
-void enw_serialize(packet_enw_t *, list_t *);
+//PACKET SEG
+packet_seg_t *deserialize_seg(char **args);
 
-// EHT COMMAND
-void eht_serialize(packet_eht_t *, list_t *);
+//PACKET SMG
+packet_smg_t *deserialize_smg(char **args);
 
-// EBO COMMAND
-void ebo_serialize(packet_ebo_t *, list_t *);
+//PACKET SUC
+packet_suc_t *deserialize_suc(char **args);
 
-// EDI COMMAND
-void edi_serialize(packet_edi_t *, list_t *);
-
-// SGT COMMAND
-void sgt_serialize(packet_sgt_t *, list_t *);
-packet_sgt_t *sgt_deserialize(char **);
-
-// TEAM COMMAND
-void team_serialize(packet_team_t *, list_t *);
-packet_team_t *team_deserialize(char **);
-
-// SST COMMAND
-void sst_serialize(packet_sst_t *, list_t *);
-packet_sst_t *sst_deserialize(char **);
-
-// SEG COMMAND
-void seg_serialize(packet_seg_t *, list_t *);
-
-// SMG COMMAND
-void smg_serialize(packet_smg_t *, list_t *);
-
-// SUC COMMAND
-void suc_serialize(packet_suc_t *, list_t *);
-
-// SBP COMMAND
-void sbp_serialize(packet_sbp_t *, list_t *);
-
-#endif //ZAPPY_PROTOCOL_H
+//PACKET SBP
+packet_sbp_t *deserialize_sbp(char **args);
