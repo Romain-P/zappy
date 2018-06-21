@@ -100,3 +100,9 @@ packet_seg_t *deserialize_seg(char **args);
 
 //PACKET SMG
 packet_smg_t *deserialize_smg(char **args);
+
+//PACKET SUC
+packet_suc_t *deserialize_suc(char **args);
+
+//PACKET SBP
+packet_sbp_t *deserialize_sbp(char **args);

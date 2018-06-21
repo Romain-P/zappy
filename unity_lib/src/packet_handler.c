@@ -149,13 +149,13 @@ static message_t const messages[] = {
                 NULL
         },
         { "suc",
-                (serialize_t) &smg_serialize,
                 NULL,
+                (deserialize_t) &deserialize_suc,
                 (handler_t *) &zappy_instance.handlers.on_unknown_command
         },
         { "sbp",
-                (serialize_t) &sbp_serialize,
                 NULL,
+                (deserialize_t) &deserialize_sbp,
                 (handler_t *) &zappy_instance.handlers.on_command_param_wrong
         },
         { "smg",
