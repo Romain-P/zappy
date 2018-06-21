@@ -71,3 +71,6 @@ packet_pdr_t *deserialize_pdr(char **args);
 
 //PACKET PGT
 packet_pgt_t *deserialize_pgt(char **args);
+
+//PACKET PDI
+packet_pdi_t *deserialize_pdi(char **args);
