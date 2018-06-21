@@ -89,8 +89,8 @@ static message_t const messages[] = {
                 (handler_t *) &zappy_instance.handlers.on_player_cast_end
         },
         { "pfk",
-                (serialize_t) &pfk_serialize,
                 NULL,
+                (deserialize_t) &deserialize_pfk,
                 (handler_t *) &zappy_instance.handlers.on_player_lay_self
         },
         { "pdr",
