@@ -6,7 +6,6 @@
 
 static size_t const MAX_COMMANDS = 10;
 static time_t exec_time;
-static int tic_time;
 
 int to_seconds(int tics) {
     return tics / server.freq;
@@ -20,15 +19,14 @@ bool delay(void *packet, handler_t handler, player_t *player, int tics) {
     if (player->waiting_commands >= MAX_COMMANDS)
         return false;
     ((network_packet_t *) packet)->delayed = true;
-    exec_time = time(NULL);
-    tic_time = tics;
+    exec_time = time(NULL) + to_seconds(tics) * 1000;
     player->waiting_commands++;
     waiting_t *waiting = malloc(sizeof(*waiting));
     waiting->player = player;
     waiting->start_time = exec_time;
     waiting->command_handler = handler;
     waiting->packet = packet;
-    waiting->tics = tic_time;
+    waiting->tics = tics;
     list_insert(&server.pending, waiting, (predicate_t) &inserter);
     return true;
 }
