@@ -110,4 +110,25 @@ packet_sbp_t *deserialize_sbp(char **args);
 //PACKET PIC
 packet_pic_t *deserialize_pic(char **args);
 
+//PACKET WELCOME
+packet_welcome_t *deserialize_welcome(char **args);
+
+//PACKET MESSAGE
+packet_message_t *deserialize_message(char **args);
+
+//PACKET LOOK
+packet_look_t *deserialize_look(char **args);
+void serialize_look(packet_look_t *packet, list_t *buffer);
+
+//PACKET INVENTORY
+packet_inventory_t *deserialize_inventory(char **args);
+void serialize_inventory(packet_inventory_t *packet, list_t *buffer);
+
+//PACKET CONNECT NUMBER
+packet_connect_number_t *deserialize_connect_number(char **args);
+void serialize_connect_number(packet_connect_number_t *packet, list_t *buffer);
+
+//PACKET BROADCAST
+void serialize_broadcast(packet_broadcast_t *packet, list_t *buffer);
+
 #endif

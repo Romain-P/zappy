@@ -104,7 +104,8 @@ typedef void *(*deserialize_t)(char **args);
 
 struct waiting_s {
     player_t *player;
-    time_t exec_time;
+    time_t start_time;
+    int tics;
     handler_t command_handler;
     void *packet;
 };

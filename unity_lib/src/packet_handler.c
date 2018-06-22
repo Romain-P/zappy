@@ -8,6 +8,36 @@
 #include "util.h"
 
 static message_t const messages[] = {
+        { "WELCOME",
+                NULL,
+                (deserialize_t) deserialize_welcome,
+                (handler_t *) &zappy_instance.handlers.on_welcome
+        },
+        { "message",
+                NULL,
+                (deserialize_t) deserialize_message,
+                (handler_t *) &zappy_instance.handlers.on_message_reply
+        },
+        { "Look",
+                (serialize_t) serialize_look,
+                (deserialize_t) deserialize_look,
+                (handler_t *) &zappy_instance.handlers.on_look_reply
+        },
+        { "Connect_nbr",
+                (serialize_t) serialize_connect_number,
+                (deserialize_t) deserialize_connect_number,
+                (handler_t *) &zappy_instance.handlers.on_connect_nummber_reply
+        },
+        { "Inventory",
+                (serialize_t) serialize_inventory,
+                (deserialize_t) deserialize_inventory,
+                (handler_t *) &zappy_instance.handlers.on_inventory_reply
+        },
+        { "Broadcast",
+                (serialize_t) serialize_broadcast,
+                NULL,
+                NULL
+        },
         { "msz",
                 (serialize_t) &serialize_msz,
                 (deserialize_t) &deserialize_msz,
@@ -212,7 +242,9 @@ void parse_packet(network_client_t *client, char const *packet, size_t len) {
             if (data)
                 free(data);
             break;
-        }
+        } else if (zappy_instance.handlers.on_unwrapped)
+            zappy_instance.handlers.on_unwrapped(client->id, split);
+
     }
 
     str_free_array(split);
