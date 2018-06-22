@@ -8,9 +8,6 @@
 #include "protocol.h"
 #include "util.h"
 #include "zappy.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
 void eht_serialize(packet_eht_t *packet, list_t *buffer)
 {

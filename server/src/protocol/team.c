@@ -15,9 +15,8 @@ static void init_player_join(player_t *player, team_t *team)
 	player->y = rand() % (server.map).height;
 	player->team = *team;
 	player->orientation = (rand() % 4) + 1;
-	player->level = 0;
+	player->level = 2;
 }
-
 
 static int check_free_team(player_t *player, char *name)
 {
@@ -50,6 +49,7 @@ packet_team_t *team_deserialize(char **args)
 
 bool team_handler(player_t *player, packet_team_t *packet)
 {
+
 	if (check_free_team(player, packet->team) == 1)
 		packet->status = 1;
 	else

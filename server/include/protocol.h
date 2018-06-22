@@ -37,6 +37,7 @@ typedef struct packet_team_s packet_team_t;
 typedef struct packet_forward_s packet_forward_t;
 typedef struct packet_turn_s packet_turn_t;
 typedef struct packet_inventory_s packet_inventory_t;
+typedef struct packet_look_s packet_look_t;
 
 struct __attribute__((__packed__)) packet_example_s {
 	PACKET_HEADER;
@@ -211,6 +212,22 @@ struct __attribute__((__packed__)) packet_forward_s {
 	PACKET_HEADER;
 };
 
+struct __attribute__((__packed__)) packet_look_s {
+	PACKET_HEADER;
+	size_t tile;
+	int x;
+	int y;
+	size_t number;
+	size_t level;
+	size_t q0;
+	size_t q1;
+	size_t q2;
+	size_t q3;
+	size_t q4;
+	size_t q5;
+	size_t q6;
+};
+
 struct __attribute__((__packed__)) packet_inventory_s {
 	PACKET_HEADER;
 	char result[2048];
@@ -235,6 +252,11 @@ void msg_example_serialize(packet_example_t *msg, list_t *buffer);
 bool forward_handler(player_t *, packet_forward_t *);
 packet_forward_t *forward_deserialize(char **);
 void forward_serialize(packet_forward_t *, list_t *);
+
+// LOOK COMMAND
+bool look_handler(player_t *, packet_look_t *);
+packet_look_t *look_deserialize(char **);
+void look_serialize(packet_look_t *, list_t *);
 
 // TURN COMMAND
 bool turn_handler(player_t *, packet_turn_t *);

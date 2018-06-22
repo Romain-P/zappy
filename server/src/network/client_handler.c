@@ -16,6 +16,7 @@ static void on_connect(network_client_t *client) {
 
     list_add(&server.players, player);
     dprintf(client->id, "WELCOME\n");
+    player->level = 1;
     eprintf("[Client %d] connected\n", client->id);
 }
 

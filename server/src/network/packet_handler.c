@@ -61,6 +61,11 @@ static message_t const messages[] = {
 		(deserialize_t) &forward_deserialize,
 		(handler_t) &forward_handler
 	},
+	{ "look",
+		(serialize_t) &look_serialize,
+		(deserialize_t) &look_deserialize,
+		(handler_t) &look_handler
+	},
 	{ "turn",
 		(serialize_t) &turn_serialize,
 		(deserialize_t) &turn_deserialize,
@@ -224,9 +229,9 @@ void parse_packet(network_client_t *client, char const *packet, size_t len)
 			data = message->deserialize(split + 1);
 
 			if (data) {
-			network_packet_t *casted = data;
-			casted->cmd = cmd;
-			casted->delayed = false;
+				network_packet_t *casted = data;
+				casted->cmd = cmd;
+				casted->delayed = false;
 			}
 			if (message->handler(find_player(client), data) && data)
 			free(data);

@@ -18,7 +18,7 @@ typedef struct zappy_instance_s zappy_instance_t;
 typedef struct player_s player_t;
 typedef struct team_s team_t;
 typedef struct map_s map_t;
-typedef struct resource resource_t;
+typedef struct resource_s resource_t;
 typedef struct inventory_s inventory_t;
 typedef struct egg_s egg_t;
 typedef struct waiting_s waiting_t;
@@ -78,7 +78,7 @@ enum resource_type_e {
     THYSTAME
 };
 
-struct resource {
+struct resource_s {
     size_t x;
     size_t y;
     resource_type_t type;
