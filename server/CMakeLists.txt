@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(zappy C)
 
-set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall")
+set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -Wno-write-strings")
 include_directories(include)
 set(CMAKE_C_STANDARD 99)
 
