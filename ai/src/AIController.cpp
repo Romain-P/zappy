@@ -19,7 +19,7 @@ namespace AIController {
     }
 
     void on_welcome(session_t id, packet_welcome_t *msg) {
-
+       sendTeamName(id, manager.getTeam());
     }
 
     void on_look_reply(session_t, packet_look_t *msg) {

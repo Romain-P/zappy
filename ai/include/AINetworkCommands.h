@@ -22,6 +22,7 @@ namespace AINetworkCommands {
     void requestTakeObject(session_t client, std::string object);
     void requestLeaveObject(session_t client, std::string object);
     void requestIncantation(session_t client);
+    void sendTeamName(session_t, std::string &team);
 };
 
 

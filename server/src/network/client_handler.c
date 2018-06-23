@@ -9,6 +9,7 @@
 #include "util.h"
 
 static void on_connect(network_client_t *client) {
+    eprintf("[Client %d] connected\n", client->id);
     player_t *player = malloc(sizeof(player_t));
     player->client = client;
     player->state = AWAIT_TEAM_NAME;
@@ -16,7 +17,6 @@ static void on_connect(network_client_t *client) {
 
     list_add(&server.players, player);
     send_unwrapped(client, "WELCOME");
-    eprintf("[Client %d] connected\n", client->id);
 }
 
 static void on_disconnect(network_client_t *client) {

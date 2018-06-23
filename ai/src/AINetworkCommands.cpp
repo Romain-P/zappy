@@ -61,4 +61,8 @@ namespace AINetworkCommands {
     void requestIncantation(session_t client) {
         send_unwrapped(client, "Incantation");
     }
+
+    void sendTeamName(session_t client, std::string &team) {
+        send_unwrapped(client, &team[0]);
+    }
 }
