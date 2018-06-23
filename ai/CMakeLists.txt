@@ -7,5 +7,5 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(include)
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
-add_executable(zappy_ai src/Main.cpp include/zappy_network.h src/AIController.cpp include/AIController.h src/AINetworkCommands.cpp include/AINetworkCommands.h src/AIManager.cpp include/AIManager.h)
+add_executable(zappy_ai src/Main.cpp include/zappy_network.h src/AIController.cpp include/AIController.h src/AINetworkCommands.cpp include/AINetworkCommands.h src/AIManager.cpp include/AIManager.h src/AIPlayer.cpp src/AIPlayer.h)
 target_link_libraries(zappy_ai zappy_network)

@@ -6,11 +6,14 @@
 #define ZAPPY_AIMANAGER_H
 
 
+#include <bits/unordered_map.h>
+#include <unordered_map>
+
 class AIManager {
 public:
 
 private:
-
+    std::unordered_map
 };
 
 

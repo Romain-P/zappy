@@ -23,8 +23,14 @@ typedef struct inventory_s inventory_t;
 typedef struct egg_s egg_t;
 typedef struct waiting_s waiting_t;
 typedef enum resource_type_e resource_type_t;
+typedef enum protocol_state_e protocol_state_t;
 
 extern zappy_instance_t server;
+
+enum protocol_state_e {
+    AWAIT_TEAM_NAME,
+    VALID_PLAYER
+};
 
 struct team_s {
     char *name;
@@ -43,7 +49,7 @@ struct inventory_s {
 
 struct player_s {
     network_client_t *client;
-    char *name;
+    protocol_state_t state;
     size_t x;
     size_t y;
     size_t orientation;

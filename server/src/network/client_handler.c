@@ -11,7 +11,7 @@
 static void on_connect(network_client_t *client) {
     player_t *player = malloc(sizeof(player_t));
     player->client = client;
-    player->name = strdup("undefined");
+    player->state = AWAIT_TEAM_NAME;
     player->waiting_commands = 0;
 
     list_add(&server.players, player);
@@ -23,8 +23,6 @@ static void on_disconnect(network_client_t *client) {
     player_t *found = find_player(client);
 
     if (found) {
-        if (found->name)
-            free(found->name);
         list_remove(&server.players, found);
         free(found);
     }

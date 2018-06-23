@@ -218,6 +218,7 @@ void send_unwrapped(session_t id, char *unwrapped) {
 
 void parse_packet(network_client_t *client, char const *packet, size_t len) {
     char **split = charset_split(packet, len, ZAPPY_PARAM_SEPARATOR);
+    bool found_wrapped = false;
 
     for (int i = 0; messages[i].named; ++i) {
         message_t const *message = messages + i;
@@ -225,6 +226,7 @@ void parse_packet(network_client_t *client, char const *packet, size_t len) {
         char const *cmd = split[0];
         if (!strcmp(message->named, cmd)) {
             void *data = NULL;
+            found_wrapped = true;
 
             if (message->deserialize)
                 data = message->deserialize(split + 1);
@@ -243,9 +245,9 @@ void parse_packet(network_client_t *client, char const *packet, size_t len) {
             if (data)
                 free(data);
             break;
-        } else if (zappy_instance.ai_handlers.on_unwrapped)
-            zappy_instance.ai_handlers.on_unwrapped(client->id, split);
+        }
     }
-
+    if (!found_wrapped && zappy_instance.ai_handlers.on_unwrapped)
+        zappy_instance.ai_handlers.on_unwrapped(client->id, split);
     str_free_array(split);
 }
