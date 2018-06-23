@@ -41,6 +41,10 @@ typedef struct packet_inventory_s packet_inventory_t;
 typedef struct packet_look_s packet_look_t;
 typedef struct packet_broadcast_s packet_broadcast_t;
 typedef struct packet_connectnbr_s packet_connectnbr_t;
+typedef struct packet_fork_s packet_fork_t;
+typedef struct packet_eject_s packet_eject_t;
+typedef struct packet_take_s packet_take_t;
+typedef struct packet_set_s packet_set_t;
 
 struct __attribute__((__packed__)) packet_example_s {
 	PACKET_HEADER;
@@ -215,6 +219,24 @@ struct __attribute__((__packed__)) packet_forward_s {
 	PACKET_HEADER;
 };
 
+struct __attribute__((__packed__)) packet_take_s {
+	PACKET_HEADER;
+	char node[1024];
+};
+
+struct __attribute__((__packed__)) packet_set_s {
+	PACKET_HEADER;
+	char node[1024];
+};
+
+struct __attribute__((__packed__)) packet_fork_s {
+	PACKET_HEADER;
+};
+
+struct __attribute__((__packed__)) packet_eject_s {
+	PACKET_HEADER;
+};
+
 struct __attribute__((__packed__)) packet_connectnbr_s {
 	PACKET_HEADER;
 };
@@ -268,6 +290,27 @@ bool forward_handler(player_t *, packet_forward_t *);
 packet_forward_t *forward_deserialize(char **);
 void forward_serialize(packet_forward_t *, list_t *);
 
+// TAKE COMMAND
+bool take_handler(player_t *, packet_take_t *);
+packet_take_t *take_deserialize(char **);
+void take_serialize(packet_take_t *, list_t *);
+size_t get_id_ressource(char *);
+
+// SET COMMAND
+bool set_handler(player_t *, packet_set_t *);
+packet_set_t *set_deserialize(char **);
+void set_serialize(packet_set_t *, list_t *);
+
+// EJECT COMMAND
+bool eject_handler(player_t *, packet_eject_t *);
+packet_eject_t *eject_deserialize(char **);
+void eject_serialize(packet_eject_t *, list_t *);
+
+// FORK COMMAND
+bool fork_handler(player_t *, packet_fork_t *);
+packet_fork_t *fork_deserialize(char **);
+void fork_serialize(packet_fork_t *, list_t *);
+
 // RIGHT COMMAND
 bool right_handler(player_t *, packet_right_t *);
 packet_right_t *right_deserialize(char **);
@@ -297,6 +340,8 @@ void look_serialize(packet_look_t *, list_t *);
 bool inventory_handler(player_t *, packet_inventory_t *);
 packet_inventory_t *inventory_deserialize(char **);
 void inventory_serialize(packet_inventory_t *, list_t *);
+void increment_inventory(player_t *, size_t);
+void set_ressource(player_t *, size_t);
 
 // MSZ COMMAND
 bool msz_handler(player_t *, packet_msz_t *);

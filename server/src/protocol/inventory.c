@@ -33,6 +33,36 @@ bool inventory_handler(player_t *player, packet_inventory_t *packet)
 	return true;
 }
 
+void increment_inventory(player_t *player, size_t id)
+{
+	if (id == 0)
+		(player->inventory).q0++;
+	if (id == 1)
+		(player->inventory).q1++;
+	if (id == 2)
+		(player->inventory).q2++;
+	if (id == 3)
+		(player->inventory).q3++;
+	if (id == 4)
+		(player->inventory).q4++;
+	if (id == 5)
+		(player->inventory).q5++;
+	if (id == 6)
+		(player->inventory).q6++;
+}
+
+void set_ressource(player_t *player, size_t id)
+{
+	resource_t *ressource = malloc(sizeof(*ressource));
+
+	if (ressource == NULL)
+		exit(84);
+	ressource->x = player->x;
+	ressource->y = player->y;
+	ressource->type = (resource_type_t) id;
+	list_add(&(server.map).ressources, ressource);
+}
+
 void inventory_serialize(packet_inventory_t *packet, list_t *buffer)
 {
 	list_add(buffer, strdup(packet->result));

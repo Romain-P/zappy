@@ -59,7 +59,9 @@ struct map_s {
     size_t height;
     size_t max;
     size_t nb_ressource;
+    size_t nb_eggs;
     list_t ressources;
+    list_t eggs;
 };
 
 struct egg_s {
@@ -70,12 +72,12 @@ struct egg_s {
 
 enum resource_type_e {
     FOOD = 0,
-    LINEMATE,
-    DERAUMERE,
-    SIBUR,
-    MENDIANE,
-    PHIRAS,
-    THYSTAME
+    LINEMATE = 1,
+    DERAUMERE = 2,
+    SIBUR = 3,
+    MENDIANE = 4,
+    PHIRAS = 5,
+    THYSTAME = 6
 };
 
 struct resource_s {

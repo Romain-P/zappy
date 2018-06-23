@@ -61,6 +61,26 @@ static message_t const messages[] = {
 		(deserialize_t) &forward_deserialize,
 		(handler_t) &forward_handler
 	},
+	{ "Take",
+		(serialize_t) &take_serialize,
+		(deserialize_t) &take_deserialize,
+		(handler_t) &take_handler
+	},
+	{ "Set",
+		(serialize_t) &set_serialize,
+		(deserialize_t) &set_deserialize,
+		(handler_t) &set_handler
+	},
+	{ "Eject",
+		(serialize_t) &eject_serialize,
+		(deserialize_t) &eject_deserialize,
+		(handler_t) &eject_handler
+	},
+	{ "Fork",
+		(serialize_t) &fork_serialize,
+		(deserialize_t) &fork_deserialize,
+		(handler_t) &fork_handler
+	},
 	{ "Connect_nbr",
 		(serialize_t) &connectnbr_serialize,
 		(deserialize_t) &connectnbr_deserialize,

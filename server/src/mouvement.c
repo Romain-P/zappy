@@ -10,27 +10,27 @@
 
 int get_valid_direction(player_t *player, size_t direction)
 {
-	size_t x = player->x;
-	size_t y = player->y;
+	int x = (int) player->x;
+	int y = (int) player->y;
 
 	increment_direction(&x, &y, direction);
 	if (check_player_in_tile(x, y) == 1)
 		return (1);
-	player->x = x;
-	player->y = y;
+	player->x = (size_t) x;
+	player->y = (size_t) y;
 	return (0);
 }
 
-void increment_direction(size_t *x, size_t *y, size_t direction)
+void increment_direction(int *x, int *y, size_t direction)
 {
 	if (direction == 1)
-		*y = *y + 1;
+		*y = *y - 1;
 	if (direction == 2)
 		*x = *x + 1;
 	if (direction == 3)
 		*y = *y + 1;
 	if (direction == 4)
-		*x = *x + 1;
+		*x = *x - 1;
 	if (*x == ((server.map).width))
 		*x = 0;
 	if (*y == ((server.map).height))

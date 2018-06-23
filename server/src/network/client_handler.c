@@ -10,10 +10,17 @@
 
 static void on_connect(network_client_t *client) {
     player_t *player = malloc(sizeof(player_t));
+
     player->client = client;
     player->name = strdup("undefined");
+    (player->inventory).q0 = 0;
+    (player->inventory).q1 = 0;
+    (player->inventory).q2 = 0;
+    (player->inventory).q3 = 0;
+    (player->inventory).q4 = 0;
+    (player->inventory).q5 = 0;
+    (player->inventory).q6 = 0;
     player->waiting_commands = 0;
-
     list_add(&server.players, player);
     dprintf(client->id, "WELCOME\n");
     player->level = 1;
