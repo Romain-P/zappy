@@ -13,7 +13,9 @@ int get_valid_direction(player_t *player, size_t direction)
 	size_t x = player->x;
 	size_t y = player->y;
 
+	printf("%d - %d - %d\n", x, y, direction);
 	increment_direction(&x, &y, direction);
+	printf("%d - %d - %d\n", x, y, direction);
 	if (check_player_in_tile(x, y) == 1)
 		return (1);
 	player->x = x;
@@ -24,13 +26,13 @@ int get_valid_direction(player_t *player, size_t direction)
 void increment_direction(size_t *x, size_t *y, size_t direction)
 {
 	if (direction == 1)
-		y++;
+		*y = *y + 1;
 	if (direction == 2)
-		x++;
+		*x = *x + 1;
 	if (direction == 3)
-		y--;
+		*y = *y + 1;
 	if (direction == 4)
-		x--;
+		*x = *x + 1;
 	if (*x == ((server.map).width))
 		*x = 0;
 	if (*y == ((server.map).height))

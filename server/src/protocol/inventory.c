@@ -21,7 +21,7 @@ packet_inventory_t *inventory_deserialize(char **args)
 bool inventory_handler(player_t *player, packet_inventory_t *packet)
 {
 	sprintf(packet->result, "[food %zu, linemate %zu, deraumere %zu, "
-		"sibur %zu, mendiane %zu, phiras %zu, thystame %zu]\n",
+		"sibur %zu, mendiane %zu, phiras %zu, thystame %zu]",
 	(player->inventory).q0,
 	(player->inventory).q1,
 	(player->inventory).q2,
@@ -29,7 +29,7 @@ bool inventory_handler(player_t *player, packet_inventory_t *packet)
 	(player->inventory).q4,
 	(player->inventory).q5,
 	(player->inventory).q6);
-	send_packet(player->client, &packet); //TODO: tu voulais pas faire send_unwrapped(client, "ok"); ?
+	send_unwrapped(player->client, packet->result);
 	return true;
 }
 

@@ -61,15 +61,25 @@ static message_t const messages[] = {
 		(deserialize_t) &forward_deserialize,
 		(handler_t) &forward_handler
 	},
+	{ "broadcast",
+		(serialize_t) &broadcast_serialize,
+		(deserialize_t) &broadcast_deserialize,
+		(handler_t) &broadcast_handler
+	},
 	{ "look",
 		(serialize_t) &look_serialize,
 		(deserialize_t) &look_deserialize,
 		(handler_t) &look_handler
 	},
-	{ "turn",
-		(serialize_t) &turn_serialize,
-		(deserialize_t) &turn_deserialize,
-		(handler_t) &turn_handler
+	{ "left",
+		(serialize_t) &left_serialize,
+		(deserialize_t) &left_deserialize,
+		(handler_t) &left_handler
+	},
+	{ "right",
+		(serialize_t) &right_serialize,
+		(deserialize_t) &right_deserialize,
+		(handler_t) &right_handler
 	},
 	{ "inventory",
 		(serialize_t) &inventory_serialize,

@@ -35,9 +35,11 @@ typedef struct packet_suc_s packet_suc_t;
 typedef struct packet_sbp_s packet_sbp_t;
 typedef struct packet_team_s packet_team_t;
 typedef struct packet_forward_s packet_forward_t;
-typedef struct packet_turn_s packet_turn_t;
+typedef struct packet_left_s packet_left_t;
+typedef struct packet_right_s packet_right_t;
 typedef struct packet_inventory_s packet_inventory_t;
 typedef struct packet_look_s packet_look_t;
+typedef struct packet_broadcast_s packet_broadcast_t;
 
 struct __attribute__((__packed__)) packet_example_s {
 	PACKET_HEADER;
@@ -212,6 +214,11 @@ struct __attribute__((__packed__)) packet_forward_s {
 	PACKET_HEADER;
 };
 
+struct __attribute__((__packed__)) packet_broadcast_s {
+	PACKET_HEADER;
+	char text[1024];
+};
+
 struct __attribute__((__packed__)) packet_look_s {
 	PACKET_HEADER;
 	size_t tile;
@@ -233,9 +240,12 @@ struct __attribute__((__packed__)) packet_inventory_s {
 	char result[2048];
 };
 
-struct __attribute__((__packed__)) packet_turn_s {
+struct __attribute__((__packed__)) packet_left_s {
 	PACKET_HEADER;
-	char orientation[6];
+};
+
+struct __attribute__((__packed__)) packet_right_s {
+	PACKET_HEADER;
 };
 
 struct __attribute__((__packed__)) packet_team_s {
@@ -253,15 +263,25 @@ bool forward_handler(player_t *, packet_forward_t *);
 packet_forward_t *forward_deserialize(char **);
 void forward_serialize(packet_forward_t *, list_t *);
 
+// RIGHT COMMAND
+bool right_handler(player_t *, packet_right_t *);
+packet_right_t *right_deserialize(char **);
+void right_serialize(packet_right_t *, list_t *);
+
+// LEFT COMMAND
+bool left_handler(player_t *, packet_left_t *);
+packet_left_t *left_deserialize(char **);
+void left_serialize(packet_left_t *, list_t *);
+
+// BROADCAST COMMAND
+bool broadcast_handler(player_t *, packet_broadcast_t *);
+packet_broadcast_t *broadcast_deserialize(char **);
+void broadcast_serialize(packet_broadcast_t *, list_t *);
+
 // LOOK COMMAND
 bool look_handler(player_t *, packet_look_t *);
 packet_look_t *look_deserialize(char **);
 void look_serialize(packet_look_t *, list_t *);
-
-// TURN COMMAND
-bool turn_handler(player_t *, packet_turn_t *);
-packet_turn_t *turn_deserialize(char **);
-void turn_serialize(packet_turn_t *, list_t *);
 
 // IVENTORY COMMAND
 bool inventory_handler(player_t *, packet_inventory_t *);
