@@ -3,25 +3,23 @@
 //
 
 #include <unistd.h>
-#include <lib.h>
 #include "network.h"
 #include "stderr.h"
 #include "lib.h"
 #include "util.h"
 
 static void on_connect(network_client_t *client) {
-    dprintf(client->id, "WELCOME\n");
-    eprintf("[Client %d] connected\n", client->id);
-    zappy_instance.handlers.on_connect(client->id);
+    eprintf("[Client %d] connected to [Server]\n", client->id);
+    zappy_instance.gui_handlers.on_connect(client->id);
 }
 
 static void on_disconnect(network_client_t *client) {
-    zappy_instance.handlers.on_disconnect(client->id);
-    eprintf("[Client %d] disconnected\n", client->id);
+    zappy_instance.gui_handlers.on_disconnect(client->id);
+    eprintf("[Client %d] disconnected to server\n", client->id);
 }
 
 static void on_received(network_client_t *client, char const *packet, size_t len) {
-    eprintf("[Server] Recv \t<--\t[Client %d]:\t\t", client->id);
+    eprintf("[Client %d] Recv \t<--\t[Server]:\t\t", client->id);
     fflush(stderr);
     write(STDERR_FILENO, packet, len);
     eprintf("\n");
@@ -30,9 +28,9 @@ static void on_received(network_client_t *client, char const *packet, size_t len
 }
 
 static void on_sent(network_client_t *client, char const *packet, size_t len) {
-    eprintf("[Server] Sent \t-->\t[Client %d]:\t\t", client->id);
+    eprintf("[Client %d] Sent \t-->\t[Server]:\t\t", client->id);
     fflush(stderr);
-    write(STDERR_FILENO, packet, len - 2);
+    write(STDERR_FILENO, packet, len - 1);
     eprintf("\n");
 }
 

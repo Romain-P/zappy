@@ -480,4 +480,7 @@ packet_sbp_t *sbp_deserialize(char **);
 bool sbp_handler(player_t *, packet_sbp_t *);
 void sbp_serialize(packet_sbp_t *, list_t *);
 
+// UNWRAPPED PACKETS
+void on_unwrapped(player_t *, char **unwrapped);
+
 #endif //ZAPPY_PROTOCOL_H

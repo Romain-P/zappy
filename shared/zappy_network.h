@@ -18,6 +18,7 @@
 
 typedef struct packet_example_s packet_example_t;
 typedef struct packet_msz_s packet_msz_t;
+typedef struct packet_welcome_s packet_welcome_t;
 typedef struct packet_bct_tile_s packet_bct_tile_t;
 typedef struct packet_mct_s packet_mct_t;
 typedef struct packet_tna_s packet_tna_t;
@@ -43,16 +44,14 @@ typedef struct packet_seg_s packet_seg_t;
 typedef struct packet_smg_s packet_smg_t;
 typedef struct packet_suc_s packet_suc_t;
 typedef struct packet_sbp_s packet_sbp_t;
-typedef struct packet_team_s packet_team_t;
-typedef struct packet_forward_s packet_forward_t;
-typedef struct packet_turn_s packet_turn_t;
+typedef struct packet_look_s packet_look_t;
+typedef struct packet_broadcast_s packet_broadcast_t;
+typedef struct packet_connect_number_s packet_connect_number_t;
+typedef struct packet_message_s packet_message_t;
 typedef struct packet_inventory_s packet_inventory_t;
 
-struct PACKED packet_example_s {
+struct PACKED packet_welcome_s {
     PACKET_HEADER;
-    int64_t some;
-    char str[100];
-    int64_t shiet;
 };
 
 struct PACKED packet_msz_s {
@@ -137,8 +136,8 @@ struct PACKED packet_pic_s {
     size_t x;
     size_t y;
     size_t incantation_level;
-    size_t player_nb1;
-    size_t player_nb2;
+    size_t players_count;
+    size_t players[100];
 };
 
 struct PACKED packet_pie_s {
@@ -213,40 +212,49 @@ struct PACKED packet_smg_s {
     char message[1024];
 };
 
-struct PACKED suc_s {
+struct PACKED packet_suc_s {
     PACKET_HEADER;
 };
 
-struct PACKED sbp_s {
+struct PACKED packet_sbp_s {
     PACKET_HEADER;
 };
 
-struct PACKED packet_forward_s {
+struct PACKED packet_message_s {
     PACKET_HEADER;
+    size_t tile;
+    char text[100];
 };
+
+struct PACKED packet_look_s {
+    PACKET_HEADER;
+    char data[2048];
+};
+
+struct PACKED packet_broadcast_s {
+    PACKET_HEADER;
+    char text[1024];
+};
+
+struct PACKED packet_connect_number_s {
+    PACKET_HEADER;
+    size_t value;
+};
+
 
 struct PACKED packet_inventory_s {
     PACKET_HEADER;
     char result[2048];
 };
 
-struct PACKED packet_turn_s {
-    PACKET_HEADER;
-    char orientation[6];
-};
-
-struct PACKED packet_team_s {
-    PACKET_HEADER;
-    char team[1024];
-    int status;
-};
-
-typedef struct network_handlers_s network_handlers_t;
+typedef struct gui_handlers_s gui_handlers_t;
+typedef struct ai_handlers_s ai_handlers_t;
 typedef int session_t;
 
-struct network_handlers_s {
+struct gui_handlers_s {
     void (*on_connect)(session_t id);
     void (*on_disconnect)(session_t id);
+    void (*on_welcome)(session_t id, packet_welcome_t *);
     void (*on_map_size_reply)(session_t id, packet_msz_t *);
     void (*on_tile_content_reply)(session_t id, packet_bct_tile_t *);
     void (*on_team_name_reply)(session_t id, packet_tna_t *);
@@ -273,9 +281,25 @@ struct network_handlers_s {
     void (*on_command_param_wrong)(session_t id, packet_sbp_t *);
 };
 
-EXPORT bool zappy_init_connector(char *address, uint16_t port, bool thread_sync, network_handlers_t *handlers);
-EXPORT session_t zappy_new_connection();
-EXPORT void zappy_sync_poll();
-EXPORT void send_packet(session_t id, void *msg);
+struct ai_handlers_s {
+    void (*on_connect)(session_t id);
+    void (*on_disconnect)(session_t id);
+    void (*on_welcome)(session_t id, packet_welcome_t *);
+    void (*on_look_reply)(session_t, packet_look_t *);
+    void (*on_message_reply)(session_t, packet_message_t *);
+    void (*on_connect_nummber_reply)(session_t, packet_connect_number_t *);
+    void (*on_inventory_reply)(session_t, packet_inventory_t *);
+    void (*on_unwrapped)(session_t id, char **packet);
+};
+
+
+extern "C" {
+    EXPORT bool zappy_init_connector(char *address, uint16_t port, bool thread_sync, gui_handlers_t handlers);
+    EXPORT bool zappy_init_connector_ai(char *address, uint16_t port, bool thread_sync, ai_handlers_t handlers);
+    EXPORT session_t zappy_new_connection();
+    EXPORT void zappy_sync_poll();
+    EXPORT void send_packet(session_t id, void *msg);
+    EXPORT void send_unwrapped(session_t id, char *msg);
+}
 
 #endif

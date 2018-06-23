@@ -12,7 +12,7 @@ int to_seconds(int tics) {
 }
 
 static bool inserter(waiting_t *waiting) {
-    return exec_time < waiting->exec_time;
+    return exec_time < waiting->start_time + ( to_seconds(waiting->tics) * 1000 );
 }
 
 bool delay(void *packet, handler_t handler, player_t *player, int tics) {
@@ -23,9 +23,10 @@ bool delay(void *packet, handler_t handler, player_t *player, int tics) {
     player->waiting_commands++;
     waiting_t *waiting = malloc(sizeof(*waiting));
     waiting->player = player;
-    waiting->exec_time = exec_time;
+    waiting->start_time = exec_time;
     waiting->command_handler = handler;
     waiting->packet = packet;
+    waiting->tics = tics;
     list_insert(&server.pending, waiting, (predicate_t) &inserter);
     return true;
 }
@@ -37,7 +38,7 @@ void check_delayed_tasks() {
         waiting_t *waiting = it->data;
         iter_next(it);
 
-        if (current_time >= waiting->exec_time) {
+        if (current_time >= waiting->start_time + (to_seconds(waiting->tics) * 1000)) {
             waiting->command_handler(waiting->player, waiting->packet);
             list_remove(&server.pending, waiting);
             waiting->player->waiting_commands--;
