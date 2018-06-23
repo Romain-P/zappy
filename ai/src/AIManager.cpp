@@ -15,3 +15,11 @@ players_t &AIManager::getPlayers() {
 std::string &AIManager::getTeam() {
     return _team;
 }
+
+size_t &AIManager::getMaxPlayers() {
+    return _maxplayers;
+}
+
+void AIManager::generateMap(size_t width, size_t height) {
+    _map = std::make_unique<GameMap>(width, height);
+}
