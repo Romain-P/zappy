@@ -13,8 +13,6 @@ static void on_connect(network_client_t *client) {
     player_t *player = malloc(sizeof(player_t));
 
     player->client = client;
-<<<<<<< HEAD
-    player->name = strdup("undefined");
     (player->inventory).q0 = 0;
     (player->inventory).q1 = 0;
     (player->inventory).q2 = 0;
@@ -22,18 +20,12 @@ static void on_connect(network_client_t *client) {
     (player->inventory).q4 = 0;
     (player->inventory).q5 = 0;
     (player->inventory).q6 = 0;
-=======
     player->state = AWAIT_TEAM_NAME;
->>>>>>> b9d3f1d18038118a94a3960484a67cf68cb3660a
     player->waiting_commands = 0;
     list_add(&server.players, player);
-<<<<<<< HEAD
-    dprintf(client->id, "WELCOME\n");
-    player->level = 1;
-    eprintf("[Client %d] connected\n", client->id);
-=======
     send_unwrapped(client, "WELCOME");
->>>>>>> b9d3f1d18038118a94a3960484a67cf68cb3660a
+    player->level = 0;
+    eprintf("[Client %d] connected\n", client->id);
 }
 
 static void on_disconnect(network_client_t *client) {

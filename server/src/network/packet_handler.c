@@ -210,88 +210,75 @@ static message_t const messages[] = {
 };
 
 void send_packet(network_client_t *client, void *msg) {
-    list_t buffer = list_init;
-    message_t const *message = NULL;
-    char const *named = ((network_packet_t *) msg)->cmd;
+	list_t buffer = list_init;
+	message_t const *message = NULL;
+	char const *named = ((network_packet_t *) msg)->cmd;
 
-    for (int i = 0; messages[i].named; ++i) {
-        if (!strcmp(messages[i].named, named)) {
-            message = messages + i;
-            break;
-        }
-    }
-    if (message == NULL) return;
-    message->serialize(msg, &buffer);
-    char *packet = strdup(named);
-    size_t pos = strlen(packet);
-    for (iter_t *it = iter_begin(&buffer); it; iter_next(it)) {
-        char *arg = it->data;
-        size_t len = strlen(arg) + 1;
-        packet = realloc(packet, len);
-        strcpy(packet + pos, ZAPPY_PARAM_SEPARATOR);
-        strcpy(packet + pos + 1, arg);
-        pos += len;
-    }
-    list_clear(&buffer, &free);
-    packet = realloc(packet, strlen(packet) + 1);
-    packet[pos] = '\n';
-    network_client_send(client, packet, strlen(packet));
-    free(packet);
-}
-
-void send_unwrapped(network_client_t *client, char *unwrapped) {
-    size_t len = strlen(unwrapped);
-    char cmd[len + 1];
-    strcpy(cmd, unwrapped);
-    cmd[len] = '\n';
-    network_client_send(client, cmd, len + 1);
-}
-
-void parse_packet(network_client_t *client, char const *packet, size_t len) {
-    char **split = charset_split(packet, len, ZAPPY_PARAM_SEPARATOR);
-    player_t *player = find_player(client);
-    bool found_wrapped = false;
-
-    for (int i = 0; messages[i].named; ++i) {
-        message_t const *message = messages + i;
-
-        char const *cmd = split[0];
-        if (!strcmp(message->named, cmd)) {
-            found_wrapped = true;
-            if (player->state != VALID_PLAYER) {
-                network_client_close(client);
-                break;
-            }
-            void *data = NULL;
-
-            if (message->deserialize)
-                data = message->deserialize(split + 1);
-
-<<<<<<< HEAD
-			if (data) {
-				network_packet_t *casted = data;
-				casted->cmd = cmd;
-				casted->delayed = false;
-			}
-			if (message->handler(find_player(client), data) && data)
-			free(data);
+	for (int i = 0; messages[i].named; ++i) {
+		if (!strcmp(messages[i].named, named)) {
+			message = messages + i;
 			break;
 		}
 	}
-=======
-            if (data) {
-                network_packet_t *casted = data;
-                casted->cmd = cmd;
-                casted->delayed = false;
-            }
-            if (message->handler(player, data) && data)
-                free(data);
-            break;
-        }
-    }
-    if (!found_wrapped)
-        on_unwrapped(player, split);
->>>>>>> b9d3f1d18038118a94a3960484a67cf68cb3660a
+	if (message == NULL) return;
+	message->serialize(msg, &buffer);
+	char *packet = strdup(named);
+	size_t pos = strlen(packet);
+	for (iter_t *it = iter_begin(&buffer); it; iter_next(it)) {
+		char *arg = it->data;
+		size_t len = strlen(arg) + 1;
+		packet = realloc(packet, len);
+		strcpy(packet + pos, ZAPPY_PARAM_SEPARATOR);
+		strcpy(packet + pos + 1, arg);
+		pos += len;
+	}
+	list_clear(&buffer, &free);
+	packet = realloc(packet, strlen(packet) + 1);
+	packet[pos] = '\n';
+	network_client_send(client, packet, strlen(packet));
+	free(packet);
+}
 
-    str_free_array(split);
+void send_unwrapped(network_client_t *client, char *unwrapped) {
+	size_t len = strlen(unwrapped);
+	char cmd[len + 1];
+	strcpy(cmd, unwrapped);
+	cmd[len] = '\n';
+	network_client_send(client, cmd, len + 1);
+}
+
+void parse_packet(network_client_t *client, char const *packet, size_t len) {
+	char **split = charset_split(packet, len, ZAPPY_PARAM_SEPARATOR);
+	player_t *player = find_player(client);
+	bool found_wrapped = false;
+
+	for (int i = 0; messages[i].named; ++i) {
+	message_t const *message = messages + i;
+
+	char const *cmd = split[0];
+	if (!strcmp(message->named, cmd)) {
+		found_wrapped = true;
+		if (player->state != VALID_PLAYER) {
+			network_client_close(client);
+			break;
+		}
+		void *data = NULL;
+
+		if (message->deserialize)
+			data = message->deserialize(split + 1);
+
+		if (data) {
+			network_packet_t *casted = data;
+			casted->cmd = cmd;
+			casted->delayed = false;
+		}
+		if (message->handler(player, data) && data)
+			free(data);
+		break;
+	}
+	}
+	if (!found_wrapped)
+	on_unwrapped(player, split);
+
+	str_free_array(split);
 }
