@@ -3,3 +3,15 @@
 //
 
 #include "AIManager.h"
+
+AIPlayer &AIManager::getPlayer(session_t id) {
+    return *_players.at(id);
+}
+
+players_t &AIManager::getPlayers() {
+    return _players;
+}
+
+std::string &AIManager::getTeam() {
+    return _team;
+}

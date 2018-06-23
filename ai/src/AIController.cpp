@@ -8,6 +8,8 @@
 using namespace AINetworkCommands;
 
 namespace AIController {
+    AIManager manager;
+
     void on_connect(session_t id) {
 
     }

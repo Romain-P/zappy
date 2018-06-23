@@ -7,8 +7,12 @@
 
 
 #include "zappy_network.h"
+#include "AIManager.h"
 
 namespace AIController {
+
+    extern AIManager manager;
+
     void on_connect(session_t id);
     void on_disconnect(session_t id);
     void on_welcome(session_t id, packet_welcome_t *);
