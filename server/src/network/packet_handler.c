@@ -218,7 +218,7 @@ void parse_packet(network_client_t *client, char const *packet, size_t len) {
         char const *cmd = split[0];
         if (!strcmp(message->named, cmd)) {
             found_wrapped = true;
-            if (player->state != READY) {
+            if (player->state != VALID_PLAYER) {
                 network_client_close(client);
                 break;
             }

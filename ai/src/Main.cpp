@@ -40,7 +40,7 @@ static bool parse_options(int argc, char **argv, uint16_t &port, std::string &ho
     }
 
     if (optcount != 2 && optcount != 3) {
-        std::cerr << "Too many or not enough arguments" << std::endl;
+        std::cerr << "Too many or not enough options" << std::endl;
         error:
         display_help(path);
         return false;
