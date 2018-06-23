@@ -56,32 +56,37 @@ static message_t const messages[] = {
 		(deserialize_t) &team_deserialize,
 		(handler_t) &team_handler
 	},
-	{ "forward",
+	{ "Forward",
 		(serialize_t) &forward_serialize,
 		(deserialize_t) &forward_deserialize,
 		(handler_t) &forward_handler
 	},
-	{ "broadcast",
+	{ "Connect_nbr",
+		(serialize_t) &connectnbr_serialize,
+		(deserialize_t) &connectnbr_deserialize,
+		(handler_t) &connectnbr_handler
+	},
+	{ "Broadcast",
 		(serialize_t) &broadcast_serialize,
 		(deserialize_t) &broadcast_deserialize,
 		(handler_t) &broadcast_handler
 	},
-	{ "look",
+	{ "Look",
 		(serialize_t) &look_serialize,
 		(deserialize_t) &look_deserialize,
 		(handler_t) &look_handler
 	},
-	{ "left",
+	{ "Left",
 		(serialize_t) &left_serialize,
 		(deserialize_t) &left_deserialize,
 		(handler_t) &left_handler
 	},
-	{ "right",
+	{ "Right",
 		(serialize_t) &right_serialize,
 		(deserialize_t) &right_deserialize,
 		(handler_t) &right_handler
 	},
-	{ "inventory",
+	{ "Inventory",
 		(serialize_t) &inventory_serialize,
 		(deserialize_t) &inventory_deserialize,
 		(handler_t) &inventory_handler

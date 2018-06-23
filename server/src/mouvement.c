@@ -13,9 +13,7 @@ int get_valid_direction(player_t *player, size_t direction)
 	size_t x = player->x;
 	size_t y = player->y;
 
-	printf("%d - %d - %d\n", x, y, direction);
 	increment_direction(&x, &y, direction);
-	printf("%d - %d - %d\n", x, y, direction);
 	if (check_player_in_tile(x, y) == 1)
 		return (1);
 	player->x = x;

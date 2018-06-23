@@ -40,6 +40,7 @@ typedef struct packet_right_s packet_right_t;
 typedef struct packet_inventory_s packet_inventory_t;
 typedef struct packet_look_s packet_look_t;
 typedef struct packet_broadcast_s packet_broadcast_t;
+typedef struct packet_connectnbr_s packet_connectnbr_t;
 
 struct __attribute__((__packed__)) packet_example_s {
 	PACKET_HEADER;
@@ -214,6 +215,10 @@ struct __attribute__((__packed__)) packet_forward_s {
 	PACKET_HEADER;
 };
 
+struct __attribute__((__packed__)) packet_connectnbr_s {
+	PACKET_HEADER;
+};
+
 struct __attribute__((__packed__)) packet_broadcast_s {
 	PACKET_HEADER;
 	char text[1024];
@@ -272,6 +277,11 @@ void right_serialize(packet_right_t *, list_t *);
 bool left_handler(player_t *, packet_left_t *);
 packet_left_t *left_deserialize(char **);
 void left_serialize(packet_left_t *, list_t *);
+
+// CONNECTNBR COMMAND
+bool connectnbr_handler(player_t *, packet_connectnbr_t *);
+packet_connectnbr_t *connectnbr_deserialize(char **);
+void connectnbr_serialize(packet_connectnbr_t *, list_t *);
 
 // BROADCAST COMMAND
 bool broadcast_handler(player_t *, packet_broadcast_t *);
