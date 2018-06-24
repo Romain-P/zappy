@@ -22,7 +22,7 @@ bool sgt_handler(player_t *player, packet_sgt_t *packet)
 {
 	packet->time = 0;
 	send_packet(player->client, &packet);
-	return true;
+	return (true);
 }
 
 void sgt_serialize(packet_sgt_t *packet, list_t *buffer)

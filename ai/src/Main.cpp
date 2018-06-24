@@ -57,14 +57,14 @@ int main(int ac, char **args) {
         return (EXIT_FAILURE);
 
     ai_handlers_t handlers = {
-            &AINetworkController::on_connect,
-            &AINetworkController::on_disconnect,
-            &AINetworkController::on_welcome,
-            &AINetworkController::on_look_reply,
-            &AINetworkController::on_message_reply,
-            &AINetworkController::on_connect_nummber_reply,
-            &AINetworkController::on_inventory_reply,
-            &AINetworkController::on_unwrapped
+            &AINetworkController::onConnect,
+            &AINetworkController::onDisconnect,
+            &AINetworkController::onWelcome,
+            &AINetworkController::onLookReply,
+            &AINetworkController::onBroadcast,
+            &AINetworkController::onConnectNumberReply,
+            &AINetworkController::onInventoryReply,
+            &AINetworkController::onUnwrapped
     };
     if (!zappy_init_connector_ai(&host[0], port, false, handlers)) {
         std::cerr << "Impossible to connect: check your internet connection" << std::endl;

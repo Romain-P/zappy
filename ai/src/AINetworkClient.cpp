@@ -2,6 +2,7 @@
 // Created by romain on 24/06/18.
 //
 
+#include <cstring>
 #include "AINetworkClient.h"
 
 
@@ -30,10 +31,9 @@ void AINetworkClient::requestInventory() {
 }
 
 void AINetworkClient::requestBroadcast(std::string &text) {
-    std::string cmd("Broadcast");
-    cmd += " ";
-    cmd += text;
-    send_unwrapped(_id, &cmd[0]);
+    packet_broadcast_t packet = {.cmd = "Broadcast"};
+    strcpy(packet.text, &text[0]);
+    send_packet(_id, &packet);
 }
 
 void AINetworkClient::requestRemainingConnections() {

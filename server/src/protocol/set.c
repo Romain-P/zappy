@@ -12,7 +12,7 @@
 packet_set_t *set_deserialize(char **args)
 {
 	packet_set_t *packet;
-	
+
 	if (str_array_length(args) != 1)
 		return (NULL);
 	packet = malloc(sizeof(*packet));
@@ -44,24 +44,25 @@ static size_t get_ressource_exist(inventory_t *inventory, size_t nb)
 static void delete_ressource(player_t *player, size_t ressource)
 {
 	if (ressource == 0)
-		(player->inventory).q0--;
+		(player->inventory).q0 -= 1;
 	if (ressource == 1)
-		(player->inventory).q1--;
+		(player->inventory).q1 -= 1;
 	if (ressource == 2)
-		(player->inventory).q2--;
+		(player->inventory).q2 -= 1;
 	if (ressource == 3)
-		(player->inventory).q3--;
+		(player->inventory).q3 -= 1;
 	if (ressource == 4)
-		(player->inventory).q4--;
+		(player->inventory).q4 -= 1;
 	if (ressource == 5)
-		(player->inventory).q5--;
+		(player->inventory).q5 -= 1;
 	if (ressource == 6)
-		(player->inventory).q6--;
+		(player->inventory).q6 -= 1;
 }
 
 bool set_handler(player_t *player, packet_set_t *packet)
 {
-	size_t id = get_ressource_exist(&(player->inventory), get_id_ressource(packet->node));
+	size_t id = get_ressource_exist(&(player->inventory),
+		get_id_ressource(packet->node));
 
 	if (id == 7)
 		send_unwrapped(player->client, "ko");

@@ -16,7 +16,8 @@ using players_t = std::unordered_map<session_t, std::unique_ptr<AIPlayer>>;
 
 class AIManager {
 public:
-    void generateMap(size_t width, size_t height);
+
+    bool everyoneReadyToCast();
 
     std::string &getTeam();
     AIPlayer &getPlayer(session_t id);

@@ -19,3 +19,17 @@ std::string &AIManager::getTeam() {
 size_t &AIManager::getMaxPlayers() {
     return _maxplayers;
 }
+
+bool AIManager::everyoneReadyToCast() {
+    bool ready = true;
+
+    for (auto &keyset: _players) {
+        auto &player = keyset.second;
+        if (player->getState() != AIPlayer::READY_TO_CAST) {
+            ready = false;
+            break;
+        }
+    }
+
+    return ready;
+}

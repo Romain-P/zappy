@@ -18,7 +18,6 @@ packet_pic_t *pic_deserialize(char **args)
 	return (packet);
 }
 
-
 bool pic_handler(player_t *player, packet_pic_t *packet)
 {
 	player_t *list;
@@ -30,7 +29,7 @@ bool pic_handler(player_t *player, packet_pic_t *packet)
 		list = it->data;
 		send_packet(list->client, &packet);
 	}
-	return true;
+	return (true);
 }
 
 void pic_serialize(packet_pic_t *packet, list_t *buffer)

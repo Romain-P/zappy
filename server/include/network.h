@@ -14,6 +14,9 @@
 	#include <netinet/in.h>
 	#include "linked_list.h"
 	#include "network_epoll.h"
+	#include <stdlib.h>
+	#include <string.h>
+	#include <unistd.h>
 
 	#ifndef NETWORK_READ_SIZE
 		#define NETWORK_READ_SIZE   (1024)
@@ -78,10 +81,20 @@
 	};
 
 	void network_server_start(network_server_t *, server_config_t *);
-	void network_client_read(network_server_t *, network_client_t *, char *, size_t);
+	void network_client_read(network_server_t *,
+		network_client_t *, char *, size_t);
 	void network_client_send(network_client_t *, char *, size_t);
 	void network_client_close(network_client_t *);
 	void network_client_free(void *);
-	network_client_t *network_client_find(list_t *, session_t);
+		network_client_t *network_client_find(list_t *, session_t);
+	void destroy_packet(network_client_t *, char **, size_t, bool);
+	int read_receive_packet(network_client_t *,
+	bool, char **, network_server_t *);
+	void network_client_read(network_server_t *,
+		network_client_t *, char *, size_t);
+	void initialize_buffer(network_client_t *, size_t, char *);
+	int check_too_much_data(network_client_t *,
+		network_server_t *, size_t, char *);
+	bool too_much_data(network_client_t *, size_t, size_t);
 
 #endif //MYIRC_NETWORK_H

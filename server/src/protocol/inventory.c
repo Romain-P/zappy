@@ -30,25 +30,25 @@ bool inventory_handler(player_t *player, packet_inventory_t *packet)
 	(player->inventory).q5,
 	(player->inventory).q6);
 	send_unwrapped(player->client, packet->result);
-	return true;
+	return (true);
 }
 
 void increment_inventory(player_t *player, size_t id)
 {
 	if (id == 0)
-		(player->inventory).q0++;
+		(player->inventory).q0 += 1;
 	if (id == 1)
-		(player->inventory).q1++;
+		(player->inventory).q1 += 1;
 	if (id == 2)
-		(player->inventory).q2++;
+		(player->inventory).q2 += 1;
 	if (id == 3)
-		(player->inventory).q3++;
+		(player->inventory).q3 += 1;
 	if (id == 4)
-		(player->inventory).q4++;
+		(player->inventory).q4 += 1;
 	if (id == 5)
-		(player->inventory).q5++;
+		(player->inventory).q5 += 1;
 	if (id == 6)
-		(player->inventory).q6++;
+		(player->inventory).q6 += 1;
 }
 
 void set_ressource(player_t *player, size_t id)

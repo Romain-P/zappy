@@ -13,14 +13,14 @@ namespace AINetworkController {
 
     extern AIManager manager;
 
-    void on_connect(session_t id);
-    void on_disconnect(session_t id);
-    void on_welcome(session_t id, packet_welcome_t *);
-    void on_look_reply(session_t, packet_look_t *);
-    void on_message_reply(session_t, packet_message_t *);
-    void on_connect_nummber_reply(session_t, packet_connect_number_t *);
-    void on_inventory_reply(session_t, packet_inventory_t *);
-    void on_unwrapped(session_t id, char **packet);
+    void onConnect(session_t id);
+    void onDisconnect(session_t id);
+    void onWelcome(session_t id, packet_welcome_t *);
+    void onLookReply(session_t, packet_look_t *);
+    void onBroadcast(session_t, packet_message_t *);
+    void onConnectNumberReply(session_t, packet_connect_number_t *);
+    void onInventoryReply(session_t, packet_inventory_t *);
+    void onUnwrapped(session_t id, char **packet);
 };
 
 

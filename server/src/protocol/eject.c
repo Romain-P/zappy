@@ -50,7 +50,8 @@ bool eject_handler(player_t *player, packet_eject_t *packet)
 		list = it->data;
 		if (list->x == player->x && list->y == player->y &&
 		(list->client)->id != (player->client)->id) {
-			move_player_eject(player, (int) player->y, (int) player->y);
+			move_player_eject(
+			player, (int) player->y, (int) player->y);
 			sprintf(str, "Eject: %d", 0);
 			send_unwrapped(list->client, str);
 		}

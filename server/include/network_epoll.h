@@ -11,6 +11,13 @@
 	#include <sys/types.h>
 	#include <time.h>
 	#include <stdbool.h>
+	#include <errno.h>
+	#include <string.h>
+	#include <stdio.h>
+	#include <sys/epoll.h>
+	#include <signal.h>
+	#include <sys/signalfd.h>
+	#include <unistd.h>
 
 	#define ERROR (-1)
 

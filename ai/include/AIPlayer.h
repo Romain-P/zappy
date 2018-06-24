@@ -15,13 +15,16 @@ public:
     explicit AIPlayer(session_t id) : AINetworkClient(id) {}
 
     enum State {
-        AWAIT_FOR_CAST,
-
+        READY_TO_CAST,
+        WORKING
     };
 
+    State &getState();
+    size_t &getLevel();
 
 private:
-    State _state;
+    State _state = WORKING;
+    size_t _level = 1;
 };
 
 

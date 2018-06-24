@@ -58,7 +58,7 @@ bool pin_handler(player_t *player, packet_pin_t *packet)
 {
 	get_inventory_player(packet->player_number, packet);
 	send_packet(player->client, &packet);
-	return true;
+	return (true);
 }
 
 void pin_serialize(packet_pin_t *packet, list_t *buffer)

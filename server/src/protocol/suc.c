@@ -11,6 +11,4 @@
 
 void suc_serialize(packet_suc_t *packet, list_t *buffer)
 {
-	(void) packet;
-	(void) buffer;
 }
