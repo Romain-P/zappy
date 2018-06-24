@@ -23,8 +23,13 @@ packet_broadcast_t *broadcast_deserialize(char **args)
 
 bool broadcast_handler(player_t *player, packet_broadcast_t *packet)
 {
-	send_unwrapped(player->client, "ok");
-	return (true);
+	if (!packet->delayed) {
+		delay(packet,
+		(handler_t) &broadcast_handler, player, 7);
+	} else {
+		send_unwrapped(player->client, "ok");
+	}
+	return (false);
 }
 
 void broadcast_serialize(packet_broadcast_t *packet, list_t *buffer)

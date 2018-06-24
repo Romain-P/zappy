@@ -48,7 +48,7 @@
 	typedef struct packet_eject_s packet_eject_t;
 	typedef struct packet_take_s packet_take_t;
 	typedef struct packet_set_s packet_set_t;
-
+	
 	struct __attribute__((__packed__)) packet_example_s {
 		PACKET_HEADER;
 		int64_t some;

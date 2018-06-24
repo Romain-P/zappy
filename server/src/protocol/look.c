@@ -22,24 +22,16 @@ packet_look_t *look_deserialize(char **args)
 
 bool look_handler(player_t *player, packet_look_t *packet)
 {
-	int i = 0;
-	char **tab = malloc(sizeof(char *) * get_count_tile(player->level));
+	char **tab;
 
-	if (tab == NULL)
-		exit(84);
-	packet->level = player->level;
-	tab[0] = strdup("player");
-	packet->number = 1;
-	while (i < player->level) {
-		packet->x = 0;
-		packet->y = 0;
-		loop_tile(player, packet, i, tab);
-		packet->tile += 2;
-		i += 1;
+	if (!packet->delayed) {
+		delay(packet,
+		(handler_t) &look_handler, player, 7);
+	} else {
+		tab = get_result_look(player, packet);
+		send_unwrapped(player->client, prepare_packet_look(tab));
 	}
-	tab[packet->number] = NULL;
-	send_unwrapped(player->client, prepare_packet_look(tab));
-	return (true);
+	return (false);
 }
 
 void set_type(char *str, char *type, size_t nb)

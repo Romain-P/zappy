@@ -20,13 +20,18 @@ packet_left_t *left_deserialize(char **args)
 
 bool left_handler(player_t *player, packet_left_t *packet)
 {
-	player->orientation--;
-	if (player->orientation == 0)
-		player->orientation = 4;
-	if (player->orientation == 5)
-		player->orientation = 1;
-	send_unwrapped(player->client, "ok");
-	return (true);
+	if (!packet->delayed) {
+		delay(packet,
+		(handler_t) &left_handler, player, 7);
+	} else {
+		player->orientation--;
+		if (player->orientation == 0)
+			player->orientation = 4;
+		if (player->orientation == 5)
+			player->orientation = 1;
+		send_unwrapped(player->client, "ok");
+	}
+	return (false);
 }
 
 void left_serialize(packet_left_t *packet, list_t *buffer)

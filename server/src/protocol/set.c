@@ -61,17 +61,23 @@ static void delete_ressource(player_t *player, size_t ressource)
 
 bool set_handler(player_t *player, packet_set_t *packet)
 {
-	size_t id = get_ressource_exist(&(player->inventory),
-		get_id_ressource(packet->node));
+	size_t id;
 
-	if (id == 7)
-		send_unwrapped(player->client, "ko");
-	else {
-		delete_ressource(player, id);
-		set_ressource(player, id);
-		send_unwrapped(player->client, "ok");
+	if (!packet->delayed) {
+		delay(packet,
+		(handler_t) &set_handler, player, 7);
+	} else {
+		id = get_ressource_exist(&(player->inventory),
+		get_id_ressource(packet->node));
+		if (id == 7)
+			send_unwrapped(player->client, "ko");
+		else {
+			delete_ressource(player, id);
+			set_ressource(player, id);
+			send_unwrapped(player->client, "ok");
+		}
 	}
-	return (true);
+	return (false);
 }
 
 void set_serialize(packet_set_t *packet, list_t *buffer)
