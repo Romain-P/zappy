@@ -31,7 +31,8 @@ void AINetworkClient::requestInventory() {
 }
 
 void AINetworkClient::requestBroadcast(std::string &text) {
-    packet_broadcast_t packet = {.cmd = "Broadcast"};
+    packet_broadcast_t packet;
+    strcpy(packet.cmd, "Broadcast");
     strcpy(packet.text, &text[0]);
     send_packet(_id, &packet);
 }
