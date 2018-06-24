@@ -2,6 +2,8 @@
 // Created by romain on 18/06/18.
 //
 
+#include <unistd.h>
+#include <stderr.h>
 #include "zappy.h"
 
 static size_t const MAX_COMMANDS = 10;
@@ -32,6 +34,16 @@ bool delay(void *packet, handler_t handler, player_t *player, int tics) {
 }
 
 void check_delayed_tasks() {
+    /**if (server.players.size  == 1) {
+        eprintf("ENTER A STRING TO SEND OR PRESS ENTER FOR READ NEXT PACKET\n");
+        char test[1024];
+        ssize_t r = read(0, test, 1024);
+        if (r > 1) {
+            test[r] = '\n';
+            test[r + 1] = 0;
+            send_unwrapped(((player_t *)server.players.begin->data)->client, test);
+        }
+    } **/
     time_t current_time = time(NULL);
 
     for (iter_t *it = iter_begin(&server.pending); it;) {

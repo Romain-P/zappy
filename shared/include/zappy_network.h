@@ -13,7 +13,7 @@
     #define IMPORT
 #endif
 
-#define PACKET_HEADER   char const *cmd
+#define PACKET_HEADER   char cmd[15]
 #define PACKED  __attribute__((__packed__))
 
 typedef struct packet_example_s packet_example_t;
@@ -56,21 +56,21 @@ struct PACKED packet_welcome_s {
 
 struct PACKED packet_msz_s {
     PACKET_HEADER;
-    size_t x;
-    size_t y;
+    uint32_t x;
+    uint32_t y;
 };
 
 struct PACKED packet_bct_tile_s {
     PACKET_HEADER;
-    size_t x;
-    size_t y;
-    size_t q0;
-    size_t q1;
-    size_t q2;
-    size_t q3;
-    size_t q4;
-    size_t q5;
-    size_t q6;
+    uint32_t x;
+    uint32_t y;
+    uint32_t q0;
+    uint32_t q1;
+    uint32_t q2;
+    uint32_t q3;
+    uint32_t q4;
+    uint32_t q5;
+    uint32_t q6;
 };
 
 struct PACKED packet_mct_s {
@@ -84,122 +84,122 @@ struct PACKED packet_tna_s {
 
 struct PACKED packet_pnw_s {
     PACKET_HEADER;
-    size_t player_number;
-    size_t x;
-    size_t y;
-    size_t orientation;
-    size_t level;
+    uint32_t player_number;
+    uint32_t x;
+    uint32_t y;
+    uint32_t orientation;
+    uint32_t level;
     char name_team[1024];
 };
 
 struct PACKED packet_ppo_s {
     PACKET_HEADER;
-    size_t player_number;
-    size_t x;
-    size_t y;
-    size_t orientation;
+    uint32_t player_number;
+    uint32_t x;
+    uint32_t y;
+    uint32_t orientation;
 };
 
 struct PACKED packet_plv_s {
     PACKET_HEADER;
-    size_t player_number;
-    size_t level;
+    uint32_t player_number;
+    uint32_t level;
 };
 
 struct PACKED packet_pin_s {
     PACKET_HEADER;
-    size_t player_number;
-    size_t x;
-    size_t y;
-    size_t q0;
-    size_t q1;
-    size_t q2;
-    size_t q3;
-    size_t q4;
-    size_t q5;
-    size_t q6;
+    uint32_t player_number;
+    uint32_t x;
+    uint32_t y;
+    uint32_t q0;
+    uint32_t q1;
+    uint32_t q2;
+    uint32_t q3;
+    uint32_t q4;
+    uint32_t q5;
+    uint32_t q6;
 };
 
 struct PACKED packet_pex_s {
     PACKET_HEADER;
-    size_t player_number;
+    uint32_t player_number;
 };
 
 struct PACKED packet_pbc_s {
     PACKET_HEADER;
-    size_t player_number;
+    uint32_t player_number;
     char message[1024];
 };
 
 struct PACKED packet_pic_s {
     PACKET_HEADER;
-    size_t x;
-    size_t y;
-    size_t incantation_level;
-    size_t players_count;
-    size_t players[100];
+    uint32_t x;
+    uint32_t y;
+    uint32_t incantation_level;
+    uint32_t players_count;
+    uint32_t players[100];
 };
 
 struct PACKED packet_pie_s {
     PACKET_HEADER;
-    size_t x;
-    size_t y;
-    size_t result;
+    uint32_t x;
+    uint32_t y;
+    uint32_t result;
 };
 
 struct PACKED packet_pfk_s {
     PACKET_HEADER;
-    size_t player_number;
+    uint32_t player_number;
 };
 
 struct PACKED packet_pdr_s {
     PACKET_HEADER;
-    size_t player_number;
-    size_t ressource;
+    uint32_t player_number;
+    uint32_t ressource;
 };
 
 struct PACKED packet_pgt_s {
     PACKET_HEADER;
-    size_t player_number;
-    size_t ressource;
+    uint32_t player_number;
+    uint32_t ressource;
 };
 
 struct PACKED packet_pdi_s {
     PACKET_HEADER;
-    size_t player_number;
+    uint32_t player_number;
 };
 
 struct PACKED packet_enw_s {
     PACKET_HEADER;
-    size_t egg;
-    size_t player_number;
-    size_t x;
-    size_t y;
+    uint32_t egg;
+    uint32_t player_number;
+    uint32_t x;
+    uint32_t y;
 };
 
 struct PACKED packet_eht_s {
     PACKET_HEADER;
-    size_t egg;
+    uint32_t egg;
 };
 
 struct PACKED packet_ebo_s {
     PACKET_HEADER;
-    size_t egg;
+    uint32_t egg;
 };
 
 struct PACKED packet_edi_s {
     PACKET_HEADER;
-    size_t egg;
+    uint32_t egg;
 };
 
 struct PACKED packet_sgt_s {
     PACKET_HEADER;
-    size_t time;
+    uint32_t time;
 };
 
 struct PACKED packet_sst_s {
     PACKET_HEADER;
-    size_t time;
+    uint32_t time;
 };
 
 struct PACKED packet_seg_s {
@@ -222,7 +222,7 @@ struct PACKED packet_sbp_s {
 
 struct PACKED packet_message_s {
     PACKET_HEADER;
-    size_t tile;
+    uint32_t tile;
     char text[100];
 };
 
@@ -238,7 +238,7 @@ struct PACKED packet_broadcast_s {
 
 struct PACKED packet_connect_number_s {
     PACKET_HEADER;
-    size_t value;
+    uint32_t value;
 };
 
 
@@ -249,7 +249,7 @@ struct PACKED packet_inventory_s {
 
 typedef struct gui_handlers_s gui_handlers_t;
 typedef struct ai_handlers_s ai_handlers_t;
-typedef int session_t;
+typedef uint32_t session_t;
 
 struct gui_handlers_s {
     void (*on_connect)(session_t id);

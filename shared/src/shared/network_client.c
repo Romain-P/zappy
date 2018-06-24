@@ -85,7 +85,7 @@ void network_client_read(network_instance_t *server,
         client->buffer = malloc(sizeof(char) * (client->length));
         strncpy(client->buffer, split[len - 1], client->length);
     } else if (client->bstate != FREED) {
-        free(client->buffer);
+        //free(client->buffer);
         client->bstate = FREED;
     }
     str_free_array(split);

@@ -19,7 +19,3 @@ std::string &AIManager::getTeam() {
 size_t &AIManager::getMaxPlayers() {
     return _maxplayers;
 }
-
-void AIManager::generateMap(size_t width, size_t height) {
-    _map = std::make_unique<GameMap>(width, height);
-}

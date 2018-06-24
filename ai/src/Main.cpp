@@ -6,9 +6,10 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <cstdlib>
-#include <AIController.h>
+#include <AINetworkController.h>
 #include <getopt.h>
 #include <iostream>
+#include <thread>
 
 static void display_help(char *path) {
     std::cerr << "USAGE: " << path << ":  -p port -n name -h host address" << std::endl;
@@ -29,7 +30,7 @@ static bool parse_options(int argc, char **argv, uint16_t &port, std::string &ho
                 port = static_cast<uint16_t>(atoi(optarg));
                 break;
             case 'n':
-                AIController::manager.getTeam() = std::string(optarg);
+                AINetworkController::manager.getTeam() = std::string(optarg);
                 break;
             case 'h':
                 host = std::string(optarg);
@@ -56,16 +57,15 @@ int main(int ac, char **args) {
         return (EXIT_FAILURE);
 
     ai_handlers_t handlers = {
-            &AIController::on_connect,
-            &AIController::on_disconnect,
-            &AIController::on_welcome,
-            &AIController::on_look_reply,
-            &AIController::on_message_reply,
-            &AIController::on_connect_nummber_reply,
-            &AIController::on_inventory_reply,
-            &AIController::on_unwrapped
+            &AINetworkController::on_connect,
+            &AINetworkController::on_disconnect,
+            &AINetworkController::on_welcome,
+            &AINetworkController::on_look_reply,
+            &AINetworkController::on_message_reply,
+            &AINetworkController::on_connect_nummber_reply,
+            &AINetworkController::on_inventory_reply,
+            &AINetworkController::on_unwrapped
     };
-
     if (!zappy_init_connector_ai(&host[0], port, false, handlers)) {
         std::cerr << "Impossible to connect: check your internet connection" << std::endl;
         return (EXIT_FAILURE);

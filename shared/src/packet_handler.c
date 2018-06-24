@@ -5,8 +5,10 @@
 #include <string.h>
 #include <lib.h>
 #include <printf.h>
+#include <stderr.h>
 #include "protocol.h"
 #include "util.h"
+#include "zappy_network.h"
 
 static message_t const messages[] = {
         { "WELCOME",
@@ -207,7 +209,7 @@ void send_packet(session_t id, void *msg) {
     free(packet);
 }
 
-void send_unwrapped(session_t id, char *unwrapped) {
+EXPORT void send_unwrapped(session_t id, char *unwrapped) {
     size_t len = strlen(unwrapped);
     char cmd[len + 1];
     strcpy(cmd, unwrapped);
@@ -227,23 +229,23 @@ void parse_packet(network_client_t *client, char const *packet, size_t len) {
         if (!strcmp(message->named, cmd)) {
             void *data = NULL;
             found_wrapped = true;
-
             if (message->deserialize)
                 data = message->deserialize(split + 1);
-
             if (data) {
                 network_packet_t *casted = data;
-                casted->cmd = cmd;
+                strcpy(casted->cmd, cmd);
             }
             handler_t handler = *message->handler;
+
             if (handler) {
-                if (!zappy_instance.thread_sync)
+                if (!zappy_instance.thread_sync) {
                     handler(client->id, data);
-                else
+                } else
                     zappy_sync_push(client->id, handler, data);
             }
-            if (data)
+            if (data && !zappy_instance.thread_sync) {
                 free(data);
+            }
             break;
         }
     }
