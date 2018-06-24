@@ -1,6 +1,9 @@
-//
-// Created by romain on 16/05/18.
-//
+/*
+** EPITECH PROJECT, 2018
+** network
+** File description:
+** network.h
+*/
 
 #ifndef MYIRC_NETWORK_H
 #define MYIRC_NETWORK_H
@@ -13,7 +16,7 @@
 #include "network_epoll.h"
 
 #ifndef NETWORK_READ_SIZE
-    #define NETWORK_READ_SIZE   (2048)
+#define NETWORK_READ_SIZE   (2048)
 #endif
 
 #define ERROR               (-1)
@@ -31,53 +34,57 @@ typedef enum buffer_state_e buffer_state_t;
 typedef struct network_packet_s network_packet_t;
 
 enum buffer_state_e {
-    FREED,
-    INCOMPLETE,
-    READY
+	FREED,
+	INCOMPLETE,
+	READY
 };
 
 struct PACKED network_packet_s {
-    PACKET_HEADER;
+	PACKET_HEADER;
 };
 
 struct network_client_s {
-    session_t id;
-    char *buffer;
-    buffer_state_t bstate;
-    size_t length;
-    network_instance_t *server;
-    bool closed;
+	session_t id;
+	char *buffer;
+	buffer_state_t bstate;
+	size_t length;
+	network_instance_t *server;
+	bool closed;
 };
 
 struct client_handler_s {
-    void (*on_connect)(network_client_t *client);
-    void (*on_disconnect)(network_client_t *client);
-    void (*on_received)(network_client_t *client, char const *packet, size_t len);
-    void (*on_sent)(network_client_t *client, char const *packet, size_t len);
+	void (*on_connect)(network_client_t *client);
+	void (*on_disconnect)(network_client_t *client);
+	void (*on_received)(network_client_t *client,
+			char const *packet, size_t len);
+	void (*on_sent)(network_client_t *client,
+			char const *packet, size_t len);
 };
 
 struct netinstance_s {
-    session_t epoll_id;
-    network_config_t *config;
-    client_handler_t client_handler;
-    list_t clients;
+	session_t epoll_id;
+	network_config_t *config;
+	client_handler_t client_handler;
+	list_t clients;
 };
 
 struct network_config_s {
-    char *host;
-    uint16_t port;
-    char *packet_delimiter;
-    size_t packet_max_size;
-    void (*on_server_close)();
-    void (*configure_handlers)(client_handler_t *);
-    on_epoll_unblocked on_unblocked;
+	char *host;
+	uint16_t port;
+	char *packet_delimiter;
+	size_t packet_max_size;
+	void (*on_server_close)();
+	void (*configure_handlers)(client_handler_t *);
+	on_epoll_unblocked on_unblocked;
 };
 
-bool network_connector_start(network_instance_t *instance, network_config_t *config);
+bool network_connector_start(network_instance_t *instance,
+			network_config_t *config);
 
 network_client_t *network_new_connection(network_instance_t *instance);
 
-void network_client_read(network_instance_t *server, network_client_t *client, char *buffer, size_t length);
+void network_client_read(network_instance_t *server,
+			network_client_t *client, char *buffer, size_t length);
 
 void network_client_send(network_client_t *client, char *packet, size_t len);
 

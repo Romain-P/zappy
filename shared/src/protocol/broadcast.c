@@ -1,6 +1,9 @@
-//
-// Created by romain on 22/06/18.
-//
+/*
+** EPITECH PROJECT, 2018
+** broadcast
+** File description:
+** broadcast.c
+*/
 
 #include <zappy_network.h>
 #include <linked_list.h>

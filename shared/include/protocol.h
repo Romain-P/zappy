@@ -1,6 +1,9 @@
-//
-// Created by romain on 08/06/18.
-//
+/*
+** EPITECH PROJECT, 2018
+** protocol
+** File description:
+** protocol.h
+*/
 
 #ifndef ZAPPY_PROTOCOL_H
 #define ZAPPY_PROTOCOL_H
@@ -21,10 +24,10 @@ typedef void (*serialize_t)(void *msg, list_t *buffer);
 typedef void *(*deserialize_t)(char **args);
 
 struct command_s {
-    char const *named;
-    serialize_t serialize;
-    deserialize_t deserialize;
-    handler_t *handler;
+	char const *named;
+	serialize_t serialize;
+	deserialize_t deserialize;
+	handler_t *handler;
 };
 
 //PACKET MSZ
