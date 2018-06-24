@@ -46,7 +46,7 @@ EXPORT bool zappy_init_connector(char *address, uint16_t port,
 }
 
 EXPORT bool zappy_init_connector_ai(char *address, uint16_t port,
-				    bool thread_sync, ai_handlers_t handlers) {
+				bool thread_sync, ai_handlers_t handlers) {
 	network_config_t config = {
 		.host = address,
 		.port = port,
