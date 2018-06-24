@@ -177,7 +177,8 @@ void parse_packet(network_client_t *client, char const *packet, size_t len) {
 				if (!zappy_instance.thread_sync) {
 					handler(client->id, data);
 				} else
-					zappy_sync_push(client->id, handler, data);
+					zappy_sync_push
+						(client->id, handler, data);
 			}
 			if (data && !zappy_instance.thread_sync) {
 				free(data);
