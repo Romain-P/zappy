@@ -30,7 +30,7 @@ bool pie_handler(player_t *player, packet_pie_t *packet)
 		list = it->data;
 		send_packet(list->client, &packet);
 	}
-	return true;
+	return (true);
 }
 
 void pie_serialize(packet_pie_t *packet, list_t *buffer)

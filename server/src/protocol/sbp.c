@@ -11,6 +11,4 @@
 
 void sbp_serialize(packet_sbp_t *packet, list_t *buffer)
 {
-	(void) packet;
-	(void) buffer;
 }

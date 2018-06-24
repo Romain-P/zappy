@@ -23,7 +23,7 @@ packet_look_t *look_deserialize(char **args)
 bool look_handler(player_t *player, packet_look_t *packet)
 {
 	int i = 0;
-	char **tab = malloc(sizeof(char*) * get_count_tile(player->level));
+	char **tab = malloc(sizeof(char *) * get_count_tile(player->level));
 
 	if (tab == NULL)
 		exit(84);
@@ -35,7 +35,7 @@ bool look_handler(player_t *player, packet_look_t *packet)
 		packet->y = 0;
 		loop_tile(player, packet, i, tab);
 		packet->tile += 2;
-		i++;
+		i += 1;
 	}
 	tab[packet->number] = NULL;
 	send_unwrapped(player->client, prepare_packet_look(tab));
@@ -52,26 +52,26 @@ void set_type(char *str, char *type, size_t nb)
 		strcat(str, type);
 		if ((i + 1) < nb)
 			strcat(str, " ");
-		i++;
+		i += 1;
 	}
 }
 
 void increment_ressource(packet_look_t *packet, resource_type_t type)
 {
 	if (type == FOOD)
-		packet->q0++;
+		packet->q0 += 1;
 	if (type == LINEMATE)
-		packet->q1++;
+		packet->q1 += 1;
 	if (type == DERAUMERE)
-		packet->q2++;
+		packet->q2 += 1;
 	if (type == SIBUR)
-		packet->q3++;
+		packet->q3 += 1;
 	if (type == MENDIANE)
-		packet->q4++;
+		packet->q4 += 1;
 	if (type == PHIRAS)
-		packet->q5++;
+		packet->q5 += 1;
 	if (type == THYSTAME)
-		packet->q6++;
+		packet->q6 += 1;
 }
 
 void look_serialize(packet_look_t *packet, list_t *buffer)

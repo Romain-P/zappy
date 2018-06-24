@@ -16,7 +16,8 @@
 
 	#define eprintf(format, ...) (fprintf(stderr, (format), ##__VA_ARGS__))
 
-	#define iprintf(from, errsav) (fprintf(stderr, "%s error: %s\n", (from), strerror((errsav))))
+	#define iprintf(from, errsav) (fprintf(stderr, "%s error: %s\n", \
+		(from), strerror((errsav))))
 
 	#define raise_stacktrace(from) \
 	do { \

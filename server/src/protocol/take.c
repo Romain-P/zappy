@@ -49,7 +49,7 @@ static size_t check_ressource_validity(player_t *player, size_t id)
 packet_take_t *take_deserialize(char **args)
 {
 	packet_take_t *packet;
-	
+
 	if (str_array_length(args) != 1)
 		return (NULL);
 	packet = malloc(sizeof(*packet));

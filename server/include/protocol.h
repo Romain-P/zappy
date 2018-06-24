@@ -1,6 +1,9 @@
-//
-// Created by romain on 08/06/18.
-//
+/*
+** EPITECH PROJECT, 2018
+** ZAPPY
+** File description:
+** Protocol Header
+*/
 
 #ifndef ZAPPY_PROTOCOL_H
 #define ZAPPY_PROTOCOL_H
@@ -280,6 +283,8 @@
 		char team[1024];
 		int status;
 	};
+
+	void send_unwrapped(network_client_t *, char *);
 
 	bool msg_example_handler(player_t *player, packet_example_t *msg);
 	packet_example_t *msg_example_deserialize(char **args);

@@ -18,7 +18,6 @@ packet_pfk_t *pfk_deserialize(char **args)
 	return (packet);
 }
 
-
 bool pfk_handler(player_t *player, packet_pfk_t *packet) {
 	player_t *list;
 	iter_t *it;

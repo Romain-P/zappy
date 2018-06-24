@@ -13,8 +13,10 @@
 	#define ZAPPY_PARAM_SEPARATOR (" ")
 
 	#include <time.h>
+	#include <stdlib.h>
+	#include <stdio.h>
+	#include <string.h>
 	#include "network.h"
-	#include "team.h"
 
 	typedef struct command_s message_t;
 	typedef struct zappy_instance_s zappy_instance_t;

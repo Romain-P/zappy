@@ -10,7 +10,10 @@
 
 	#include <stdbool.h>
 	#include <stdlib.h>
+	#include <string.h>
+	#include <stdio.h>
 	#include <sys/types.h>
+	#include "network_epoll.h"
 
 	#define not_split(x) (!(x) || !(*(x)) || !(x)[1])
 
@@ -19,6 +22,7 @@
 	bool charset_ends_with(char const *, size_t, char const *);
 	void str_free_array(char **);
 	bool parse_int(char const *, int64_t *);
-	char *to_string(int i);
+	char *to_string(int);
+	int read_content(int, epoll_t, epoll_config_t, void *);
 
 #endif //MYIRC_UTIL_H

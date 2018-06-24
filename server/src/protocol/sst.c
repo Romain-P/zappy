@@ -12,7 +12,7 @@
 packet_sst_t *sst_deserialize(char **args)
 {
 	packet_sst_t *packet;
-	
+
 	if (str_array_length(args) != 1)
 		return (NULL);
 	packet = malloc(sizeof(*packet));
@@ -27,12 +27,12 @@ packet_sst_t *sst_deserialize(char **args)
 
 bool sst_handler(player_t *player, packet_sst_t *packet)
 {
-    packet->time = 0;
-    send_packet(player->client, &packet);
-    return true;
+	packet->time = 0;
+	send_packet(player->client, &packet);
+	return (true);
 }
 
 void sst_serialize(packet_sst_t *packet, list_t *buffer)
 {
-    list_add(buffer, to_string(packet->time));
+	list_add(buffer, to_string(packet->time));
 }

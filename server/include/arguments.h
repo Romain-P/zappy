@@ -13,6 +13,6 @@
 	#include <stdlib.h>
 	#include <unistd.h>
 
-	void get_arguments(int, char**);
+	void get_arguments(int, char **);
 
 #endif /* !ARGUMENTS_H_ */

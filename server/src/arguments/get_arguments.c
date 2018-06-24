@@ -9,45 +9,39 @@
 #include "util.h"
 #include "arguments.h"
 #include "map.h"
+#include "team.h"
 
 static int set_argument(int c)
 {
-	switch(c) {
-		case 'p':
-			server.port = atoi(optarg);
-			break;
-		case 'x':
-			set_width_map(atoi(optarg));
-			break;
-		case 'y':
-			set_height_map(atoi(optarg));
-			break;
-		case 'n':
-			server.name = strdup(optarg);
-			break;
-		case 'c':
-			server.nb_clients = atoi(optarg);
-			break;
-		case 'f':
-			server.freq = atoi(optarg);
-			break;
-		case '?':
-		default:
-			return (1);
-	}
+	if (c == 'p')
+		server.port = atoi(optarg);
+	if (c == 'x')
+		set_width_map(atoi(optarg));
+	if (c == 'y')
+		set_height_map(atoi(optarg));
+	if (c == 'n')
+		server.name = strdup(optarg);
+	if (c == 'c')
+		server.nb_clients = atoi(optarg);
+	if (c == 'f')
+		server.freq = atoi(optarg);
+	if (c == '?')
+		return (1);
 	return (0);
 }
 
 static void print_usage(void)
 {
-	printf("USAGE: ./zappy_server -p port -x width -y height -n name1 name2");
+	printf("USAGE: ./zappy_server -p port ");
+	printf("-x width -y height -n name1 name2");
 	printf(" ... -c clientsNb -f freq\n");
 	printf("\tport\t\tis the port number\n");
 	printf("\twidth\t\tis the width of the world\n");
 	printf("\theight\t\tis the height of the world\n");
 	printf("\tnameX\t\tis the name of the team X\n");
 	printf("\tcliensNb\tis the number of authorized clients per team\n");
-	printf("\tfreq\t\tis the reciprocal of time unit for execution of actions\n");
+	printf("\tfreq\t\tis the reciprocal of time unit");
+	printf(" for execution of actions\n");
 	exit(84);
 }
 

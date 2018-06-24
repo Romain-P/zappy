@@ -28,7 +28,7 @@ bool tna_handler(player_t *player, packet_tna_t *packet)
 		strcpy(packet->name, team->name);
 		send_packet(player->client, &packet);
 	}
-	return true;
+	return (true);
 }
 
 void tna_serialize(packet_tna_t *packet, list_t *buffer)
