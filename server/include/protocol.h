@@ -235,6 +235,7 @@
 
 	struct __attribute__((__packed__)) packet_fork_s {
 		PACKET_HEADER;
+		egg_t *egg;
 	};
 
 	struct __attribute__((__packed__)) packet_incantation_s {

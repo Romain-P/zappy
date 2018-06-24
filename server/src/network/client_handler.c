@@ -19,18 +19,10 @@ static void on_connect(network_client_t *client)
 		return;
 	eprintf("[Client %d] connected\n", client->id);
 	player->client = client;
-	(player->inventory).q0 = 0;
-	(player->inventory).q1 = 0;
-	(player->inventory).q2 = 0;
-	(player->inventory).q3 = 0;
-	(player->inventory).q4 = 0;
-	(player->inventory).q5 = 0;
-	(player->inventory).q6 = 0;
 	player->state = AWAIT_TEAM_NAME;
 	player->waiting_commands = 0;
 	list_add(&server.players, player);
 	send_unwrapped(client, "WELCOME");
-	player->level = 0;
 }
 
 static void on_disconnect(network_client_t *client)

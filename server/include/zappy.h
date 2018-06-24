@@ -27,6 +27,7 @@
 	typedef struct inventory_s inventory_t;
 	typedef struct egg_s egg_t;
 	typedef struct waiting_s waiting_t;
+	typedef struct spawn_s spawn_t;
 	typedef enum resource_type_e resource_type_t;
 	typedef enum protocol_state_e protocol_state_t;
 
@@ -37,9 +38,15 @@
 		VALID_PLAYER
 	};
 
+	struct incantation_s {
+		size_t level;
+		size_t nb;
+	};
+
 	struct team_s {
 		char *name;
 		int player;
+		list_t spawn;
 	};
 
 	struct inventory_s {
@@ -59,7 +66,7 @@
 		size_t y;
 		size_t orientation;
 		size_t level;
-		team_t team;
+		team_t *team;
 		inventory_t inventory;
 		list_t eggs;
 		size_t waiting_commands;
@@ -77,6 +84,12 @@
 
 	struct egg_s {
 		size_t id;
+		size_t x;
+		size_t y;
+		bool layed;
+	};
+
+	struct spawn_s {
 		size_t x;
 		size_t y;
 	};

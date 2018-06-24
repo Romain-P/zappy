@@ -8,13 +8,40 @@
 #include "zappy.h"
 #include "team.h"
 
+void init_coord_player(player_t *player, team_t *team)
+{
+	spawn_t *list;
+	iter_t *it;
+
+	for (it = iter_begin(&team->spawn); it; iter_next(it)) {
+		list = it->data;
+		player->x = list->x;
+		player->y = list->y;
+		list_remove(&team->spawn, list);
+		free(list);
+		team->spawn.size -= 1;
+		return;
+	}
+}
+
 void init_player_join(player_t *player, team_t *team)
 {
-	player->x = rand() % (server.map).width;
-	player->y = rand() % (server.map).height;
-	player->team = *team;
+	if ((team->spawn).size == 0) {
+		player->x = rand() % (server.map).width;
+		player->y = rand() % (server.map).height;
+	}
+	else
+		init_coord_player(player, team);
+	player->team = team;
 	player->orientation = (rand() % 4) + 1;
-	player->level = 2;
+	player->level = 1;
+	(player->inventory).q0 = 0;
+	(player->inventory).q1 = 0;
+	(player->inventory).q2 = 0;
+	(player->inventory).q3 = 0;
+	(player->inventory).q4 = 0;
+	(player->inventory).q5 = 0;
+	(player->inventory).q6 = 0;
 }
 
 int check_free_team(player_t *player, char *name)
@@ -40,7 +67,7 @@ char *get_team_char(player_t *player, size_t status)
 	if (packet == NULL)
 		exit(84);
 	if (status == 0)
-		sprintf(packet, "%d", (player->team).player);
+		sprintf(packet, "%d", (player->team)->player);
 	else
 		sprintf(packet, "%zu %zu",
 		(server.map).width, (server.map).width);
@@ -60,6 +87,8 @@ void add_team(char *name)
 		exit(84);
 	}
 	team->name = strdup(name);
-	team->player = 6;
+	team->player = server.nb_clients;
+	(team->spawn) = *list_new();
+	(team->spawn).size = 0;
 	list_add(&server.teams, team);
 }
