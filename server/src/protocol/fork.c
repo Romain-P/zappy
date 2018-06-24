@@ -30,7 +30,6 @@ void create_egg(player_t *player, packet_fork_t *packet)
 	egg->y = player->y;
 	egg->layed = false;
 	packet->egg = egg;
-	//list_add(&(server.map).eggs, egg);
 }
 
 void add_spawn_team(player_t *player)

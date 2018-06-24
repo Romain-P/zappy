@@ -10,11 +10,6 @@
 #include "util.h"
 
 static message_t const messages[] = {
-	{ "example",
-		(serialize_t) &msg_example_serialize,
-		(deserialize_t) &msg_example_deserialize,
-		(handler_t) &msg_example_handler
-	},
 	{ "msz",
 		(serialize_t) &msz_serialize,
 		(deserialize_t) &msz_deserialize,
