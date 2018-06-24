@@ -48,6 +48,7 @@
 	typedef struct packet_eject_s packet_eject_t;
 	typedef struct packet_take_s packet_take_t;
 	typedef struct packet_set_s packet_set_t;
+	typedef struct packet_incantation_s packet_incantation_t;
 	
 	struct __attribute__((__packed__)) packet_example_s {
 		PACKET_HEADER;
@@ -236,6 +237,10 @@
 		PACKET_HEADER;
 	};
 
+	struct __attribute__((__packed__)) packet_incantation_s {
+		PACKET_HEADER;
+	};
+
 	struct __attribute__((__packed__)) packet_eject_s {
 		PACKET_HEADER;
 	};
@@ -315,6 +320,11 @@
 	bool fork_handler(player_t *, packet_fork_t *);
 	packet_fork_t *fork_deserialize(char **);
 	void fork_serialize(packet_fork_t *, list_t *);
+
+	// FORK COMMAND
+	bool incantation_handler(player_t *, packet_incantation_t *);
+	packet_incantation_t *incantation_deserialize(char **);
+	void incantation_serialize(packet_incantation_t *, list_t *);
 
 	// RIGHT COMMAND
 	bool right_handler(player_t *, packet_right_t *);
