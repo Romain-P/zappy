@@ -20,8 +20,7 @@ int to_seconds(int tics)
 static bool inserter(waiting_t *waiting)
 {
 	return
-	(exec_time < waiting->start_time +
-	(to_seconds(waiting->tics) * 1000));
+	(exec_time < waiting->start_time + to_seconds(waiting->tics));
 }
 
 bool delay(void *packet, handler_t handler, player_t *player, int tics)
@@ -31,13 +30,12 @@ bool delay(void *packet, handler_t handler, player_t *player, int tics)
 	if (player->waiting_commands >= MAX_COMMANDS)
 		return (false);
 	((network_packet_t *) packet)->delayed = true;
-	exec_time = time(NULL) + to_seconds(tics) * 1000;
+	exec_time = time(NULL) + to_seconds(tics);
 	player->waiting_commands++;
 	waiting = malloc(sizeof(*waiting));
 	if (waiting == NULL)
 		exit(84);
 	waiting->player = player;
-	waiting->start_time = time(NULL);
 	waiting->start_time = time(NULL);
 	waiting->command_handler = handler;
 	waiting->packet = packet;
@@ -56,7 +54,7 @@ void check_delayed_tasks(void)
 		waiting = it->data;
 		iter_next(it);
 		if (current_time >=
-		waiting->start_time + (to_seconds(waiting->tics) * 1000)) {
+		waiting->start_time + to_seconds(waiting->tics)) {
 			waiting->command_handler(waiting->player,
 			waiting->packet);
 			list_remove(&server.pending, waiting);
