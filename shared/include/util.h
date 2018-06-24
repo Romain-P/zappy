@@ -1,6 +1,9 @@
-//
-// Created by romain on 26/05/18.
-//
+/*
+** EPITECH PROJECT, 2018
+** util
+** File description:
+** util.h
+*/
 
 #ifndef MYIRC_UTIL_H
 #define MYIRC_UTIL_H

@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2018
+** linked_list
+** File description:
+** linked_list.h
+*/
+
 #ifndef MYIRC_LIST_H
 #define MYIRC_LIST_H
 
@@ -15,18 +22,20 @@ typedef bool (*predicate_t)(void *data);
 #define iter_value(it_ptr)      ((it)->data)
 #define list_init               (list_t) {NULL, NULL, 0}
 
-#define ERROR_OUTOFBOUND    ("list_at error: index %zu out of bound, list size: %zu\n")
-#define ERROR_NULL          ("data_null_check: NULL pointer cant be added or removed from a list\n")
+#define ERROR_OUTOFBOUND
+("list_at error: index %zu out of bound, list size: %zu\n")
+#define ERROR_NULL
+("data_null_check: NULL pointer cant be added or removed from a list\n")
 
 struct iter_s {
-    ptr_t data;
-    iter_t *next;
+	ptr_t data;
+	iter_t *next;
 };
 
 struct list_s {
-    iter_t *begin;
-    iter_t *end;
-    size_t size;
+	iter_t *begin;
+	iter_t *end;
+	size_t size;
 };
 
 list_t  *list_new();
