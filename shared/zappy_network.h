@@ -1,3 +1,10 @@
+/*
+** EPITECH PROJECT, 2018
+** zappy_network
+** File description:
+** zappy_network.h
+*/
+
 #ifndef ZAPPY_LIBRARY_H
 #define ZAPPY_LIBRARY_H
 
