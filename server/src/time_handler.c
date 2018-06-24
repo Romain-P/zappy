@@ -38,13 +38,13 @@ bool delay(void *packet, handler_t handler, player_t *player, int tics)
 		exit(84);
 	waiting->player = player;
 	waiting->start_time = time(NULL);
+	waiting->start_time = exec_time;
 	waiting->command_handler = handler;
 	waiting->packet = packet;
 	waiting->tics = tics;
 	list_insert(&server.pending, waiting, (predicate_t) &inserter);
 	return (true);
 }
-
 
 void check_delayed_tasks(void)
 {

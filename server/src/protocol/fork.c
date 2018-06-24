@@ -20,16 +20,22 @@ packet_fork_t *fork_deserialize(char **args)
 
 bool fork_handler(player_t *player, packet_fork_t *packet)
 {
-	egg_t *egg = malloc(sizeof(egg_t));
+	egg_t *egg;
 
-	if (egg == NULL)
-		exit(84);
-	egg->id = (server.map).nb_eggs;
-	egg->x = player->x;
-	egg->y = player->y;
-	list_add(&(server.map).eggs, egg);
-	send_unwrapped(player->client, "ok");
-	return (true);
+	if (!packet->delayed) {
+		delay(packet,
+		(handler_t) &fork_handler, player, 42);
+	} else {
+		egg = malloc(sizeof(egg_t));
+		if (egg == NULL)
+			exit(84);
+		egg->id = (server.map).nb_eggs;
+		egg->x = player->x;
+		egg->y = player->y;
+		list_add(&(server.map).eggs, egg);
+		send_unwrapped(player->client, "ok");
+	}
+	return (false);
 }
 
 void fork_serialize(packet_fork_t *packet, list_t *buffer)

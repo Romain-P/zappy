@@ -40,7 +40,7 @@ packet_eject_t *eject_deserialize(char **args)
 	return (packet);
 }
 
-bool eject_handler(player_t *player, packet_eject_t *packet)
+static void eject_player_case(player_t *player)
 {
 	player_t *list;
 	iter_t *it;
@@ -56,8 +56,18 @@ bool eject_handler(player_t *player, packet_eject_t *packet)
 			send_unwrapped(list->client, str);
 		}
 	}
-	send_unwrapped(player->client, "ok");
-	return (true);
+}
+
+bool eject_handler(player_t *player, packet_eject_t *packet)
+{
+	if (!packet->delayed) {
+		delay(packet,
+		(handler_t) &eject_handler, player, 7);
+	} else {
+		eject_player_case(player);
+		send_unwrapped(player->client, "ok");
+	}
+	return (false);
 }
 
 void eject_serialize(packet_eject_t *packet, list_t *buffer)

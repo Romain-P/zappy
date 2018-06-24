@@ -37,9 +37,7 @@ bool look_handler(player_t *player, packet_look_t *packet)
 		packet->tile += 2;
 		i += 1;
 	}
-	tab[packet->number] = NULL;
-	send_unwrapped(player->client, prepare_packet_look(tab));
-	return (true);
+	return (false);
 }
 
 void set_type(char *str, char *type, size_t nb)
