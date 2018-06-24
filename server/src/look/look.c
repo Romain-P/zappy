@@ -68,3 +68,24 @@ void ajust_position(packet_look_t *packet)
 	if (packet->x <= -1)
 		packet->x = (server.map).width + (packet->x);
 }
+
+char **get_result_look(player_t *player, packet_look_t *packet)
+{
+	int i = 0;
+	char **tab = malloc(sizeof(char *) * get_count_tile(player->level));
+
+	if (tab == NULL)
+		exit(84);
+	packet->level = player->level;
+	tab[0] = strdup("player");
+	packet->number = 1;
+	while (i < player->level) {
+		packet->x = 0;
+		packet->y = 0;
+		loop_tile(player, packet, i, tab);
+		packet->tile += 2;
+		i += 1;
+	}
+	tab[packet->number] = NULL;
+	return (tab);
+}

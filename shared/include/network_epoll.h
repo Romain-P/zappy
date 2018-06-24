@@ -11,7 +11,7 @@
 
 #define ERROR   (-1)
 
-typedef int session_t;
+typedef uint32_t session_t;
 typedef int network_server_id_t;
 typedef struct epoll_event epoll_t;
 typedef void (*on_data_received)(session_t client, void *server_ptr);
@@ -23,6 +23,8 @@ struct epoll_config_s {
     on_epoll_unblocked on_unblocked;
     int timeout;
 };
+
+void epoll_stop();
 
 void epoll_listen(session_t epoll_instance, epoll_config_t *config, void *server_ptr);
 

@@ -4,6 +4,7 @@
 #include "lib.h"
 #include <stdlib.h>
 #include <pthread.h>
+#include <stderr.h>
 
 zappy_instance_t zappy_instance = {
         .pending = list_init,
@@ -20,7 +21,7 @@ static void on_unblocked() {
 
 }
 
-EXPORT extern bool zappy_init_connector(char *address, uint16_t port, bool thread_sync, gui_handlers_t handlers) {
+EXPORT bool zappy_init_connector(char *address, uint16_t port, bool thread_sync, gui_handlers_t handlers) {
     network_config_t config = {
             .host = address,
             .port = port,
@@ -32,10 +33,11 @@ EXPORT extern bool zappy_init_connector(char *address, uint16_t port, bool threa
     };
     zappy_instance.thread_sync = thread_sync;
     zappy_instance.gui_handlers = handlers;
+    eprintf("zappy_network: trying to connect to %s:%d\n", address, port);
     return network_connector_start(&zappy_instance.net, &config);
 }
 
-EXPORT extern bool zappy_init_connector_ai(char *address, uint16_t port, bool thread_sync, ai_handlers_t handlers) {
+EXPORT bool zappy_init_connector_ai(char *address, uint16_t port, bool thread_sync, ai_handlers_t handlers) {
     network_config_t config = {
             .host = address,
             .port = port,
@@ -55,11 +57,11 @@ EXPORT extern bool zappy_init_connector_ai(char *address, uint16_t port, bool th
     return network_connector_start(&zappy_instance.net, &config);
 }
 
-EXPORT extern session_t zappy_new_connection() {
+EXPORT session_t zappy_new_connection() {
     return network_new_connection(&zappy_instance.net)->id;
 }
 
-EXPORT extern void zappy_sync_poll() {
+EXPORT void zappy_sync_poll() {
     list_t *queue = &zappy_instance.pending;
     if (queue->size == 0)
         return;
@@ -71,7 +73,7 @@ EXPORT extern void zappy_sync_poll() {
     free(popped);
 }
 
-EXPORT extern void zappy_sync_push(session_t client_id, handler_t handler, void *packet) {
+void zappy_sync_push(session_t client_id, handler_t handler, void *packet) {
     waiting_t *waiting = malloc(sizeof(*waiting));
     waiting->client_id = client_id;
     waiting->handler = handler;

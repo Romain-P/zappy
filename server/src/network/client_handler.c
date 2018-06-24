@@ -16,7 +16,7 @@ static void on_connect(network_client_t *client)
 	player_t *player = malloc(sizeof(player_t));
 
 	if (player == NULL)
-		exit(84);
+		return;
 	eprintf("[Client %d] connected\n", client->id);
 	player->client = client;
 	(player->inventory).q0 = 0;
@@ -31,7 +31,6 @@ static void on_connect(network_client_t *client)
 	list_add(&server.players, player);
 	send_unwrapped(client, "WELCOME");
 	player->level = 0;
-	eprintf("[Client %d] connected\n", client->id);
 }
 
 static void on_disconnect(network_client_t *client)

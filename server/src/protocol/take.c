@@ -61,11 +61,17 @@ packet_take_t *take_deserialize(char **args)
 
 bool take_handler(player_t *player, packet_take_t *packet)
 {
-	if (check_ressource_validity(player, get_id_ressource(packet->node)))
-		send_unwrapped(player->client, "ok");
-	else
-		send_unwrapped(player->client, "ko");
-	return (true);
+	if (!packet->delayed) {
+		delay(packet,
+		(handler_t) &take_handler, player, 7);
+	} else {
+		if (check_ressource_validity(player,
+		get_id_ressource(packet->node)))
+			send_unwrapped(player->client, "ok");
+		else
+			send_unwrapped(player->client, "ko");
+	}
+	return (false);
 }
 
 void take_serialize(packet_take_t *packet, list_t *buffer)

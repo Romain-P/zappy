@@ -52,6 +52,9 @@ static void read_data(network_instance_t *instance, int client) {
         instance->client_handler.on_disconnect(found);
         list_remove(&instance->clients, found);
         network_client_free(found);
+
+        if (instance->clients.size == 0)
+            epoll_stop();
     }
 }
 

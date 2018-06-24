@@ -12,6 +12,12 @@
 #include "network_epoll.h"
 #include "stderr.h"
 
+static bool listen = true;
+
+void epoll_stop() {
+    listen = false;
+}
+
 void epoll_listen(session_t epoll_instance, epoll_config_t *config, void *network_ptr) {
     struct signalfd_siginfo info;
     epoll_t ev;
@@ -27,6 +33,8 @@ void epoll_listen(session_t epoll_instance, epoll_config_t *config, void *networ
     epoll_add_client(epoll_instance, signal_fd);
 
     while (true) {
+        if (!listen)
+            goto closed;
         int rdy = epoll_wait(epoll_instance, &ev, 1, config->timeout);
         if (config->on_unblocked)
             config->on_unblocked();
@@ -39,6 +47,7 @@ void epoll_listen(session_t epoll_instance, epoll_config_t *config, void *networ
             if (read(signal_fd, &info, sizeof(info)) != sizeof(info))
                 continue;
             else if (info.ssi_signo == SIGINT) {
+                closed:
                 config->on_data(-1, network_ptr);
                 break;
             }

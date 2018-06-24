@@ -8,8 +8,10 @@
 #include <string.h>
 #include <lib.h>
 #include <printf.h>
+#include <stderr.h>
 #include "protocol.h"
 #include "util.h"
+#include "zappy_network.h"
 
 static message_t const messages[] = {
 	{"WELCOME", NULL, (deserialize_t) deserialize_welcome,
@@ -159,28 +161,27 @@ void parse_packet(network_client_t *client, char const *packet, size_t len) {
 
 	for (int i = 0; messages[i].named; ++i) {
 		message_t const *message = messages + i;
-
 		char const *cmd = split[0];
 		if (!strcmp(message->named, cmd)) {
 			void *data = NULL;
 			found_wrapped = true;
-
 			if (message->deserialize)
 				data = message->deserialize(split + 1);
-
 			if (data) {
 				network_packet_t *casted = data;
-				casted->cmd = cmd;
+				strcpy(casted->cmd, cmd);
 			}
 			handler_t handler = *message->handler;
+
 			if (handler) {
-				if (!zappy_instance.thread_sync)
+				if (!zappy_instance.thread_sync) {
 					handler(client->id, data);
-				else
+				} else
 					zappy_sync_push(client->id, handler, data);
 			}
-			if (data)
+			if (data && !zappy_instance.thread_sync) {
 				free(data);
+			}
 			break;
 		}
 	}

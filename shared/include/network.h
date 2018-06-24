@@ -20,11 +20,11 @@
 
 #define PACKED  __attribute__((__packed__))
 
-#define PACKET_HEADER      char const *cmd
+#define PACKET_HEADER      char cmd[15]
 
 typedef struct network_client_s network_client_t;
 typedef struct netinstance_s network_instance_t;
-typedef int session_t;
+typedef uint32_t session_t;
 typedef struct network_config_s network_config_t;
 typedef struct client_handler_s client_handler_t;
 typedef enum buffer_state_e buffer_state_t;

@@ -105,6 +105,11 @@ static message_t const messages[] = {
 		(deserialize_t) &inventory_deserialize,
 		(handler_t) &inventory_handler
 	},
+	{ "Incantation",
+		(serialize_t) &incantation_serialize,
+		(deserialize_t) &incantation_deserialize,
+		(handler_t) &incantation_handler
+	},
 	{ "pnw",
 		(serialize_t) &pnw_serialize,
 		NULL,
