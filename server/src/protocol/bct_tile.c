@@ -34,8 +34,9 @@ bool bct_tile_handler(player_t *player, packet_bct_tile_t *packet)
 	init_bct_tile_packet(packet);
 	for (it = iter_begin(&(server.map).ressources); it; iter_next(it)) {
 		ressource = it->data;
-		if (packet->x == ressource->x && packet->y == ressource->y)
+		if (packet->x == ressource->x && packet->y == ressource->y) {
 			get_ressource_tile(ressource->type, packet);
+		}
 	}
 	send_packet(player->client, &packet);
 	return (true);

@@ -5,12 +5,13 @@
 ## Makefile
 ##
 
-CFLAGS = -Iinclude -Wall -Werror
+CFLAGS = -Iinclude -Wall -Werror -g3
 
-SRC	=	src/main.c			\
+SRC =	src/main.c			\
 	src/mouvement.c			\
 	src/player.c			\
 	src/team.c			\
+	src/level.c			\
 	src/time_handler.c		\
 	src/network/client_handler.c	\
 	src/arguments/get_arguments.c	\
@@ -18,14 +19,16 @@ SRC	=	src/main.c			\
 	src/network/unwraped.c		\
 	src/map/init_map.c		\
 	src/map/ressource.c		\
+	src/map/delete_ressource.c	\
+	src/map/ressource_incantation.c \
 	src/look/look.c			\
-	src/look/packet.c		 \
+	src/look/packet.c		\
 	src/look/ressource.c		\
 	src/shared/linked_list.c	\
-	src/shared/linked_list_utils.c   \
-	src/shared/network_client.c	 \
-	src/shared/network_epoll.c	  \
-	src/shared/network_server.c	 \
+	src/shared/linked_list_utils.c	\
+	src/shared/network_client.c	\
+	src/shared/network_epoll.c	\
+	src/shared/network_server.c	\
 	src/shared/packet.c		\
 	src/shared/util_1.c		\
 	src/shared/util_2.c		\

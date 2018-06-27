@@ -29,6 +29,6 @@ packet_msz_t *msz_deserialize(char **args)
 
 void msz_serialize(packet_msz_t *packet, list_t *buffer)
 {
-	list_add(buffer, to_string(packet->x));
-	list_add(buffer, to_string(packet->y));
+	list_add(buffer, to_string(50));
+	list_add(buffer, to_string(50));
 }

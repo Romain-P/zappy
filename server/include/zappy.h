@@ -28,6 +28,7 @@
 	typedef struct egg_s egg_t;
 	typedef struct waiting_s waiting_t;
 	typedef struct spawn_s spawn_t;
+	typedef struct level_s level_t;
 	typedef enum resource_type_e resource_type_t;
 	typedef enum protocol_state_e protocol_state_t;
 
@@ -36,6 +37,16 @@
 	enum protocol_state_e {
 		AWAIT_TEAM_NAME,
 		VALID_PLAYER
+	};
+
+	struct level_s {
+		size_t level;
+		size_t q1;
+		size_t q2;
+		size_t q3;
+		size_t q4;
+		size_t q5;
+		size_t q6;
 	};
 
 	struct incantation_s {
