@@ -7,6 +7,7 @@
 
 #include "zappy.h"
 #include "team.h"
+#include "protocol.h"
 
 void init_coord_player(player_t *player, team_t *team)
 {
@@ -42,6 +43,7 @@ void init_player_join(player_t *player, team_t *team)
 	(player->inventory).q4 = 0;
 	(player->inventory).q5 = 0;
 	(player->inventory).q6 = 0;
+	send_pnw(player);
 }
 
 int check_free_team(player_t *player, char *name)

@@ -7,14 +7,30 @@
 
 #include "zappy.h"
 #include "level.h"
+#include "protocol.h"
 
 size_t check_condition_incantation(player_t *player)
 {
-	size_t count = get_condition_player_level(player);
-	size_t need = get_need_level(player->level);
+	size_t count = 0;
+	int *tab = malloc(sizeof(int) * (100));
+	player_t *list;
+	size_t nb;
+	iter_t *it;
 
-	if (count != need)
+	if (tab == NULL)
+		exit(84);
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		list = it->data;
+		if (list->x == player->x && list->y == player->y &&
+		player->level == list->level)
+			tab[count++] = player->client->id;
+	}
+	if (count != get_need_level(player->level))
 		return (1);
+	nb = count;
+	count = check_ressource_tile(player);
+	if (count != 1)
+		send_pic(player, nb, tab);
 	return (check_ressource_tile(player));	
 }
 

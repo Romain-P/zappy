@@ -9,6 +9,23 @@
 #include "util.h"
 #include "zappy.h"
 
+void send_pie(player_t *player)
+{
+	char *packet = malloc(sizeof(char) * (strlen("pie") +
+	20));
+	iter_t *it;
+	player_t *list;
+
+	if (packet == NULL)
+		exit(84);
+	sprintf(packet, "pie %zo %zo %zo",
+	player->x, player->y, player->level);
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		list = it->data;
+		send_unwrapped(list->client, packet);
+	}
+}
+
 packet_pie_t *pie_deserialize(char **args)
 {
 	packet_pie_t *packet = malloc(sizeof(*packet));

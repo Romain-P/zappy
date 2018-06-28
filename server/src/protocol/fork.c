@@ -30,13 +30,16 @@ void create_egg(player_t *player, packet_fork_t *packet)
 	egg->y = player->y;
 	egg->layed = false;
 	packet->egg = egg;
+	(server.map).nb_eggs += 1;
+	send_enw(player, (server.map).nb_eggs);
+	send_pfk(player);
 }
 
-void add_spawn_team(player_t *player)
+void add_spawn_team(player_t *player, packet_fork_t *packet)
 {
 	spawn_t *spawn = malloc(sizeof(spawn_t));
 
-	send_unwrapped(player->client, "egg ok");
+	send_eht(player, packet->egg);
 	if (spawn == NULL)
 		exit(84);
 	spawn->x = player->x;
@@ -53,8 +56,7 @@ bool fork_handler(player_t *player, packet_fork_t *packet)
 	}
 	if (!packet->delayed) {
 		create_egg(player, packet);
-		delay(packet,
-		(handler_t) &fork_handler, player, 42);
+		delay(packet, (handler_t) &fork_handler, player, 42);
 	}
 	else {
 		if (!packet->egg->layed) {
@@ -63,7 +65,7 @@ bool fork_handler(player_t *player, packet_fork_t *packet)
 			delay(packet, (handler_t) &fork_handler, player, 300);
 		}
 		else
-			add_spawn_team(player);
+			add_spawn_team(player, packet);
 	}
 	return (false);
 }

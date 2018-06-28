@@ -43,7 +43,7 @@ static char *send_current_level(player_t *player)
 
 bool incantation_handler(player_t *player, packet_incantation_t *packet)
 {
-	size_t condition= check_condition_incantation(player);
+	size_t condition = check_condition_incantation(player);
 
 	if (condition == 1) {
 		send_unwrapped(player->client, "ko");
@@ -57,6 +57,7 @@ bool incantation_handler(player_t *player, packet_incantation_t *packet)
 		delete_ressource(player);
 		player->level++;
 		send_to_all_tile(send_current_level(player), player);
+		send_pie(player);
 	}
 	return (false);
 }

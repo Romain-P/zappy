@@ -73,6 +73,7 @@ bool set_handler(player_t *player, packet_set_t *packet)
 			send_unwrapped(player->client, "ko");
 		else {
 			delete_ressource(player, id);
+			send_pdr(player, id);
 			set_ressource(player, id);
 			send_unwrapped(player->client, "ok");
 		}

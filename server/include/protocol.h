@@ -385,6 +385,7 @@
 	packet_pnw_t *pnw_deserialize(char **);
 	bool pnw_handler(player_t *, packet_pnw_t *);
 	void pnw_serialize(packet_pnw_t *, list_t *);
+	void send_pnw(player_t *);
 
 	// PPO COMMAND
 	packet_ppo_t *ppo_deserialize(char **);
@@ -415,26 +416,31 @@
 	packet_pic_t *pic_deserialize(char **);
 	bool pic_handler(player_t *, packet_pic_t *);
 	void pic_serialize(packet_pic_t *, list_t *);
+	void send_pic(player_t *, size_t, int *);
 
 	// PIE COMMAND
 	packet_pie_t *pie_deserialize(char **);
 	bool pie_handler(player_t *, packet_pie_t *);
 	void pie_serialize(packet_pie_t *, list_t *);
+	void send_pie(player_t *);
 
 	// PFK COMMAND
 	packet_pfk_t *pfk_deserialize(char **);
 	bool pfk_handler(player_t *, packet_pfk_t *);
 	void pfk_serialize(packet_pfk_t *, list_t *);
+	void send_pfk(player_t *);
 
 	// PDR COMMAND
 	packet_pdr_t *pdr_deserialize(char **);
 	bool pdr_handler(player_t *player, packet_pdr_t *);
 	void pdr_serialize(packet_pdr_t *, list_t *);
+	void send_pdr(player_t *, size_t);
 
 	// PGT COMMAND
 	packet_pgt_t *pgt_deserialize(char **);
 	bool pgt_handler(player_t *, packet_pgt_t *);
 	void pgt_serialize(packet_pgt_t *, list_t *);
+	void send_pgt(player_t *, size_t);
 
 	// PDI COMMAND
 	packet_pdi_t *pdi_deserialize(char **);
@@ -445,16 +451,19 @@
 	packet_enw_t *enw_deserialize(char **);
 	bool enw_handler(player_t *player, packet_enw_t *);
 	void enw_serialize(packet_enw_t *, list_t *);
+	void send_enw(player_t *, size_t);
 
 	// EHT COMMAND
 	packet_eht_t *eht_deserialize(char **);
 	bool eht_handler(player_t *, packet_eht_t *);
 	void eht_serialize(packet_eht_t *, list_t *);
+	void send_eht(player_t *, egg_t *);
 
 	// EBO COMMAND
 	packet_ebo_t *ebo_deserialize(char **);
 	bool ebo_handler(player_t *, packet_ebo_t *);
 	void ebo_serialize(packet_ebo_t *, list_t *);
+	void send_ebo(player_t *, egg_t *);
 
 	// EDI COMMAND
 	packet_edi_t *edi_deserialize(char **);

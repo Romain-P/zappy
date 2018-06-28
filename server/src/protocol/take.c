@@ -40,6 +40,7 @@ static size_t check_ressource_validity(player_t *player, size_t id)
 			list_remove(&(server.map).ressources, list);
 			free(list);
 			increment_inventory(player, id);
+			send_pgt(player, id);
 			return (1);
 		}
 	}

@@ -9,6 +9,22 @@
 #include "util.h"
 #include "zappy.h"
 
+void send_pfk(player_t *player)
+{
+	char *packet = malloc(sizeof(char) * (strlen("pfk") +
+	20));
+	iter_t *it;
+	player_t *list;
+
+	if (packet == NULL)
+		exit(84);
+	sprintf(packet, "pfk %d", player->client->id);
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		list = it->data;
+		send_unwrapped(list->client, packet);
+	}
+}
+
 packet_pfk_t *pfk_deserialize(char **args)
 {
 	packet_pfk_t *packet = malloc(sizeof(*packet));

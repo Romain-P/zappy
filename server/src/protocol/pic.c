@@ -9,6 +9,28 @@
 #include "util.h"
 #include "zappy.h"
 
+void send_pic(player_t *player, size_t count, int *tab)
+{
+	char *packet = malloc(sizeof(char) * (strlen("pic") +
+	200));
+	iter_t *it;
+	size_t i = 0;
+	player_t *list;
+
+	if (packet == NULL)
+		exit(84);
+	sprintf(packet, "pic %zo %zo %zo",
+	player->x, player->y, player->level + 1);
+	while (i < count)
+		sprintf(packet + strlen(packet),
+		" %d", tab[i++]);
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		list = it->data;
+		send_unwrapped(list->client, packet);
+	}
+	free(packet);
+}
+
 packet_pic_t *pic_deserialize(char **args)
 {
 	packet_pic_t *packet = malloc(sizeof(*packet));
