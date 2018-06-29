@@ -14,7 +14,7 @@
 #endif
 
 #define PACKET_HEADER   char cmd[15]
-#define PACKED  __attribute__((__packed__))
+#define PACKED
 
 typedef struct packet_example_s packet_example_t;
 typedef struct packet_msz_s packet_msz_t;
@@ -294,8 +294,8 @@ struct ai_handlers_s {
 
 
 extern "C" {
-    EXPORT bool zappy_init_connector(char *address, uint16_t port, bool thread_sync, gui_handlers_t handlers);
-    EXPORT bool zappy_init_connector_ai(char *address, uint16_t port, bool thread_sync, ai_handlers_t handlers);
+    EXPORT extern bool zappy_init_connector(char *address, uint16_t port, gui_handlers_t handlers, uint32_t timeout);
+    EXPORT bool zappy_init_connector_ai(char *address, uint16_t port, ai_handlers_t handlers, uint32_t timeout);
     EXPORT session_t zappy_new_connection();
     EXPORT void zappy_sync_poll();
     EXPORT void send_packet(session_t id, void *msg);

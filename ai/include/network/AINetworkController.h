@@ -7,7 +7,8 @@
 
 
 #include "zappy_network.h"
-#include "AIManager.h"
+
+class AIManager;
 
 namespace AINetworkController {
 

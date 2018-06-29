@@ -1,9 +1,6 @@
-/*
-** EPITECH PROJECT, 2018
-** network_epoll
-** File description:
-** network_epoll.h
-*/
+//
+// Created by romain on 26/05/18.
+//
 
 #ifndef MYIRC_NETWORK_EPOLL_H
 #define MYIRC_NETWORK_EPOLL_H
@@ -22,15 +19,14 @@ typedef void (*on_epoll_unblocked)();
 typedef struct epoll_config_s epoll_config_t;
 
 struct epoll_config_s {
-	on_data_received on_data;
-	on_epoll_unblocked on_unblocked;
-	int timeout;
+    on_data_received on_data;
+    on_epoll_unblocked on_unblocked;
+    int timeout;
 };
 
 void epoll_stop();
 
-void epoll_listen(session_t epoll_instance,
-		epoll_config_t *config, void *server_ptr);
+void epoll_listen(session_t epoll_instance, epoll_config_t *config, void *server_ptr);
 
 bool epoll_add_client(session_t epoll_id, session_t new);
 
