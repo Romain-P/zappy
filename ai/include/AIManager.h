@@ -8,7 +8,6 @@
 
 #include <unordered_map>
 #include <memory>
-#include <bits/unordered_map.h>
 #include "zappy_network.h"
 #include "AIPlayer.h"
 
@@ -17,17 +16,33 @@ using players_t = std::unordered_map<session_t, std::unique_ptr<AIPlayer>>;
 class AIManager {
 public:
 
-    bool everyoneReadyToCast();
+    bool mustFork();
+    bool askRemainingConnections();
+    void unblockAsking();
+    bool everyoneAreReadyToCast() const;
+    bool noneReadyToCast() const;
+    void onCastingFailed();
+    void alertReadyForCast(AIPlayer &player);
+    void leaveItemsForCast(AIPlayer &player);
 
-    std::string &getTeam();
+    objects_t neededObjects(size_t custom = 0);
+
+    std::string &getTeamName();
     AIPlayer &getPlayer(session_t id);
     players_t &getPlayers();
-    size_t &getMaxPlayers();
+    size_t &getFreePlaces();
+    size_t &getLevel();
+
 private:
+    static const objects_t levels[];
 
     players_t _players;
-    std::string _team;
-    size_t _maxplayers;
+    std::string _teamName;
+    size_t _freePlaces = 0;
+    size_t _level = 1;
+    size_t _forks = 0;
+    bool _ask = true;
+    objects_t _currentElevation;
 };
 
 

@@ -1,10 +1,3 @@
-/*
-** EPITECH PROJECT, 2018
-** zappy_network
-** File description:
-** zappy_network.h
-*/
-
 #ifndef ZAPPY_LIBRARY_H
 #define ZAPPY_LIBRARY_H
 
@@ -13,11 +6,11 @@
 #include <sys/types.h>
 
 #if defined(_MSC_VER)
-#define EXPORT __declspec(dllexport)
-#define IMPORT __declspec(dllimport)
+    #define EXPORT __declspec(dllexport)
+    #define IMPORT __declspec(dllimport)
 #elif defined(__GNUC__)
-#define EXPORT __attribute__((visibility("default")))
-#define IMPORT
+    #define EXPORT __attribute__((visibility("default")))
+    #define IMPORT
 #endif
 
 #define PACKET_HEADER   char const *cmd
@@ -58,200 +51,200 @@ typedef struct packet_message_s packet_message_t;
 typedef struct packet_inventory_s packet_inventory_t;
 
 struct PACKED packet_welcome_s {
-	PACKET_HEADER;
+    PACKET_HEADER;
 };
 
 struct PACKED packet_msz_s {
-	PACKET_HEADER;
-	size_t x;
-	size_t y;
+    PACKET_HEADER;
+    size_t x;
+    size_t y;
 };
 
 struct PACKED packet_bct_tile_s {
-	PACKET_HEADER;
-	size_t x;
-	size_t y;
-	size_t q0;
-	size_t q1;
-	size_t q2;
-	size_t q3;
-	size_t q4;
-	size_t q5;
-	size_t q6;
+    PACKET_HEADER;
+    size_t x;
+    size_t y;
+    size_t q0;
+    size_t q1;
+    size_t q2;
+    size_t q3;
+    size_t q4;
+    size_t q5;
+    size_t q6;
 };
 
 struct PACKED packet_mct_s {
-	PACKET_HEADER;
+    PACKET_HEADER;
 };
 
 struct PACKED packet_tna_s {
-	PACKET_HEADER;
-	char name[1024];
+    PACKET_HEADER;
+    char name[1024];
 };
 
 struct PACKED packet_pnw_s {
-	PACKET_HEADER;
-	size_t player_number;
-	size_t x;
-	size_t y;
-	size_t orientation;
-	size_t level;
-	char name_team[1024];
+    PACKET_HEADER;
+    size_t player_number;
+    size_t x;
+    size_t y;
+    size_t orientation;
+    size_t level;
+    char name_team[1024];
 };
 
 struct PACKED packet_ppo_s {
-	PACKET_HEADER;
-	size_t player_number;
-	size_t x;
-	size_t y;
-	size_t orientation;
+    PACKET_HEADER;
+    size_t player_number;
+    size_t x;
+    size_t y;
+    size_t orientation;
 };
 
 struct PACKED packet_plv_s {
-	PACKET_HEADER;
-	size_t player_number;
-	size_t level;
+    PACKET_HEADER;
+    size_t player_number;
+    size_t level;
 };
 
 struct PACKED packet_pin_s {
-	PACKET_HEADER;
-	size_t player_number;
-	size_t x;
-	size_t y;
-	size_t q0;
-	size_t q1;
-	size_t q2;
-	size_t q3;
-	size_t q4;
-	size_t q5;
-	size_t q6;
+    PACKET_HEADER;
+    size_t player_number;
+    size_t x;
+    size_t y;
+    size_t q0;
+    size_t q1;
+    size_t q2;
+    size_t q3;
+    size_t q4;
+    size_t q5;
+    size_t q6;
 };
 
 struct PACKED packet_pex_s {
-	PACKET_HEADER;
-	size_t player_number;
+    PACKET_HEADER;
+    size_t player_number;
 };
 
 struct PACKED packet_pbc_s {
-	PACKET_HEADER;
-	size_t player_number;
-	char message[1024];
+    PACKET_HEADER;
+    size_t player_number;
+    char message[1024];
 };
 
 struct PACKED packet_pic_s {
-	PACKET_HEADER;
-	size_t x;
-	size_t y;
-	size_t incantation_level;
-	size_t players_count;
-	size_t players[100];
+    PACKET_HEADER;
+    size_t x;
+    size_t y;
+    size_t incantation_level;
+    size_t players_count;
+    size_t players[100];
 };
 
 struct PACKED packet_pie_s {
-	PACKET_HEADER;
-	size_t x;
-	size_t y;
-	size_t result;
+    PACKET_HEADER;
+    size_t x;
+    size_t y;
+    size_t result;
 };
 
 struct PACKED packet_pfk_s {
-	PACKET_HEADER;
-	size_t player_number;
+    PACKET_HEADER;
+    size_t player_number;
 };
 
 struct PACKED packet_pdr_s {
-	PACKET_HEADER;
-	size_t player_number;
-	size_t ressource;
+    PACKET_HEADER;
+    size_t player_number;
+    size_t ressource;
 };
 
 struct PACKED packet_pgt_s {
-	PACKET_HEADER;
-	size_t player_number;
-	size_t ressource;
+    PACKET_HEADER;
+    size_t player_number;
+    size_t ressource;
 };
 
 struct PACKED packet_pdi_s {
-	PACKET_HEADER;
-	size_t player_number;
+    PACKET_HEADER;
+    size_t player_number;
 };
 
 struct PACKED packet_enw_s {
-	PACKET_HEADER;
-	size_t egg;
-	size_t player_number;
-	size_t x;
-	size_t y;
+    PACKET_HEADER;
+    size_t egg;
+    size_t player_number;
+    size_t x;
+    size_t y;
 };
 
 struct PACKED packet_eht_s {
-	PACKET_HEADER;
-	size_t egg;
+    PACKET_HEADER;
+    size_t egg;
 };
 
 struct PACKED packet_ebo_s {
-	PACKET_HEADER;
-	size_t egg;
+    PACKET_HEADER;
+    size_t egg;
 };
 
 struct PACKED packet_edi_s {
-	PACKET_HEADER;
-	size_t egg;
+    PACKET_HEADER;
+    size_t egg;
 };
 
 struct PACKED packet_sgt_s {
-	PACKET_HEADER;
-	size_t time;
+    PACKET_HEADER;
+    size_t time;
 };
 
 struct PACKED packet_sst_s {
-	PACKET_HEADER;
-	size_t time;
+    PACKET_HEADER;
+    size_t time;
 };
 
 struct PACKED packet_seg_s {
-	PACKET_HEADER;
-	char team[1024];
+    PACKET_HEADER;
+    char team[1024];
 };
 
 struct PACKED packet_smg_s {
-	PACKET_HEADER;
-	char message[1024];
+    PACKET_HEADER;
+    char message[1024];
 };
 
 struct PACKED packet_suc_s {
-	PACKET_HEADER;
+    PACKET_HEADER;
 };
 
 struct PACKED packet_sbp_s {
-	PACKET_HEADER;
+    PACKET_HEADER;
 };
 
 struct PACKED packet_message_s {
-	PACKET_HEADER;
-	size_t tile;
-	char text[100];
+    PACKET_HEADER;
+    size_t tile;
+    char text[100];
 };
 
 struct PACKED packet_look_s {
-	PACKET_HEADER;
-	char data[2048];
+    PACKET_HEADER;
+    char data[2048];
 };
 
 struct PACKED packet_broadcast_s {
-	PACKET_HEADER;
-	char text[1024];
+    PACKET_HEADER;
+    char text[1024];
 };
 
 struct PACKED packet_connect_number_s {
-	PACKET_HEADER;
-	size_t value;
+    PACKET_HEADER;
+    size_t value;
 };
 
 
 struct PACKED packet_inventory_s {
-	PACKET_HEADER;
-	char result[2048];
+    PACKET_HEADER;
+    char result[2048];
 };
 
 typedef struct gui_handlers_s gui_handlers_t;
@@ -259,58 +252,54 @@ typedef struct ai_handlers_s ai_handlers_t;
 typedef int session_t;
 
 struct gui_handlers_s {
-	void (*on_connect)(session_t id);
-	void (*on_disconnect)(session_t id);
-	void (*on_welcome)(session_t id, packet_welcome_t *);
-	void (*on_map_size_reply)(session_t id, packet_msz_t *);
-	void (*on_tile_content_reply)(session_t id, packet_bct_tile_t *);
-	void (*on_team_name_reply)(session_t id, packet_tna_t *);
-	void (*on_player_position_update)(session_t id, packet_ppo_t *);
-	void (*on_player_level_update)(session_t id, packet_plv_t *);
-	void (*on_player_inventory_update)(session_t id, packet_pin_t *);
-	void (*on_player_connected)(session_t id, packet_pnw_t *);
-	void (*on_player_expulsed)(session_t id, packet_pex_t *);
-	void (*on_broadcast)(session_t id, packet_pbc_t *);
-	void (*on_server_broadcast)(session_t id, packet_smg_t *);
-	void (*on_player_cast_start)(session_t id, packet_pic_t *);
-	void (*on_player_cast_end)(session_t id, packet_pie_t *);
-	void (*on_player_lay_self)(session_t id, packet_pfk_t *);
-	void (*on_player_lay)(session_t id, packet_enw_t *);
-	void (*on_player_drop)(session_t id, packet_pdr_t *);
-	void (*on_player_collect)(session_t id, packet_pgt_t *);
-	void (*on_player_death)(session_t id, packet_pdi_t *);
-	void (*on_egg_hatching)(session_t id, packet_eht_t *);
-	void (*on_egg_hatching_death)(session_t id, packet_edi_t *);
-	void (*on_timeunit_reply)(session_t id, packet_sgt_t *);
-	void (*on_timeunit_modif_reply)(session_t id, packet_sst_t *);
-	void (*on_game_end)(session_t id, packet_seg_t *);
-	void (*on_unknown_command)(session_t id, packet_suc_t *);
-	void (*on_command_param_wrong)(session_t id, packet_sbp_t *);
+    void (*on_connect)(session_t id);
+    void (*on_disconnect)(session_t id);
+    void (*on_welcome)(session_t id, packet_welcome_t *);
+    void (*on_map_size_reply)(session_t id, packet_msz_t *);
+    void (*on_tile_content_reply)(session_t id, packet_bct_tile_t *);
+    void (*on_team_name_reply)(session_t id, packet_tna_t *);
+    void (*on_player_position_update)(session_t id, packet_ppo_t *);
+    void (*on_player_level_update)(session_t id, packet_plv_t *);
+    void (*on_player_inventory_update)(session_t id, packet_pin_t *);
+    void (*on_player_connected)(session_t id, packet_pnw_t *);
+    void (*on_player_expulsed)(session_t id, packet_pex_t *);
+    void (*on_broadcast)(session_t id, packet_pbc_t *);
+    void (*on_server_broadcast)(session_t id, packet_smg_t *);
+    void (*on_player_cast_start)(session_t id, packet_pic_t *);
+    void (*on_player_cast_end)(session_t id, packet_pie_t *);
+    void (*on_player_lay_self)(session_t id, packet_pfk_t *);
+    void (*on_player_lay)(session_t id, packet_enw_t *);
+    void (*on_player_drop)(session_t id, packet_pdr_t *);
+    void (*on_player_collect)(session_t id, packet_pgt_t *);
+    void (*on_player_death)(session_t id, packet_pdi_t *);
+    void (*on_egg_hatching)(session_t id, packet_eht_t *);
+    void (*on_egg_hatching_death)(session_t id, packet_edi_t *);
+    void (*on_timeunit_reply)(session_t id, packet_sgt_t *);
+    void (*on_timeunit_modif_reply)(session_t id, packet_sst_t *);
+    void (*on_game_end)(session_t id, packet_seg_t *);
+    void (*on_unknown_command)(session_t id, packet_suc_t *);
+    void (*on_command_param_wrong)(session_t id, packet_sbp_t *);
 };
 
 struct ai_handlers_s {
-	void (*on_connect)(session_t id);
-	void (*on_disconnect)(session_t id);
-	void (*on_welcome)(session_t id, packet_welcome_t *);
-	void (*on_look_reply)(session_t, packet_look_t *);
-	void (*on_message_reply)(session_t, packet_message_t *);
-	void (*on_connect_nummber_reply)(session_t, packet_connect_number_t *);
-	void (*on_inventory_reply)(session_t, packet_inventory_t *);
-	void (*on_unwrapped)(session_t id, char **packet);
+    void (*on_connect)(session_t id);
+    void (*on_disconnect)(session_t id);
+    void (*on_welcome)(session_t id, packet_welcome_t *);
+    void (*on_look_reply)(session_t, packet_look_t *);
+    void (*on_message_reply)(session_t, packet_message_t *);
+    void (*on_connect_nummber_reply)(session_t, packet_connect_number_t *);
+    void (*on_inventory_reply)(session_t, packet_inventory_t *);
+    void (*on_unwrapped)(session_t id, char **packet);
 };
 
 
 extern "C" {
-	EXPORT bool zappy_init_connector(char *address, uint16_t port,
-				bool thread_sync, gui_handlers_t handlers);
-	EXPORT bool zappy_init_connector_ai(char *address,
-					uint16_t port,
-					bool thread_sync,
-					ai_handlers_t handlers);
-	EXPORT session_t zappy_new_connection();
-	EXPORT void zappy_sync_poll();
-	EXPORT void send_packet(session_t id, void *msg);
-	EXPORT void send_unwrapped(session_t id, char *msg);
+    EXPORT bool zappy_init_connector(char *address, uint16_t port, bool thread_sync, gui_handlers_t handlers);
+    EXPORT bool zappy_init_connector_ai(char *address, uint16_t port, bool thread_sync, ai_handlers_t handlers);
+    EXPORT session_t zappy_new_connection();
+    EXPORT void zappy_sync_poll();
+    EXPORT void send_packet(session_t id, void *msg);
+    EXPORT void send_unwrapped(session_t id, char *msg);
 }
 
 #endif
