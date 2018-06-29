@@ -50,10 +50,6 @@ void add_spawn_team(player_t *player, packet_fork_t *packet)
 
 bool fork_handler(player_t *player, packet_fork_t *packet)
 {
-	if ((player->team)->player == 0) {
-		send_unwrapped(player->client, "ko");
-		return (false);
-	}
 	if (!packet->delayed) {
 		create_egg(player, packet);
 		delay(packet, (handler_t) &fork_handler, player, 42);
@@ -61,6 +57,7 @@ bool fork_handler(player_t *player, packet_fork_t *packet)
 	else {
 		if (!packet->egg->layed) {
 			send_unwrapped(player->client, "ok");
+			send_unwrapped(player->client, "HELLO");
 			packet->egg->layed = true;
 			delay(packet, (handler_t) &fork_handler, player, 300);
 		}
