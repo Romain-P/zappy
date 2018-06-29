@@ -23,9 +23,6 @@ void BasicAI::onSuccess(AIAction action) {
             _player->request(INVENTORY);
             _actionsBeforeCheckFood = 0;
             break;
-        case INVENTORY:
-            enoughResourcesForCast();
-            break;
         case MOVE_FORWARD:
         case MOVE_RIGHT:
         case MOVE_LEFT:
