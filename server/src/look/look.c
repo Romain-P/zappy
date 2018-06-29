@@ -11,6 +11,13 @@ void loop_tile(player_t *player, packet_look_t *packet, size_t pos, char **tab)
 {
 	size_t i = 0;
 
+	if (pos == 0) {
+		packet->x = player->x;
+		packet->y = player->y;
+		tab[0] = get_content_tile(packet);
+		packet->x = 0;
+		packet->y = 0;
+	}
 	get_start_coord(player, packet, pos + 1);
 	while (i < packet->tile) {
 		tab[packet->number] = get_content_tile(packet);

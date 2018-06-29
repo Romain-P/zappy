@@ -34,11 +34,11 @@ bool look_handler(player_t *player, packet_look_t *packet)
 	return (false);
 }
 
-void set_type(char *str, char *type, size_t nb)
+void set_type(char *str, char *type, size_t nb, size_t *tmp)
 {
 	size_t i = 0;
 
-	if (str[0] != '\0')
+	if (*tmp == 1)
 		strcat(str, " ");
 	while (i < nb) {
 		strcat(str, type);
@@ -46,6 +46,7 @@ void set_type(char *str, char *type, size_t nb)
 			strcat(str, " ");
 		i += 1;
 	}
+	*tmp =1;
 }
 
 void increment_ressource(packet_look_t *packet, resource_type_t type)

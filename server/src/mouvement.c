@@ -14,8 +14,6 @@ int get_valid_direction(player_t *player, size_t direction)
 	int y = (int) player->y;
 
 	increment_direction(&x, &y, direction);
-	if (check_player_in_tile(x, y) == 1)
-		return (1);
 	player->x = (size_t) x;
 	player->y = (size_t) y;
 	return (0);

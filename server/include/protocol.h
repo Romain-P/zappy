@@ -358,6 +358,7 @@
 	bool look_handler(player_t *, packet_look_t *);
 	packet_look_t *look_deserialize(char **);
 	void look_serialize(packet_look_t *, list_t *);
+	void set_player_count_look(size_t, char *);
 
 	// IVENTORY COMMAND
 	bool inventory_handler(player_t *, packet_inventory_t *);

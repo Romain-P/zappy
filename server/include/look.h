@@ -22,7 +22,7 @@
 	void get_start_coord(player_t *, packet_look_t *, size_t);
 	void loop_tile(player_t *, packet_look_t *, size_t, char **);
 	void increment_ressource(packet_look_t *, resource_type_t);
-	void set_type(char *, char *, size_t);
+	void set_type(char *, char *, size_t, size_t *);
 	size_t get_count_tile(size_t);
 	char *prepare_packet_look(char **);
 	char **get_result_look(player_t *, packet_look_t *);

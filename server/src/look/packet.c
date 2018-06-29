@@ -7,6 +7,20 @@
 
 #include "look.h"
 
+void set_player_count_look(size_t count, char *str)
+{
+	size_t i = 0;
+
+	while (i < count) {
+		if (i + 1 == count)
+			strcat(str, "player");
+		else {
+			strcat(str, "player ");
+		}
+		i++;
+	}
+}
+
 int get_size_look(char **tab)
 {
 	size_t i = 0;

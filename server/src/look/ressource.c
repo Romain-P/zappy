@@ -14,15 +14,14 @@ char *get_content_tile(packet_look_t *packet)
 	char *str;
 
 	if (nb > 0)
-		len = strlen("player");
+		len = strlen(" player ");
 	count_ressource_on_tile(packet);
 	count_size_ressource(packet, &len);
-	str = malloc(sizeof(char) * (len + 1));
+	str = malloc(sizeof(char) * (len + 64));
 	if (str == NULL)
 		exit(84);
 	str[0] = '\0';
-	if (nb > 0)
-		strcat(str, "player");
+	set_player_count_look(nb, str);
 	get_type_in_tile(packet, str, nb);
 	return (str);
 }
@@ -63,22 +62,26 @@ void count_ressource_on_tile(packet_look_t *packet)
 
 void get_type_in_tile(packet_look_t *packet, char *str, size_t nb)
 {
-	if (nb != 0)
+	size_t tmp = 0;
+
+	if (nb != 0 && (packet->q0 >= 1 || packet->q1 >= 1 ||
+	packet->q2 >= 1 || packet->q3 >= 1 || packet->q4 >= 1 ||
+	packet->q5 >= 1 || packet->q6 >= 1))
 		strcat(str, " ");
 	if (packet->q0 > 0)
-		set_type(str, "food", packet->q0);
+		set_type(str, "food", packet->q0, &tmp);
 	if (packet->q1 > 0)
-		set_type(str, "linemate", packet->q1);
+		set_type(str, "linemate", packet->q1, &tmp);
 	if (packet->q2 > 0)
-		set_type(str, "deraumere", packet->q2);
+		set_type(str, "deraumere", packet->q2, &tmp);
 	if (packet->q3 > 0)
-		set_type(str, "sibur", packet->q3);
+		set_type(str, "sibur", packet->q3, &tmp);
 	if (packet->q4 > 0)
-		set_type(str, "mendiane", packet->q4);
+		set_type(str, "mendiane", packet->q4, &tmp);
 	if (packet->q5 > 0)
-		set_type(str, "phiras", packet->q5);
+		set_type(str, "phiras", packet->q5, &tmp);
 	if (packet->q6 > 0)
-		set_type(str, "linemate", packet->q6);
+		set_type(str, "linemate", packet->q6, &tmp);
 }
 
 void count_size_ressource(packet_look_t *packet, size_t *len)
