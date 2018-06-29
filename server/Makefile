@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-CFLAGS = -Iinclude -Wall -Werror -g3
+CFLAGS = -Iinclude -Wall -Werror -g3 -lm
 
 SRC =	src/main.c			\
 	src/mouvement.c			\
@@ -36,6 +36,7 @@ SRC =	src/main.c			\
 	src/protocol/bct_tile.c		\
 	src/protocol/broadcast.c	\
 	src/protocol/connect_nbr.c	\
+	src/protocol/broadcast_utils.c	\
 	src/protocol/ebo.c		\
 	src/protocol/edi.c		\
 	src/protocol/eht.c		\

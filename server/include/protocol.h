@@ -9,6 +9,7 @@
 #define ZAPPY_PROTOCOL_H
 
 	#include "zappy.h"
+	#include <math.h>
 
 	typedef struct packet_example_s packet_example_t;
 	typedef struct packet_msz_s packet_msz_t;
@@ -346,6 +347,12 @@
 	bool broadcast_handler(player_t *, packet_broadcast_t *);
 	packet_broadcast_t *broadcast_deserialize(char **);
 	void broadcast_serialize(packet_broadcast_t *, list_t *);
+	int get_good_orientation(int, size_t, int);
+	int get_broadcast_orientation(int, int, size_t);
+	int get_valid_broadcast_direction(int);
+	int get_direction_by_angle(double, int);
+	int get_sound_player(player_t *, player_t *);
+	player_t  *correct_orientation_player(player_t *);
 
 	// LOOK COMMAND
 	bool look_handler(player_t *, packet_look_t *);
@@ -411,6 +418,10 @@
 	packet_pbc_t *pbc_deserialize(char **);
 	bool pbc_handler(player_t *player, packet_pbc_t *);
 	void pbc_serialize(packet_pbc_t *, list_t *);
+	void loop_segment2(int *, int *, int, int);
+	void change_value(int *, int *, int, int);
+	int set_segment(int, int, int, int);
+	void loop_segment(int *, int *, int, int);
 
 	// PIC COMMAND
 	packet_pic_t *pic_deserialize(char **);

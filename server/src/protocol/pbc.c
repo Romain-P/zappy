@@ -10,29 +10,59 @@
 #include "util.h"
 #include "zappy.h"
 
-packet_pbc_t *pbc_deserialize(char **args)
+void loop_segment(int *x, int *y, int map_x, int map_y)
 {
-	packet_pbc_t *packet = malloc(sizeof(*packet));
-	if (packet == NULL)
-		return (NULL);
-	return (packet);
+	int save_x = *x;
+	int save_y = *y;
+	int value = set_segment(save_x + map_x, save_y + map_y, *x, *y);
+
+	if (value == 1)
+		change_value(x, y, save_x + map_x, save_y + map_y);
+	value = set_segment(save_x + map_x, save_y - map_y, *x , *y);
+	if (value == 1)
+		change_value(x, y, save_x + map_x, save_y - map_y);
+	value = set_segment(save_x + map_x, save_y, *x, *y);
+	if (value == 1)
+		change_value(x, y, save_x + map_x, save_y);
+	loop_segment2(x, y, save_x, save_y);
 }
 
-bool pbc_handler(player_t *player, packet_pbc_t *packet)
+int set_segment(int x, int y, int dx, int dy)
 {
-	player_t *list;
-	iter_t *it;
+	double height;
+	double width;
 
-	packet->player_number = (player->client)->id;
-	for (it = iter_begin(&server.players); it; iter_next(it)) {
-		list = it->data;
-		send_packet(list->client, &packet);
-	}
-	return (true);
+	height = sqrt((y * y) + (x * x));
+	width = sqrt((dy * y) + (dx * dx));
+	if (width <= height)
+		return (0);
+	return (1);
 }
 
-void pbc_serialize(packet_pbc_t *packet, list_t *buffer)
+void change_value(int *x, int *y, int dx, int dy)
 {
-	list_add(buffer, to_string(packet->player_number));
-	list_add(buffer, strdup(packet->message));
+	*x = dx;
+	*y = dy;
+}
+
+void loop_segment2(int *x, int *y, int save_x, int save_y)
+{
+	int map_x = (server.map).width;
+	int map_y = (server.map).height;
+	int value = set_segment(save_x - map_x, save_y + map_y, *x, *y);
+
+	if (value == 1)
+		change_value(x, y, save_x - map_x, save_y + map_y);
+	value = set_segment(save_x - map_x, save_y - map_y, *x, *y);
+	if (value == 1)
+		change_value(x, y, save_x - map_x, save_y - map_y);
+	value = set_segment(save_x - map_x, save_y, *x, *y);
+	if (value == 1)
+		change_value(x, y, save_x - map_x, save_y);
+	value = set_segment(save_x, save_y + map_y, *x, *y);
+	if (value == 1)
+		change_value(x, y, save_x, save_y + map_y);
+	value = set_segment(save_x, save_y - map_y, *x, *y);
+	if (value == 1)
+		change_value(x, y, save_x, save_y - map_y);	
 }

@@ -115,11 +115,6 @@ static message_t const messages[] = {
 		NULL,
 		NULL
 	},
-	{ "pbc",
-		(serialize_t) &pbc_serialize,
-		(deserialize_t) &pbc_deserialize,
-		(handler_t) &pbc_handler
-	},
 	{ "pic",
 		(serialize_t) &pic_serialize,
 		(deserialize_t) &pic_deserialize,
