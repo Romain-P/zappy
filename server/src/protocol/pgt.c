@@ -24,6 +24,7 @@ void send_pgt(player_t *player, size_t id)
 		list = it->data;
 		send_unwrapped(list->client, packet);
 	}
+	free(packet);
 }
 
 void pgt_serialize(packet_pgt_t *packet, list_t *buffer)

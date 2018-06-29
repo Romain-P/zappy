@@ -23,6 +23,7 @@ void send_pfk(player_t *player)
 		list = it->data;
 		send_unwrapped(list->client, packet);
 	}
+	free(packet);
 }
 
 packet_pfk_t *pfk_deserialize(char **args)

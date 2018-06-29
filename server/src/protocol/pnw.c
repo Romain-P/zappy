@@ -27,6 +27,7 @@ void send_pnw(player_t *player)
 		list = it->data;
 		send_unwrapped(list->client, packet);
 	}
+	free(packet);
 }
 
 void pnw_serialize(packet_pnw_t *packet, list_t *buffer)

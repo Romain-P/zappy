@@ -34,6 +34,7 @@ void loop_broadcast_player(player_t *player, char *text)
 	iter_t *it;
 	char packet[1024];
 
+	send_pbc(player, text);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
 		if (list->client->id != player->client->id) {
@@ -47,12 +48,25 @@ void loop_broadcast_player(player_t *player, char *text)
 packet_broadcast_t *broadcast_deserialize(char **args)
 {
 	packet_broadcast_t *packet = malloc(sizeof(*packet));
+	char *text;
+	size_t len = 0;
+	size_t i = 0;
 
-	if (str_array_length(args) != 1)
+	if (str_array_length(args) != 1) {
 		return (NULL);
+	}
 	if (packet == NULL)
 		return (NULL);
-	strcpy(packet->text, args[0]);
+	while (args[i] != NULL)
+		len += strlen(args[i++]);
+	text = malloc(sizeof(char) * (len + 10));
+	if (text == NULL)
+		exit(84);
+	text[0] = '\0';
+	i = 0;
+	while (args[i] != NULL)
+		strcat(text, args[i++]);
+	strcpy(packet->text, text);
 	return (packet);
 }
 

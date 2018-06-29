@@ -23,6 +23,7 @@ void send_ebo(player_t *player, egg_t *egg)
 		list = it->data;
 		send_unwrapped(list->client, packet);
 	}
+	free(packet);
 }
 
 void ebo_serialize(packet_ebo_t *packet, list_t *buffer)

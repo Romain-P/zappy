@@ -24,6 +24,7 @@ void send_enw(player_t *player, size_t nb)
 		list = it->data;
 		send_unwrapped(list->client, packet);
 	}
+	free(packet);
 }
 
 void enw_serialize(packet_enw_t *packet, list_t *buffer)

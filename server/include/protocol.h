@@ -421,6 +421,7 @@
 	void loop_segment2(int *, int *, int, int);
 	void change_value(int *, int *, int, int);
 	int set_segment(int, int, int, int);
+	void send_pbc(player_t *, char *);
 	void loop_segment(int *, int *, int, int);
 
 	// PIC COMMAND

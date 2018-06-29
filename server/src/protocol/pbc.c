@@ -10,6 +10,23 @@
 #include "util.h"
 #include "zappy.h"
 
+void send_pbc(player_t *player, char *text)
+{
+	char *packet = malloc(sizeof(char) * strlen("pbc")
+	+ 10);
+	player_t *list;
+	iter_t *it;
+
+	if (packet == NULL)
+		exit(84);
+	sprintf(packet, "pbc %d %s", player->client->id, text);
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		list = it->data;
+		send_unwrapped(list->client, packet);
+	}
+	free(packet);
+}
+
 void loop_segment(int *x, int *y, int map_x, int map_y)
 {
 	int save_x = *x;

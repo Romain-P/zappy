@@ -24,6 +24,7 @@ void send_pdr(player_t *player, size_t id)
 		list = it->data;
 		send_unwrapped(list->client, packet);
 	}
+	free(packet);
 }
 
 void pdr_serialize(packet_pdr_t *packet, list_t *buffer)

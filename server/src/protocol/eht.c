@@ -23,6 +23,7 @@ void send_eht(player_t *player, egg_t *egg)
 		list = it->data;
 		send_unwrapped(list->client, packet);
 	}
+	free(packet);
 }
 
 void eht_serialize(packet_eht_t *packet, list_t *buffer)

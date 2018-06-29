@@ -24,6 +24,7 @@ void send_pie(player_t *player)
 		list = it->data;
 		send_unwrapped(list->client, packet);
 	}
+	free(packet);
 }
 
 packet_pie_t *pie_deserialize(char **args)
