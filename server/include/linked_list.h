@@ -20,7 +20,7 @@
 	typedef bool (*predicate_t) (void *data);
 
 	#define iter_begin(list_ptr) ((list_ptr)->begin)
-	#define iter_next(it_ptr) ((it) = (it)->next)
+	#define iter_next(it_ptr) ((it_ptr) = (it_ptr)->next)
 	#define iter_value(it_ptr) ((it)->data)
 	#define list_init (list_t) {NULL, NULL, 0}
 

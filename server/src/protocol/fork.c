@@ -38,6 +38,7 @@ void create_egg(player_t *player, packet_fork_t *packet)
 void add_spawn_team(player_t *player, packet_fork_t *packet)
 {
 	spawn_t *spawn = malloc(sizeof(spawn_t));
+	player_t *each;
 
 	send_eht(player, packet->egg);
 	if (spawn == NULL)
@@ -46,7 +47,14 @@ void add_spawn_team(player_t *player, packet_fork_t *packet)
 	spawn->y = player->y;
 	(player->team)->spawn.size += 1;
 	list_add(&(player->team)->spawn, spawn);
-	send_unwrapped(player->client, "HELLO");
+	for (iter_t *it = iter_begin(&server.players); it; iter_next(it)) {
+		each = it->data;
+		if (!each->initialized) {
+			send_unwrapped(each->client, "WELCOME");
+			each->initialized = true;
+			break;
+		}
+	}
 }
 
 bool fork_handler(player_t *player, packet_fork_t *packet)
@@ -58,12 +66,17 @@ bool fork_handler(player_t *player, packet_fork_t *packet)
 	else {
 		if (!packet->egg->layed) {
 			send_unwrapped(player->client, "ok");
-			
 			packet->egg->layed = true;
-			delay(packet, (handler_t) &fork_handler, player, 300);
+            packet_fork_t *dup = malloc(sizeof(packet_fork_t));
+            if (!dup)
+                exit(84);
+            dup->egg = packet->egg;
+            dup->delayed = true;
+			delay(dup, (handler_t) &fork_handler, player, 300);
 		}
-		else
-			add_spawn_team(player, packet);
+		else {
+            add_spawn_team(player, packet);
+        }
 	}
 	return (false);
 }

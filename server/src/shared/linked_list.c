@@ -95,13 +95,14 @@ void list_insert(list_t *list, ptr_t data, predicate_t predicate)
 
 	check_nullity(list);
 	check_data_nullity(data);
-	for (it = iter_begin(list); it; before = it, iter_next(it)) {
+	for (it = iter_begin(list); it; iter_next(it)) {
 		if (predicate(it->data)) {
 			current = it;
 			break;
 		}
+		before = it;
 	}
-	if (!list->size || current == NULL || current == list->end) {
+	if (!list->size || current == NULL) {
 		list_add(list, data);
 		return;
 	}

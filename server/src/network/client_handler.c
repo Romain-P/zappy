@@ -22,7 +22,11 @@ static void on_connect(network_client_t *client)
 	player->state = AWAIT_TEAM_NAME;
 	player->waiting_commands = 0;
 	list_add(&server.players, player);
-	send_unwrapped(client, "WELCOME");
+	if (server.players.size == 1) {
+        player->initialized = true;
+		send_unwrapped(client, "WELCOME");
+	} else
+		player->initialized = false;
 }
 
 static void on_disconnect(network_client_t *client)

@@ -19,6 +19,7 @@ int to_seconds(int tics)
 
 static bool inserter(waiting_t *waiting)
 {
+	printf("valid: %d\n", exec_time < waiting->start_time + to_seconds(waiting->tics));
 	return
 	(exec_time < waiting->start_time + to_seconds(waiting->tics));
 }
@@ -59,7 +60,7 @@ void check_delayed_tasks(void)
 			waiting->packet);
 			list_remove(&server.pending, waiting);
 			waiting->player->waiting_commands--;
-			//free(waiting->packet);
+			free(waiting->packet);
 			free(waiting);
 		} else
 			break;
