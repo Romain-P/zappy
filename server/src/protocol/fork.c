@@ -46,6 +46,7 @@ void add_spawn_team(player_t *player, packet_fork_t *packet)
 	spawn->y = player->y;
 	(player->team)->spawn.size += 1;
 	list_add(&(player->team)->spawn, spawn);
+	send_unwrapped(player->client, "HELLO");
 }
 
 bool fork_handler(player_t *player, packet_fork_t *packet)
@@ -57,7 +58,7 @@ bool fork_handler(player_t *player, packet_fork_t *packet)
 	else {
 		if (!packet->egg->layed) {
 			send_unwrapped(player->client, "ok");
-			send_unwrapped(player->client, "HELLO");
+			
 			packet->egg->layed = true;
 			delay(packet, (handler_t) &fork_handler, player, 300);
 		}
