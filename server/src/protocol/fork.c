@@ -5,6 +5,7 @@
 ** FORK COMMAND
 */
 
+#include <team.h>
 #include "protocol.h"
 #include "util.h"
 #include "zappy.h"
@@ -47,11 +48,17 @@ void add_spawn_team(player_t *player, packet_fork_t *packet)
 	spawn->y = player->y;
 	(player->team)->spawn.size += 1;
 	list_add(&(player->team)->spawn, spawn);
-	for (iter_t *it = iter_begin(&server.players); it; iter_next(it)) {
+	for (iter_t *it = iter_begin(&server.pending_players); it; iter_next(it)) {
 		each = it->data;
-		if (!each->initialized) {
-			send_unwrapped(each->client, "WELCOME");
-			each->initialized = true;
+		if (player->team == each->team && !each->initialized) {
+            send_unwrapped(each->client,
+                           get_team_char(each, 0));
+            send_unwrapped(each->client,
+                           get_team_char(each, 1));
+            list_remove(&server.pending_players, each);
+            list_add(&server.players, each);
+            each->initialized = true;
+            each->state = VALID_PLAYER;
 			break;
 		}
 	}

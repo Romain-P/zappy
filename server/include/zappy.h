@@ -124,6 +124,7 @@
 
 	struct zappy_instance_s {
 		list_t players;
+		list_t pending_players;
 		int port;
 		size_t width;
 		size_t height;

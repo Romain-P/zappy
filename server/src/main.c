@@ -14,6 +14,7 @@
 
 zappy_instance_t server = {
 	.players = list_init,
+    .pending = list_init,
 	.teams = list_init,
 	.pending = list_init
 };

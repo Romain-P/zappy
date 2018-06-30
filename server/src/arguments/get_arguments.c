@@ -5,6 +5,7 @@
 ** Get argument of server binary
 */
 
+#include <stderr.h>
 #include "zappy.h"
 #include "util.h"
 #include "arguments.h"

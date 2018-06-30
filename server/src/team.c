@@ -5,6 +5,7 @@
 ** Team Management
 */
 
+#include <stderr.h>
 #include "zappy.h"
 #include "team.h"
 #include "protocol.h"

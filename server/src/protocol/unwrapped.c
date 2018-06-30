@@ -20,11 +20,18 @@ void on_unwrapped(player_t *player, char **unwrapped)
 			send_unwrapped(player->client, "ko");
 		}
 		else {
-			send_unwrapped(player->client,
-				get_team_char(player, 0));
-			send_unwrapped(player->client,
-				get_team_char(player, 1));
-			player->state = VALID_PLAYER;
+			if (player->team->player == server.nb_clients - 1) {
+				send_unwrapped(player->client,
+							   get_team_char(player, 0));
+				send_unwrapped(player->client,
+							   get_team_char(player, 1));
+				player->initialized = true;
+				player->state = VALID_PLAYER;
+			} else {
+			    list_remove(&server.players, player);
+			    list_add(&server.pending_players, player);
+                player->initialized = false;
+            }
 		}
 	}
 	else if (player->state == VALID_PLAYER) {
