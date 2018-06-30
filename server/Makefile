@@ -38,6 +38,7 @@ SRC =	src/main.c			\
 	src/protocol/connect_nbr.c	\
 	src/protocol/broadcast_utils.c	\
 	src/protocol/ebo.c		\
+	src/protocol/welcome.c		\
 	src/protocol/edi.c		\
 	src/protocol/eht.c		\
 	src/protocol/eject.c		\

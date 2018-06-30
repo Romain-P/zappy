@@ -50,6 +50,7 @@
 	typedef struct packet_take_s packet_take_t;
 	typedef struct packet_set_s packet_set_t;
 	typedef struct packet_incantation_s packet_incantation_t;
+	typedef struct packet_welcome_s packet_welcome_t;
 	
 	struct __attribute__((__packed__)) packet_example_s {
 		PACKET_HEADER;
@@ -98,6 +99,10 @@
 		size_t x;
 		size_t y;
 		size_t orientation;
+	};
+
+	struct __attribute__((__packed__)) packet_welcome_s {
+		PACKET_HEADER;
 	};
 
 	struct __attribute__((__packed__)) packet_plv_s {
@@ -517,6 +522,11 @@
 	packet_sbp_t *sbp_deserialize(char **);
 	bool sbp_handler(player_t *, packet_sbp_t *);
 	void sbp_serialize(packet_sbp_t *, list_t *);
+
+	// WELCOME COMMAND
+	packet_welcome_t *welcome_deserialize(char **);
+	bool welcome_handler(player_t *, packet_welcome_t *);
+	void welcome_serialize(packet_welcome_t *, list_t *);
 
 	// UNWRAPPED PACKETS
 	void on_unwrapped(player_t *, char **unwrapped);

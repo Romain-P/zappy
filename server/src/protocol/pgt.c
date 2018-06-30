@@ -16,9 +16,11 @@ void send_pgt(player_t *player, size_t id)
 	iter_t *it;
 	player_t *list;
 
+	if (player->is_gui == 0)
+		return;
 	if (packet == NULL)
 		exit(84);
-	sprintf(packet, "pgt %d %zo", player->client->id,
+	sprintf(packet, "pgt %d %zu", player->client->id,
 	id);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;

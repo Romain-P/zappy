@@ -13,8 +13,8 @@ bool msz_handler(player_t *player, packet_msz_t *packet)
 {
 	if (player->is_gui == 0)
 		return (true);
-	packet->x = server.width;
-	packet->y = server.height;
+	packet->x = (server.map).width;
+	packet->y = (server.map).height;
 	send_packet(player->client, packet, 0);
 	return (true);
 }

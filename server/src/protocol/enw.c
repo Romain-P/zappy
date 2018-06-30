@@ -16,9 +16,11 @@ void send_enw(player_t *player, size_t nb)
 	iter_t *it;
 	player_t *list;
 
+	if (player->is_gui == 0)
+		return;
 	if (packet == NULL)
 		exit(84);
-	sprintf(packet, "enw %zo %d %zo %zo", nb,
+	sprintf(packet, "enw %zu %d %zu %zu", nb,
 	player->client->id, player->x, player->y);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;

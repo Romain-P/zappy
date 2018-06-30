@@ -17,9 +17,11 @@ void send_pnw(player_t *player)
 	player_t *list;
 	iter_t *it;
 
+	if (player->is_gui == 0)
+		return;
 	if (packet == NULL)
 		exit(84);
-	sprintf(packet, "pnw %d %zo %zo %zo %zo %s",
+	sprintf(packet, "pnw %d %zu %zu %zu %zu %s",
 	(player->client)->id, player->x, player->y,
 	player->orientation, player->level,
 	(player->team)->name);

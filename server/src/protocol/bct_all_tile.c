@@ -23,13 +23,15 @@ bool bct_all_handler(player_t *player, packet_bct_tile_t *packet)
 	resource_t *ressource;
 	iter_t *it;
 
+	if (player->is_gui == 0)
+		return (true);
 	for (it = iter_begin(&(server.map).ressources); it; iter_next(it)) {
 		ressource = it->data;
 		init_bct_tile_packet(packet);
 		get_ressource_tile(ressource->type, packet);
 		packet->x = ressource->x;
 		packet->y = ressource->y;
-		send_packet(player->client, &packet);
+		send_packet(player->client, &packet, 0);
 	}
 	return (true);
 }

@@ -17,9 +17,11 @@ void send_pic(player_t *player, size_t count, int *tab)
 	size_t i = 0;
 	player_t *list;
 
+	if (player->is_gui == 0)
+		return;
 	if (packet == NULL)
 		exit(84);
-	sprintf(packet, "pic %zo %zo %zo",
+	sprintf(packet, "pic %zu %zu %zu",
 	player->x, player->y, player->level + 1);
 	while (i < count)
 		sprintf(packet + strlen(packet),
@@ -49,7 +51,7 @@ bool pic_handler(player_t *player, packet_pic_t *packet)
 	packet->y = 0;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_packet(list->client, &packet);
+		send_packet(list->client, &packet, 0);
 	}
 	return (true);
 }

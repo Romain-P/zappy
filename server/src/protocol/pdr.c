@@ -16,9 +16,11 @@ void send_pdr(player_t *player, size_t id)
 	iter_t *it;
 	player_t *list;
 
+	if (player->is_gui == 0)
+		return;
 	if (packet == NULL)
 		exit(84);
-	sprintf(packet, "pdr %d %zo", player->client->id,
+	sprintf(packet, "pdr %d %zu", player->client->id,
 	id);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;

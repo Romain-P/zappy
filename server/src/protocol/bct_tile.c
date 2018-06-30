@@ -38,7 +38,7 @@ bool bct_tile_handler(player_t *player, packet_bct_tile_t *packet)
 			get_ressource_tile(ressource->type, packet);
 		}
 	}
-	send_packet(player->client, &packet);
+	send_packet(player->client, &packet, 0);
 	return (true);
 }
 

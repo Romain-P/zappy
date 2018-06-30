@@ -37,7 +37,7 @@ static char *send_current_level(player_t *player)
 
 	if (level == NULL)
 		exit(84);
-	sprintf(level, "Current level: %zo", player->level);
+	sprintf(level, "Current level: %zu", player->level);
 	return (level);
 }
 

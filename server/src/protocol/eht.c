@@ -16,9 +16,11 @@ void send_eht(player_t *player, egg_t *egg)
 	iter_t *it;
 	player_t *list;
 
+	if (player->is_gui == 0)
+		return;
 	if (packet == NULL)
 		exit(84);
-	sprintf(packet, "eht %zo", egg->id);
+	sprintf(packet, "eht %zu", egg->id);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
 		send_unwrapped(list->client, packet);

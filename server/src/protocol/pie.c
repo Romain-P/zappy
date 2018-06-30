@@ -16,9 +16,11 @@ void send_pie(player_t *player)
 	iter_t *it;
 	player_t *list;
 
+	if (player->is_gui == 0)
+		return;
 	if (packet == NULL)
 		exit(84);
-	sprintf(packet, "pie %zo %zo %zo",
+	sprintf(packet, "pie %zu %zu %zu",
 	player->x, player->y, player->level);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
@@ -46,7 +48,7 @@ bool pie_handler(player_t *player, packet_pie_t *packet)
 	packet->result = 0;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_packet(list->client, &packet);
+		send_packet(list->client, &packet, 0);
 	}
 	return (true);
 }

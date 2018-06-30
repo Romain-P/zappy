@@ -16,6 +16,8 @@ void send_pfk(player_t *player)
 	iter_t *it;
 	player_t *list;
 
+	if (player->is_gui == 0)
+		return;
 	if (packet == NULL)
 		exit(84);
 	sprintf(packet, "pfk %d", player->client->id);
@@ -42,7 +44,7 @@ bool pfk_handler(player_t *player, packet_pfk_t *packet) {
 	packet->player_number = 0;
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_packet(list->client, &packet);
+		send_packet(list->client, &packet, 0);
 	}
 	return (true);
 }

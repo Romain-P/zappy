@@ -45,8 +45,10 @@ packet_ppo_t *ppo_deserialize(char **args)
 
 bool ppo_handler(player_t *player, packet_ppo_t *packet)
 {
+	if (player->is_gui == 0)
+		return (false);
 	get_information_player(packet->player_number, packet);
-	send_packet(player->client, &packet);
+	send_packet(player->client, &packet, 0);
 	return (true);
 }
 

@@ -43,8 +43,10 @@ packet_plv_t *plv_deserialize(char **args)
 
 bool plv_handler(player_t *player, packet_plv_t *packet)
 {
+	if (player->is_gui == 0)
+		return (true);
 	player_get_level(packet->player_number, packet);
-	send_packet(player->client, &packet);
+	send_packet(player->client, &packet, 0);
 	return (true);
 }
 

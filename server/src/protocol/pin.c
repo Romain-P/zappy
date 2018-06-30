@@ -56,8 +56,10 @@ packet_pin_t *pin_deserialize(char **args)
 
 bool pin_handler(player_t *player, packet_pin_t *packet)
 {
+	if (player->is_gui == 0)
+		return (true);
 	get_inventory_player(packet->player_number, packet);
-	send_packet(player->client, &packet);
+	send_packet(player->client, &packet, 0);
 	return (true);
 }
 

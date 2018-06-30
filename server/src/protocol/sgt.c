@@ -20,8 +20,10 @@ packet_sgt_t *sgt_deserialize(char **args)
 
 bool sgt_handler(player_t *player, packet_sgt_t *packet)
 {
+	if (player->is_gui == 0)
+		return (true);
 	packet->time = 0;
-	send_packet(player->client, &packet);
+	send_packet(player->client, &packet, 0);
 	return (true);
 }
 
