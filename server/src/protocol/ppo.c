@@ -9,6 +9,27 @@
 #include "util.h"
 #include "zappy.h"
 
+void send_ppo(player_t *player)
+{
+	char *packet = malloc(sizeof(char) * (strlen("ppo") +
+	20));
+	iter_t *it;
+	player_t *list;
+
+	if (packet == NULL)
+		exit(84);
+	if (player->is_gui == 0)
+		return;
+	sprintf(packet, "ppo %d %zu %zu %zu",
+	player->client->id, player->x, player->y, player->orientation);
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		list = it->data;
+		if (list->is_gui == 1)
+			send_unwrapped(list->client, packet);
+	}
+	free(packet);
+}
+
 static void get_information_player(int nb, packet_ppo_t *packet)
 {
 	player_t *player;

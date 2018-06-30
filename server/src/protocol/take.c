@@ -67,8 +67,10 @@ bool take_handler(player_t *player, packet_take_t *packet)
 		(handler_t) &take_handler, player, 7);
 	} else {
 		if (check_ressource_validity(player,
-		get_id_ressource(packet->node)))
+		get_id_ressource(packet->node))) {
+			show_inventory(player);
 			send_unwrapped(player->client, "ok");
+		}
 		else
 			send_unwrapped(player->client, "ko");
 	}

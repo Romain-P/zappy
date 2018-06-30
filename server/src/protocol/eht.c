@@ -23,7 +23,8 @@ void send_eht(player_t *player, egg_t *egg)
 	sprintf(packet, "eht %zu", egg->id);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_unwrapped(list->client, packet);
+		if (list->is_gui == 1)
+			send_unwrapped(list->client, packet);
 	}
 	free(packet);
 }

@@ -404,6 +404,7 @@
 	packet_ppo_t *ppo_deserialize(char **);
 	bool ppo_handler(player_t *, packet_ppo_t *);
 	void ppo_serialize(packet_ppo_t *, list_t *);
+	void send_ppo(player_t *);
 
 	// PLV COMMAND
 	packet_plv_t *plv_deserialize(char **);
@@ -414,6 +415,7 @@
 	packet_pin_t *pin_deserialize(char **);
 	bool pin_handler(player_t *, packet_pin_t *);
 	void pin_serialize(packet_pin_t *, list_t *);
+	void show_inventory(player_t *);
 
 	// PEX COMMAND
 	packet_pex_t *pex_deserialize(char **);

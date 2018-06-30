@@ -29,6 +29,7 @@ bool right_handler(player_t *player, packet_right_t *packet)
 			player->orientation = 4;
 		if (player->orientation == 5)
 			player->orientation = 1;
+		send_ppo(player);
 		send_unwrapped(player->client, "ok");
 	}
 	return (false);

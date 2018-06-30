@@ -24,7 +24,8 @@ void send_enw(player_t *player, size_t nb)
 	player->client->id, player->x, player->y);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_unwrapped(list->client, packet);
+		if (list->is_gui == 1)
+			send_unwrapped(list->client, packet);
 	}
 	free(packet);
 }

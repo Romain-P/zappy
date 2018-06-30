@@ -38,7 +38,7 @@ void init_player_join(player_t *player, team_t *team)
 	player->orientation = (rand() % 4) + 1;
 	player->level = 1;
 	(player->inventory).q0 = 0;
-	(player->inventory).q1 = 1;
+	(player->inventory).q1 = 0;
 	(player->inventory).q2 = 0;
 	(player->inventory).q3 = 0;
 	(player->inventory).q4 = 0;

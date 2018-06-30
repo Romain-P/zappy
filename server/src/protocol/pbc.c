@@ -24,7 +24,8 @@ void send_pbc(player_t *player, char *text)
 	sprintf(packet, "pbc %d %s", player->client->id, text);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_unwrapped(list->client, packet);
+		if (list->is_gui == 1)
+			send_unwrapped(list->client, packet);
 	}
 	free(packet);
 }

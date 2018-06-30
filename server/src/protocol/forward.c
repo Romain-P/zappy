@@ -28,6 +28,7 @@ bool forward_handler(player_t *player, packet_forward_t *packet)
 		(handler_t) &forward_handler, player, 7);
 	} else {
 		tile = get_valid_direction(player, player->orientation);
+		send_ppo(player);
 		if (tile == 0)
 			send_unwrapped(player->client, "ok");
 		else

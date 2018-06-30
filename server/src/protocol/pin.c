@@ -36,6 +36,18 @@ static void get_inventory_player(int nb, packet_pin_t *packet)
 	}
 }
 
+void show_inventory(player_t *player)
+{
+	packet_pin_t *packet = malloc(sizeof(*packet));
+
+	if (packet == NULL)
+		exit(84);
+	packet->player_number = player->client->id;
+	packet->cmd = strdup("pin");
+	pin_handler(player, packet);
+	free(packet);
+}
+
 packet_pin_t *pin_deserialize(char **args)
 {
 	packet_pin_t *packet;
@@ -59,7 +71,7 @@ bool pin_handler(player_t *player, packet_pin_t *packet)
 	if (player->is_gui == 0)
 		return (true);
 	get_inventory_player(packet->player_number, packet);
-	send_packet(player->client, &packet, 0);
+	send_packet(player->client, packet, 0);
 	return (true);
 }
 

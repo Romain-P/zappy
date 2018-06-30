@@ -23,7 +23,8 @@ void send_pfk(player_t *player)
 	sprintf(packet, "pfk %d", player->client->id);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_unwrapped(list->client, packet);
+		if (list->is_gui == 1)
+			send_unwrapped(list->client, packet);
 	}
 	free(packet);
 }
