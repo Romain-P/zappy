@@ -215,7 +215,7 @@ int get_packet_parse(char *packet, list_t *buffer, char const *named)
 	for (it = iter_begin(buffer); it; iter_next(it)) {
 		arg = it->data;
 		len = strlen(arg) + 1;
-		packet = realloc(packet, len + 1);
+		packet = realloc(packet, pos + len + 1);
 		strcpy(packet + pos, ZAPPY_PARAM_SEPARATOR);
 		strcpy(packet + pos + 1, arg);
 		pos += len;
