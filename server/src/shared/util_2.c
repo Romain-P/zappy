@@ -38,24 +38,25 @@ void parcour_str(char *str, int shifter)
 
 char *to_string(int i)
 {
-	static char hold[100];
-	static char const digit[] = "0123456789";
-	char *allocated;
-	char *str = hold;
+    static char hold[100];
+    char const digit[] = "0123456789";
+    char *p = hold;
 
-	if (i < 0) {
-		*str++ = '-';
-		i *= -1;
-	}
-	parcour_str(str, i);
-	*str = 0;
-	do {
-		*--str = digit[i%10];
-		i = i/10;
-	} while (i);
-	allocated = malloc(sizeof(char) * (strlen(hold) + 1));
-	strcpy(allocated, hold);
-	return (allocated);
+    if(i<0) {
+        *p++ = '-';
+        i *= -1;
+    }
+    int shifter = i;
+    do {
+        ++p;
+        shifter = shifter/10;
+    } while(shifter);
+    *p = '\0';
+    do {
+        *--p = digit[i%10];
+        i = i/10;
+    } while(i);
+    return strdup(hold);
 }
 
 int read_content(int signal_fd, epoll_t ev,
