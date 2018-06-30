@@ -82,6 +82,7 @@
 		list_t eggs;
 		size_t waiting_commands;
 		bool initialized;
+		size_t is_gui;
 	};
 
 	struct map_s {
@@ -158,7 +159,7 @@
 
 	void configure_client_handler(client_handler_t *);
 	void parse_packet(network_client_t *, char const *, size_t);
-	void send_packet(network_client_t *, void *);
+	void send_packet(network_client_t *, void *, int);
 	void send_unwrapped(network_client_t *, char *);
 	player_t *find_player(network_client_t *);
 	int to_seconds(int);
