@@ -203,21 +203,21 @@ static message_t const messages[] = {
 	{ NULL }
 };
 
-int get_packet_parse(char *packet, list_t *buffer, char const *named)
+int get_packet_parse(char **packet, list_t *buffer, char const *named)
 {
 	size_t pos;
 	iter_t *it;
 	char *arg;
 	size_t len;
 
-	packet = strdup(named);
-	pos = strlen(packet);
+	*packet = strdup(named);
+	pos = strlen(*packet);
 	for (it = iter_begin(buffer); it; iter_next(it)) {
 		arg = it->data;
 		len = strlen(arg) + 1;
-		packet = realloc(packet, pos + len);
-		strncpy(packet + pos, ZAPPY_PARAM_SEPARATOR, 1);
-		strncpy(packet + pos + 1, arg, len - 1);
+		*packet = realloc(*packet, pos + len);
+		strncpy(*packet + pos, ZAPPY_PARAM_SEPARATOR, 1);
+		strncpy(*packet + pos + 1, arg, len - 1);
 		pos += len;
 	}
 	return (pos);
@@ -239,7 +239,7 @@ void send_packet(network_client_t *client, void *msg, int pos)
 	if (message == NULL)
 		return;
 	message->serialize(msg, &buffer);
-	pos = get_packet_parse(packet, &buffer, named);
+	pos = get_packet_parse(&packet, &buffer, named);
 	list_clear(&buffer, &free);
 	packet = realloc(packet, pos + 1);
 	packet[pos] = '\n';
