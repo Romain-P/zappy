@@ -81,7 +81,6 @@
 		inventory_t inventory;
 		list_t eggs;
 		size_t waiting_commands;
-		bool initialized;
 	};
 
 	struct map_s {

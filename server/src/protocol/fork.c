@@ -50,14 +50,13 @@ void add_spawn_team(player_t *player, packet_fork_t *packet)
 	list_add(&(player->team)->spawn, spawn);
 	for (iter_t *it = iter_begin(&server.pending_players); it; iter_next(it)) {
 		each = it->data;
-		if (player->team == each->team && !each->initialized) {
+		if (player->team == each->team) {
             send_unwrapped(each->client,
                            get_team_char(each, 0));
             send_unwrapped(each->client,
                            get_team_char(each, 1));
             list_remove(&server.pending_players, each);
             list_add(&server.players, each);
-            each->initialized = true;
             each->state = VALID_PLAYER;
 			break;
 		}

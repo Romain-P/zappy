@@ -25,12 +25,10 @@ void on_unwrapped(player_t *player, char **unwrapped)
 							   get_team_char(player, 0));
 				send_unwrapped(player->client,
 							   get_team_char(player, 1));
-				player->initialized = true;
 				player->state = VALID_PLAYER;
 			} else {
 			    list_remove(&server.players, player);
 			    list_add(&server.pending_players, player);
-                player->initialized = false;
             }
 		}
 	}
