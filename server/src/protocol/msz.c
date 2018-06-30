@@ -11,10 +11,11 @@
 
 bool msz_handler(player_t *player, packet_msz_t *packet)
 {
-	packet_msz_t sample =
-		{.cmd = "msz", .x = server.width, .y = server.height};
-
-	send_packet(player->client, &sample);
+	if (player->is_gui == 0)
+		return (true);
+	packet->x = server.width;
+	packet->y = server.height;
+	send_packet(player->client, packet, 0);
 	return (true);
 }
 
@@ -29,6 +30,6 @@ packet_msz_t *msz_deserialize(char **args)
 
 void msz_serialize(packet_msz_t *packet, list_t *buffer)
 {
-	list_add(buffer, to_string(50));
-	list_add(buffer, to_string(50));
+	list_add(buffer, to_string(packet->x));
+	list_add(buffer, to_string(packet->y));
 }
