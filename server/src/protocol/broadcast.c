@@ -20,7 +20,7 @@ player_t  *correct_orientation_player(player_t *player)
 	if (player->orientation == 1)
 		p1->orientation = 0;
 	if (player->orientation == 3)
-		p1->orientation = 2;
+		p1->orientation = 1;
 	if (player->orientation == 2)
 		p1->orientation = 3;
 	if (player->orientation == 4)
