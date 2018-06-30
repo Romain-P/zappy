@@ -61,26 +61,32 @@ int get_valid_broadcast_direction(int orientation)
 int get_direction_by_angle(double angle, int orien)
 {
 	if (angle >= (-M_PI_4 - (M_PI / 8)) &&
-	angle <= (-M_PI_4 + (M_PI / 8)))
+	angle <= (-M_PI_4 + (M_PI / 8))) {
 		return (get_good_orientation(6, orien, 0));
+	}
 	if (angle >= (-M_PI_2 - (M_PI / 8)) &&
-	angle <= (-M_PI_2 + (M_PI / 8)))
+	angle <= (-M_PI_2 + (M_PI / 8))) {
 		return (get_good_orientation(5, orien, 0));
+	}
 	if (angle >= (-M_PI_4 * 3 - (M_PI / 8)) &&
 	angle <= (-M_PI_4 * 3 + (M_PI / 8))) {
 		return (get_good_orientation(4, orien, 0));
 	}
 	if (angle >= (M_PI_4 * 3 - (M_PI / 8)) &&
-	angle <= (-M_PI_4 * 3 + (M_PI / 8)))
+	angle <= (M_PI_4 * 3 + (M_PI / 8))) {
 		return (get_good_orientation(2, orien, 0));
+	}
 	if (angle >= (M_PI_2 - (M_PI / 8)) &&
-	angle <= (M_PI_2 + (M_PI / 8)))
+	angle <= (M_PI_2 + (M_PI / 8))) {
 		return (get_good_orientation(1, orien, 0));
+	}
 	if (angle >= (M_PI_4 - (M_PI / 8)) &&
-	angle <= (M_PI_4 + (M_PI / 8)))
+	angle <= (M_PI_4 + (M_PI / 8))) {
 		return (get_good_orientation(8, orien, 0));
-	if (angle >= (0 - (M_PI / 8)) && angle <= (0 + (M_PI / 8)))
+	}
+	if (angle >= (0 - (M_PI / 8)) && angle <= (0 + (M_PI / 8))) {
 		return (get_good_orientation(7, orien, 0));
+	}
 	return (get_good_orientation(3, orien, 0));
 }
 
