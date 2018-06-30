@@ -40,6 +40,11 @@ static message_t const messages[] = {
 		(deserialize_t) &plv_deserialize,
 		(handler_t) &plv_handler
 	},
+	{ "WELCOME",
+		(serialize_t) &welcome_serialize,
+		(deserialize_t) &welcome_deserialize,
+		(handler_t) &welcome_handler
+	},
 	{ "pin",
 		(serialize_t) &pin_serialize,
 		(deserialize_t) &pin_deserialize,
@@ -200,16 +205,17 @@ static message_t const messages[] = {
 
 int get_packet_parse(char *packet, list_t *buffer, char const *named)
 {
-	int pos = strlen(packet);
+	int pos;
 	iter_t *it;
 	char *arg;
 	int len;
 
 	packet = strdup(named);
+	pos = strlen(packet);
 	for (it = iter_begin(buffer); it; iter_next(it)) {
 		arg = it->data;
 		len = strlen(arg) + 1;
-		packet = realloc(packet, len);
+		packet = realloc(packet, len + 1);
 		strcpy(packet + pos, ZAPPY_PARAM_SEPARATOR);
 		strcpy(packet + pos + 1, arg);
 		pos += len;
@@ -217,13 +223,12 @@ int get_packet_parse(char *packet, list_t *buffer, char const *named)
 	return (pos);
 }
 
-void send_packet(network_client_t *client, void *msg)
+void send_packet(network_client_t *client, void *msg, int pos)
 {
 	list_t buffer = list_init;
 	message_t const *message = NULL;
 	char const *named = ((network_packet_t *) msg)->cmd;
 	char *packet = NULL;
-	int pos;
 
 	for (pos = 0; messages[pos].named; ++pos) {
 		if (!strcmp(messages[pos].named, named)) {
