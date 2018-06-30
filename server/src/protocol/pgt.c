@@ -29,6 +29,16 @@ void send_pgt(player_t *player, size_t id)
 	free(packet);
 }
 
+packet_pgt_t *pgt_deserialize(char **args)
+{
+	return (NULL);
+}
+
+bool pgt_handler(player_t *player, packet_pgt_t *packet)
+{
+	return (false);
+}
+
 void pgt_serialize(packet_pgt_t *packet, list_t *buffer)
 {
 	list_add(buffer, to_string(packet->player_number));

@@ -28,6 +28,16 @@ void send_ebo(player_t *player, egg_t *egg)
 	free(packet);
 }
 
+packet_ebo_t *ebo_deserialize(char **args)
+{
+	return (NULL);
+}
+
+bool ebo_handler(player_t *player, packet_ebo_t *packet)
+{
+	return (false);
+}
+
 void ebo_serialize(packet_ebo_t *packet, list_t *buffer)
 {
 	list_add(buffer, to_string(packet->egg));

@@ -32,6 +32,16 @@ void send_pnw(player_t *player)
 	free(packet);
 }
 
+packet_pnw_t *pnw_deserialize(char **args)
+{
+	return (NULL);
+}
+
+bool pnw_handler(player_t *player, packet_pnw_t *packet)
+{
+	return (false);
+}
+
 void pnw_serialize(packet_pnw_t *packet, list_t *buffer)
 {
 	list_add(buffer, to_string(packet->player_number));

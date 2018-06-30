@@ -112,13 +112,13 @@ static message_t const messages[] = {
 	},
 	{ "pnw",
 		(serialize_t) &pnw_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &pnw_deserialize,
+		(handler_t) &pnw_handler
 	},
 	{ "pex",
 		(serialize_t) &pex_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &pex_deserialize,
+		(handler_t) &pex_handler
 	},
 	{ "pic",
 		(serialize_t) &pic_serialize,
@@ -137,38 +137,38 @@ static message_t const messages[] = {
 	},
 	{ "pdr",
 		(serialize_t) &pdr_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &pdr_deserialize,
+		(handler_t) &pdr_handler
 	},
 	{ "pgt",
 		(serialize_t) &pgt_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &pgt_deserialize,
+		(handler_t) &pgt_handler
 	},
 	{ "pdi",
 		(serialize_t) &pdi_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &pdi_deserialize,
+		(handler_t) &pdi_handler
 	},
 	{ "enw",
 		(serialize_t) &enw_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &enw_deserialize,
+		(handler_t) &enw_handler
 	},
 	{ "eht",
 		(serialize_t) &eht_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &eht_deserialize,
+		(handler_t) &eht_handler
 	},
 	{ "ebo",
 		(serialize_t) &ebo_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &ebo_deserialize,
+		(handler_t) &ebo_handler
 	},
 	{ "edi",
 		(serialize_t) &edi_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &edi_deserialize,
+		(handler_t) &edi_handler
 	},
 	{ "sgt",
 		(serialize_t) &sgt_serialize,
@@ -182,23 +182,23 @@ static message_t const messages[] = {
 	},
 	{ "seg",
 		(serialize_t) &seg_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &seg_deserialize,
+		(handler_t) &seg_handler
 	},
 	{ "smg",
 		(serialize_t) &smg_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &smg_deserialize,
+		(handler_t) &smg_handler
 	},
 	{ "suc",
 		(serialize_t) &suc_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &suc_deserialize,
+		(handler_t) &suc_handler
 	},
 	{ "sbp",
 		(serialize_t) &sbp_serialize,
-		NULL,
-		NULL
+		(deserialize_t) &sbp_deserialize,
+		(handler_t) &sbp_handler
 	},
 	{ NULL }
 };

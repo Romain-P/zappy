@@ -30,6 +30,16 @@ void send_enw(player_t *player, size_t nb)
 	free(packet);
 }
 
+packet_enw_t *enw_deserialize(char **args)
+{
+	return (NULL);
+}
+
+bool enw_handler(player_t *player, packet_enw_t *packet)
+{
+	return (false);
+}
+
 void enw_serialize(packet_enw_t *packet, list_t *buffer)
 {
 	list_add(buffer, to_string(packet->egg));

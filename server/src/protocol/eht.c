@@ -29,6 +29,16 @@ void send_eht(player_t *player, egg_t *egg)
 	free(packet);
 }
 
+packet_eht_t *eht_deserialize(char **args)
+{
+	return (NULL);
+}
+
+bool eht_handler(player_t *player, packet_eht_t *packet)
+{
+	return (false);
+}
+
 void eht_serialize(packet_eht_t *packet, list_t *buffer)
 {
 	list_add(buffer, to_string(packet->egg));

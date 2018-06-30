@@ -29,6 +29,16 @@ void send_pdr(player_t *player, size_t id)
 	free(packet);
 }
 
+packet_pdr_t *pdr_deserialize(char **args)
+{
+	return (NULL);
+}
+
+bool pdr_handler(player_t *player, packet_pdr_t *packet)
+{
+	return (false);
+}
+
 void pdr_serialize(packet_pdr_t *packet, list_t *buffer)
 {
 	list_add(buffer, to_string(packet->player_number));
