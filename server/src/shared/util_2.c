@@ -53,7 +53,7 @@ char *to_string(int i)
 		*--str = digit[i%10];
 		i = i/10;
 	} while (i);
-	allocated = malloc(sizeof(char) * strlen(hold));
+	allocated = malloc(sizeof(char) * (strlen(hold) + 1));
 	strcpy(allocated, hold);
 	return (allocated);
 }
