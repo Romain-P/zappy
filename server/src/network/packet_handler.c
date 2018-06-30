@@ -241,9 +241,9 @@ void send_packet(network_client_t *client, void *msg, int pos)
 	message->serialize(msg, &buffer);
 	pos = get_packet_parse(packet, &buffer, named);
 	list_clear(&buffer, &free);
-	packet = realloc(packet, strlen(packet) + 1);
+	packet = realloc(packet, pos + 1);
 	packet[pos] = '\n';
-	network_client_send(client, packet, strlen(packet));
+	network_client_send(client, packet, pos + 1);
 	free(packet);
 }
 
