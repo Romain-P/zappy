@@ -25,7 +25,7 @@ player_t  *correct_orientation_player(player_t *player)
 		p1->orientation = 3;
 	if (player->orientation == 4)
 		p1->orientation = 2;
-	return (player);
+	return (p1);
 }
 
 void loop_broadcast_player(player_t *player, char *text)

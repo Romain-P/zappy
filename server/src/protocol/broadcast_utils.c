@@ -14,22 +14,24 @@ int get_good_orientation(int orientation_src, size_t orientation_dest, int orien
 	if (orientation_dest == 0)
 		return (orientation_src);
 	if (orientation_dest == 1) {
-		if (8 <= orientation_src + 6)
-			return (orientation_src + 6);
-		else
-			return ((orientation_src + 6) % 8);
-	}
-	if (orientation_dest == 3) {
 		if (8 <= orientation_src + 4)
 			return (orientation_src + 4);
 		else
 			return ((orientation_src + 4) % 8);
 	}
-	if (orientation_dest == 2) {
+	if (orientation_dest == 3) {
 		if (8 <= orientation_src + 2)
 			return (orientation_src + 2);
 		else
-			return ((orientation_src + 2) % 2);
+			return ((orientation_src + 2) % 8);
+	}
+	if (orientation_dest == 2) {
+		if (8 <= orientation_src + 4) {
+			return (orientation_src + 4);
+		}
+		else {
+			return ((orientation_src + 4) % 8);
+		}
 	}
 	return (-1);
 }
@@ -65,8 +67,9 @@ int get_direction_by_angle(double angle, int orien)
 	angle <= (-M_PI_2 + (M_PI / 8)))
 		return (get_good_orientation(5, orien, 0));
 	if (angle >= (-M_PI_4 * 3 - (M_PI / 8)) &&
-	angle <= (-M_PI_4 * 3 + (M_PI / 8)))
+	angle <= (-M_PI_4 * 3 + (M_PI / 8))) {
 		return (get_good_orientation(4, orien, 0));
+	}
 	if (angle >= (M_PI_4 * 3 - (M_PI / 8)) &&
 	angle <= (-M_PI_4 * 3 + (M_PI / 8)))
 		return (get_good_orientation(2, orien, 0));
