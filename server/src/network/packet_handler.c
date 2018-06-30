@@ -205,19 +205,19 @@ static message_t const messages[] = {
 
 int get_packet_parse(char *packet, list_t *buffer, char const *named)
 {
-	int pos;
+	size_t pos;
 	iter_t *it;
 	char *arg;
-	int len;
+	size_t len;
 
 	packet = strdup(named);
 	pos = strlen(packet);
 	for (it = iter_begin(buffer); it; iter_next(it)) {
 		arg = it->data;
 		len = strlen(arg) + 1;
-		packet = realloc(packet, pos + len + 1);
-		strcpy(packet + pos, ZAPPY_PARAM_SEPARATOR);
-		strcpy(packet + pos + 1, arg);
+		packet = realloc(packet, pos + len);
+		strncpy(packet + pos, ZAPPY_PARAM_SEPARATOR, 1);
+		strncpy(packet + pos + 1, arg, len - 1);
 		pos += len;
 	}
 	return (pos);
