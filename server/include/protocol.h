@@ -410,6 +410,7 @@
 	bool ppo_handler(player_t *, packet_ppo_t *);
 	void ppo_serialize(packet_ppo_t *, list_t *);
 	void send_ppo(player_t *);
+	size_t convert_orientation(size_t);
 
 	// PLV COMMAND
 	packet_plv_t *plv_deserialize(char **);
