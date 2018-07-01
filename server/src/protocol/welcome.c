@@ -35,6 +35,7 @@ bool welcome_handler(player_t *player, packet_welcome_t *packet)
     send_msz(player);
     send_tna(player);
     send_players(player);
+    send_bct(player);
 	return (true);
 }
 

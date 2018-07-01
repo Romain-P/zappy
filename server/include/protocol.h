@@ -384,6 +384,7 @@
 	void bct_tile_serialize(packet_bct_tile_t *, list_t *);
 	void init_bct_tile_packet(packet_bct_tile_t *packet);
 	void get_ressource_tile(size_t, packet_bct_tile_t *);
+	void send_bct(player_t *);
 
 	// BCT COMMAND (All Tile)
 	packet_bct_tile_t *bct_all_deserialize(char **);
