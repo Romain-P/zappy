@@ -51,7 +51,7 @@ int set_segment(int x, int y, int dx, int dy)
 	double width;
 
 	height = sqrt((y * y) + (x * x));
-	width = sqrt((dy * y) + (dx * dx));
+	width = sqrt((dy * dy) + (dx * dx));
 	if (width <= height)
 		return (0);
 	return (1);
