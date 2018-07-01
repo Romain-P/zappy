@@ -16,14 +16,16 @@ SRC	=	src/AIManager.cpp			\
 
 OBJ	=	$(SRC:.cpp=.o)
 
-CFLAGS	=	-Iinclude -Wall -Werror
+CXXFLAGS	=	-Iinclude -Wall -Wno-write-strings
+
+LDFLAGS =   -L ./lib -Wl,-rpath,./lib -lzappy_network -pthread
 
 NAME	=	zappy_ai
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	g++ $(CFLAGS) $(OBJ) -o $(NAME)
+	g++ $(CXXFLAGS) $(OBJ) -o $(NAME) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJ)
