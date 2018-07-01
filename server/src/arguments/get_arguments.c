@@ -53,7 +53,7 @@ static void initialize_options(void)
 	(server.map).height = 10;
 	server.name = strdup("Team1 Team2 Team3 Team4");
 	server.nb_clients = 6;
-	server.freq = 10;
+	server.freq = 50;
 }
 
 static void set_team(void)
