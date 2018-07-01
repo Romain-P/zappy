@@ -395,6 +395,7 @@
 	packet_tna_t *tna_deserialize(char **);
 	bool tna_handler(player_t *, packet_tna_t *);
 	void tna_serialize(packet_tna_t *, list_t *);
+	void send_tna(player_t *);
 
 	// PNW COMMAND
 	packet_pnw_t *pnw_deserialize(char **);

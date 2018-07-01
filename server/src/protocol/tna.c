@@ -9,8 +9,10 @@
 #include "util.h"
 #include "zappy.h"
 
-void send_tna(player_t *client) {
+void send_tna(player_t *client)
+{
 	packet_tna_t packet = {.cmd = "tna"};
+
 	tna_handler(client, &packet);
 }
 
