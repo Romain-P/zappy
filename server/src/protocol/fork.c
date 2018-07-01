@@ -56,6 +56,8 @@ void add_spawn_team(player_t *player, packet_fork_t *packet)
 			send_unwrapped(each->client,
 			get_team_char(each, 1));
 			list_remove(&server.pending_players, each);
+			each->x = packet->egg->x;
+			each->y = packet->egg->y;
 			list_add(&server.players, each);
 			send_pnw(each);
 			each->state = VALID_PLAYER;
@@ -80,6 +82,7 @@ bool fork_handler(player_t *player, packet_fork_t *packet)
 			dup->egg = packet->egg;
 			dup->delayed = true;
 			delay(dup, (handler_t) &fork_handler, player, 300);
+		} else {
 			add_spawn_team(player, packet);
 		}
 	}
