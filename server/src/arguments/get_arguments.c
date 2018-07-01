@@ -49,8 +49,8 @@ static void print_usage(void)
 static void initialize_options(void)
 {
 	server.port = 5050;
-	(server.map).width = 50;
-	(server.map).height = 50;
+	(server.map).width = 10;
+	(server.map).height = 10;
 	server.name = strdup("Team1 Team2 Team3 Team4");
 	server.nb_clients = 6;
 	server.freq = 10;

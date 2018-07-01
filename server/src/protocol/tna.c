@@ -9,6 +9,11 @@
 #include "util.h"
 #include "zappy.h"
 
+void send_tna(player_t *client) {
+	packet_tna_t packet = {.cmd = "tna"};
+	tna_handler(client, &packet);
+}
+
 packet_tna_t *tna_deserialize(char **args)
 {
 	packet_tna_t *packet = malloc(sizeof(*packet));
@@ -28,7 +33,7 @@ bool tna_handler(player_t *player, packet_tna_t *packet)
 	for (it = iter_begin(&server.teams); it; iter_next(it)) {
 		team = it->data;
 		strcpy(packet->name, team->name);
-		send_packet(player->client, &packet, 0);
+		send_packet(player->client, packet, 0);
 	}
 	return (true);
 }

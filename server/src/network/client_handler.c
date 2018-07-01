@@ -26,6 +26,7 @@ static void on_connect(network_client_t *client)
 	player->is_gui = 1;
 	send_unwrapped(client, "WELCOME");
 	send_msz(player);
+	send_tna(player);
 }
 
 static void on_disconnect(network_client_t *client)

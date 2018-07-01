@@ -57,6 +57,7 @@ void add_spawn_team(player_t *player, packet_fork_t *packet)
 			get_team_char(each, 1));
 			list_remove(&server.pending_players, each);
 			list_add(&server.players, each);
+			send_pnw(each);
 			each->state = VALID_PLAYER;
 			break;
 		}
