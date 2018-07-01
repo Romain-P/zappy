@@ -25,20 +25,19 @@ static void on_server_close(void)
 {
 }
 
-int main(int ac, char **args)
+int main(int ac, char **av)
 {
-	get_arguments(ac, args);
-	srand(time(NULL));
-	network_server_t server;
-	server_config_t config = {
-		.host = INADDR_ANY,
-		.port = atoi(args[1]),
-		.packet_delimiter = ZAPPY_ARG_DELIMITER,
-		.packet_max_size = ZAPPY_BUFFER_SIZE,
-		.configure_handlers = &configure_client_handler,
-		.on_server_close = &on_server_close,
-		.on_unblocked = &check_delayed_tasks
-	};
-	network_server_start(&server, &config);
-	return 0;
+	server_config_t config;
+	network_server_t servers;
+
+	get_arguments(ac, av);
+	config.host = INADDR_ANY;
+	config.port = (server.port);
+	config.packet_delimiter = ZAPPY_ARG_DELIMITER;
+	config.packet_max_size = ZAPPY_BUFFER_SIZE;
+	config.configure_handlers = &configure_client_handler;
+	config.on_server_close = &on_server_close;
+	config.on_unblocked = &check_delayed_tasks;
+	network_server_start(&servers, &config);
+	return (0);
 }
