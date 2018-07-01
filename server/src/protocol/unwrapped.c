@@ -28,9 +28,9 @@ void on_unwrapped(player_t *player, char **unwrapped)
 				send_pnw(player);
 				player->state = VALID_PLAYER;
 			} else {
-			    list_remove(&server.players, player);
-			    list_add(&server.pending_players, player);
-            }
+				list_remove(&server.players, player);
+				list_add(&server.pending_players, player);
+			}
 		}
 	}
 	else if (player->state == VALID_PLAYER) {
