@@ -9,7 +9,7 @@
 #include "util.h"
 #include "zappy.h"
 
-player_t  *correct_orientation_player(player_t *player)
+/*player_t  *correct_orientation_player(player_t *player)
 {
 	player_t *p1 = malloc(sizeof(player_t));
 
@@ -26,6 +26,25 @@ player_t  *correct_orientation_player(player_t *player)
 	if (player->orientation == 4)
 		p1->orientation = 2;
 	return (p1);
+}*/
+
+int get_sound(player_t *emitter, player_t *receiver)
+{
+	tile_t d;
+
+	if (emitter->y > receiver->y)
+		d = backward;
+	if (emitter->y < receiver->y)
+		d = forward;
+	else if (emitter->y == receiver->y) {
+		if (emitter->x > receiver->x)
+			d = right;
+		else if (emitter->x < receiver->x)
+			d = left;
+		else
+			d = none;
+	}
+	return (get_final_direction(d, receiver));
 }
 
 void loop_broadcast_player(player_t *player, char *text)
@@ -39,7 +58,7 @@ void loop_broadcast_player(player_t *player, char *text)
 		list = it->data;
 		if (list->client->id != player->client->id && !list->is_gui) {
 			sprintf(packet, "message %d, %s",
-			get_sound_player(player, list), text);
+			get_sound(list, player), text);
 			send_unwrapped(list->client, packet);
 		}
 	}

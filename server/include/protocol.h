@@ -358,6 +358,8 @@
 	int get_direction_by_angle(double, size_t);
 	int get_sound_player(player_t *, player_t *);
 	player_t  *correct_orientation_player(player_t *);
+	int get_sound(player_t *, player_t *);
+	int get_final_direction(tile_t, player_t *);
 
 	// LOOK COMMAND
 	bool look_handler(player_t *, packet_look_t *);

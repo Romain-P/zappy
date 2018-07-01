@@ -28,7 +28,7 @@ void send_pbc(player_t *player, char *text)
 	free(packet);
 }
 
-void loop_segment(int *x, int *y, int map_x, int map_y)
+/*void loop_segment(int *x, int *y, int map_x, int map_y)
 {
 	int save_x = *x;
 	int save_y = *y;
@@ -36,12 +36,15 @@ void loop_segment(int *x, int *y, int map_x, int map_y)
 
 	if (value == 1)
 		change_value(x, y, save_x + map_x, save_y + map_y);
+	printf("Result: %d - %d\n", *x, *y);
 	value = set_segment(save_x + map_x, save_y - map_y, *x , *y);
 	if (value == 1)
 		change_value(x, y, save_x + map_x, save_y - map_y);
+	printf("Result: %d - %d\n", *x, *y);
 	value = set_segment(save_x + map_x, save_y, *x, *y);
 	if (value == 1)
 		change_value(x, y, save_x + map_x, save_y);
+	printf("Result: %d - %d\n", *x, *y);
 	loop_segment2(x, y, save_x, save_y);
 }
 
@@ -71,16 +74,21 @@ void loop_segment2(int *x, int *y, int save_x, int save_y)
 
 	if (value == 1)
 		change_value(x, y, save_x - map_x, save_y + map_y);
+	printf("Result: %d - %d\n", *x, *y);
 	value = set_segment(save_x - map_x, save_y - map_y, *x, *y);
 	if (value == 1)
 		change_value(x, y, save_x - map_x, save_y - map_y);
+	printf("Result: %d - %d\n", *x, *y);
 	value = set_segment(save_x - map_x, save_y, *x, *y);
 	if (value == 1)
 		change_value(x, y, save_x - map_x, save_y);
+	printf("Result: %d - %d\n", *x, *y);
 	value = set_segment(save_x, save_y + map_y, *x, *y);
 	if (value == 1)
 		change_value(x, y, save_x, save_y + map_y);
+	printf("Result: %d - %d\n", *x, *y);
 	value = set_segment(save_x, save_y - map_y, *x, *y);
 	if (value == 1)
-		change_value(x, y, save_x, save_y - map_y);	
-}
+		change_value(x, y, save_x, save_y - map_y);
+	printf("Result: %d - %d\n", *x, *y);
+}*/

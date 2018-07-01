@@ -31,6 +31,8 @@
 	typedef struct level_s level_t;
 	typedef enum resource_type_e resource_type_t;
 	typedef enum protocol_state_e protocol_state_t;
+	typedef enum dir_e dir_t;
+	typedef enum tile_e tile_t;
 
 	extern zappy_instance_t server;
 
@@ -155,6 +157,21 @@
 		serialize_t serialize;
 		deserialize_t deserialize;
 		handler_t handler;
+	};
+
+	enum tile_e {
+		none = 0,
+		forward = 1,
+		right = 7,
+		backward = 5,
+		left = 3
+	};
+
+	enum dir_e {
+		dirtop = 1,
+		dirright = 2,
+		dirdown = 3,
+		dirleft = 4
 	};
 
 	void configure_client_handler(client_handler_t *);
