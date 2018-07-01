@@ -74,14 +74,12 @@ bool fork_handler(player_t *player, packet_fork_t *packet)
 		if (!packet->egg->layed) {
 			send_unwrapped(player->client, "ok");
 			packet->egg->layed = true;
-		packet_fork_t *dup = malloc(sizeof(packet_fork_t));
-		if (!dup)
-		    exit(84);
-		dup->egg = packet->egg;
-		dup->delayed = true;
-		delay(dup, (handler_t) &fork_handler, player, 300);
-		}
-		else {
+			packet_fork_t *dup = malloc(sizeof(packet_fork_t));
+			if (!dup)
+			exit(84);
+			dup->egg = packet->egg;
+			dup->delayed = true;
+			delay(dup, (handler_t) &fork_handler, player, 300);
 			add_spawn_team(player, packet);
 		}
 	}
