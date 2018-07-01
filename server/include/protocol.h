@@ -391,6 +391,7 @@
 	void bct_all_serialize(packet_bct_tile_t *, list_t *);
 
 	// TNA COMMAND
+	void send_tna(player_t *);
 	packet_tna_t *tna_deserialize(char **);
 	bool tna_handler(player_t *, packet_tna_t *);
 	void tna_serialize(packet_tna_t *, list_t *);
