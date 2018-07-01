@@ -390,6 +390,7 @@
 	packet_bct_tile_t *bct_all_deserialize(char **);
 	bool bct_all_handler(player_t *, packet_bct_tile_t *);
 	void bct_all_serialize(packet_bct_tile_t *, list_t *);
+	void send_to_all_bct(packet_bct_tile_t *);
 
 	// TNA COMMAND
 	void send_tna(player_t *);
@@ -498,6 +499,8 @@
 	bool sgt_handler(player_t *, packet_sgt_t *);
 	void sgt_serialize(packet_sgt_t *, list_t *);
 	packet_sgt_t *sgt_deserialize(char **);
+	void init_bct_tile_packet(packet_bct_tile_t *);
+	void send_bct_one_tile(player_t *);
 
 	// TEAM COMMAND
 	bool team_handler(player_t *, packet_team_t *);

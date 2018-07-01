@@ -69,6 +69,7 @@ bool take_handler(player_t *player, packet_take_t *packet)
 		if (check_ressource_validity(player,
 		get_id_ressource(packet->node))) {
 			show_inventory(player);
+			send_bct_one_tile(player);
 			send_unwrapped(player->client, "ok");
 		}
 		else

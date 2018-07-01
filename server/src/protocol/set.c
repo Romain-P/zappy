@@ -75,6 +75,7 @@ bool set_handler(player_t *player, packet_set_t *packet)
 			delete_ressource(player, id);
 			send_pdr(player, id);
 			set_ressource(player, id);
+			send_bct_one_tile(player);
 			send_unwrapped(player->client, "ok");
 		}
 	}

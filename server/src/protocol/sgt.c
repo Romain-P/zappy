@@ -29,3 +29,14 @@ void sgt_serialize(packet_sgt_t *packet, list_t *buffer)
 {
 	list_add(buffer, to_string(packet->time));
 }
+
+void init_bct_tile_packet(packet_bct_tile_t *packet)
+{
+	packet->q0 = 0;
+	packet->q1 = 0;
+	packet->q2 = 0;
+	packet->q3 = 0;
+	packet->q4 = 0;
+	packet->q5 = 0;
+	packet->q6 = 0;
+}

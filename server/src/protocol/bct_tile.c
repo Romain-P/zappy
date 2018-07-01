@@ -9,6 +9,19 @@
 #include "util.h"
 #include "zappy.h"
 
+void send_bct_one_tile(player_t *player)
+{
+	packet_bct_tile_t *packet =
+	malloc(sizeof(*packet));
+
+	if (packet == NULL)
+		exit(84);
+	packet->cmd = strdup("bct");
+	packet->x = player->x;
+	packet->y = player->y;
+	bct_tile_handler(player, packet);
+}
+
 packet_bct_tile_t *bct_tile_deserialize(char **args)
 {
 	packet_bct_tile_t *packet;
@@ -38,7 +51,7 @@ bool bct_tile_handler(player_t *player, packet_bct_tile_t *packet)
 			get_ressource_tile(ressource->type, packet);
 		}
 	}
-	send_packet(player->client, &packet, 0);
+	send_to_all_bct(packet);
 	return (true);
 }
 
@@ -71,15 +84,4 @@ void get_ressource_tile(size_t ressource, packet_bct_tile_t *packet)
 		packet->q5 += 1;
 	if (ressource == 6)
 		packet->q6 += 1;
-}
-
-void init_bct_tile_packet(packet_bct_tile_t *packet)
-{
-	packet->q0 = 0;
-	packet->q1 = 0;
-	packet->q2 = 0;
-	packet->q3 = 0;
-	packet->q4 = 0;
-	packet->q5 = 0;
-	packet->q6 = 0;
 }
