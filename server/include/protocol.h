@@ -415,6 +415,7 @@
 	packet_plv_t *plv_deserialize(char **);
 	bool plv_handler(player_t *, packet_plv_t *);
 	void plv_serialize(packet_plv_t *, list_t *);
+	void send_plv(player_t *);
 
 	// PIN COMMAND
 	packet_pin_t *pin_deserialize(char **);

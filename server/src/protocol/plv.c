@@ -9,6 +9,18 @@
 #include "util.h"
 #include "zappy.h"
 
+void send_plv(player_t *player)
+{
+	packet_plv_t *packet =
+	malloc(sizeof(*packet));
+
+	if (packet == NULL)
+		exit(84);
+	packet->cmd = strdup("plv");
+	packet->player_number = player->client->id;
+	plv_handler(player, packet);
+}
+
 static void player_get_level(int nb, packet_plv_t *packet)
 {
 	player_t *player;
@@ -43,10 +55,15 @@ packet_plv_t *plv_deserialize(char **args)
 
 bool plv_handler(player_t *player, packet_plv_t *packet)
 {
-	if (player->is_gui == 0)
-		return (true);
+	iter_t *it;
+	player_t *list;
+
 	player_get_level(packet->player_number, packet);
-	send_packet(player->client, &packet, 0);
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		list = it->data;
+		if (list->is_gui == 1)
+			send_packet(list->client, packet, 0);
+	}
 	return (true);
 }
 
