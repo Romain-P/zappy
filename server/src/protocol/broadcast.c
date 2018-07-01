@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2018
 ** ZAPPY
 ** File description:
-** Broadcast Command
+** Broadcast Command - Angle
 */
 
 #include "protocol.h"

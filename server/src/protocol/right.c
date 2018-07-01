@@ -9,6 +9,19 @@
 #include "util.h"
 #include "zappy.h"
 
+size_t convert_orientation(size_t direction)
+{
+	if (direction == 1)
+		return (2);
+	if (direction == 2)
+		return (1);
+	if (direction == 3)
+		return (0);
+	if (direction == 4)
+		return (3);
+	return (1);
+}
+
 packet_right_t *right_deserialize(char **args)
 {
 	packet_right_t *packet = malloc(sizeof(*packet));
