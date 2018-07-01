@@ -44,7 +44,6 @@ void init_player_join(player_t *player, team_t *team)
 	(player->inventory).q4 = 0;
 	(player->inventory).q5 = 0;
 	(player->inventory).q6 = 0;
-	player->is_gui = 1;
 }
 
 int check_free_team(player_t *player, char *name)
