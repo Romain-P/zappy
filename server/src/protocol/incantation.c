@@ -56,7 +56,7 @@ bool incantation_handler(player_t *player, packet_incantation_t *packet)
 	} else {
 		delete_ressource(player);
 		player->level++;
-		send_plv(plaver);
+		send_plv(player);
 		send_to_all_tile(send_current_level(player), player);
 		send_pie(player);
 	}

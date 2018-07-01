@@ -72,6 +72,7 @@ packet_broadcast_t *broadcast_deserialize(char **args)
 	size_t i = 0;
 
 	if (str_array_length(args) != 1) {
+		puts("mé");
 		return (NULL);
 	}
 	if (packet == NULL)

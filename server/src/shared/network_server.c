@@ -52,6 +52,7 @@ static void read_data(network_server_t *server, int client)
 	network_client_t *found =
 		network_client_find(&server->clients, client);
 
+	found->bstate = FREED;
 	if (bytes <= 0)
 		network_client_close(found);
 	else

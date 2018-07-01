@@ -266,7 +266,7 @@ int check_command_packet(const message_t *message,
 			casted->cmd = cmd;
 			casted->delayed = false;
 		}
-		if (message->handler(player, data) && data)
+		if (data && message->handler(player, data))
 			free(data);
 		return (1);
 	}
@@ -283,6 +283,8 @@ bool loop_packet(char **split, player_t *player, network_client_t *client)
 
 	for (i = 0; messages[i].named; ++i) {
 		message = messages + i;
+		if (!split[0])
+			continue;
 		cmd = split[0];
 		if (!strcmp(message->named, cmd))
 			found_wrapped = true;
