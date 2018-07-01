@@ -9,17 +9,21 @@
 #include "util.h"
 #include "zappy.h"
 
-void send_pie(player_t *player)
+void send_pie(player_t *player, packet_incantation_t *packett)
 {
 	char *packet = malloc(sizeof(char) * (strlen("pie") +
 	20));
 	iter_t *it;
+	size_t i = 0;
 	player_t *list;
 
 	if (packet == NULL)
 		exit(84);
 	sprintf(packet, "pie %zu %zu %zu %zu",
-	player->x, player->y, player->level, count);
+	player->x, player->y, player->level, packett->nb);
+	while (i < packett->nb)
+		sprintf(packet + strlen(packet),
+		" %d", packett->player[i++]);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
 		if (list->is_gui)

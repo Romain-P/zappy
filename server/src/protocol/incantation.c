@@ -16,6 +16,7 @@ packet_incantation_t *incantation_deserialize(char **args)
 
 	if (packet == NULL)
 		return (NULL);
+	packet->player = malloc(sizeof(int) * 50);
 	return (packet);
 }
 
@@ -43,7 +44,7 @@ static char *send_current_level(player_t *player)
 
 bool incantation_handler(player_t *player, packet_incantation_t *packet)
 {
-	size_t condition = check_condition_incantation(player);
+	size_t condition = check_condition_incantation(player, packet);
 
 	if (condition == 1) {
 		send_unwrapped(player->client, "ko");
@@ -58,7 +59,7 @@ bool incantation_handler(player_t *player, packet_incantation_t *packet)
 		player->level++;
 		send_plv(player);
 		send_to_all_tile(send_current_level(player), player);
-		send_pie(player);
+		send_pie(player, packet);
 	}
 	return (false);
 }

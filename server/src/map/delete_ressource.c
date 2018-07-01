@@ -9,16 +9,14 @@
 #include "level.h"
 #include "protocol.h"
 
-size_t check_condition_incantation(player_t *player)
+size_t check_condition_incantation(player_t *player, packet_incantation_t *packet)
 {
 	size_t count = 0;
-	int *tab = malloc(sizeof(int) * (100));
+	int *tab = malloc(sizeof(int) * (50));
 	player_t *list;
 	size_t nb;
 	iter_t *it;
 
-	if (tab == NULL)
-		exit(84);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
 		if (list->x == player->x && list->y == player->y &&
@@ -28,6 +26,8 @@ size_t check_condition_incantation(player_t *player)
 	if (count < get_need_level(player->level))
 		return (1);
 	nb = count;
+	packet->nb = count;
+	packet->player = tab;
 	count = check_ressource_tile(player);
 	if (count != 1)
 		send_pic(player, nb, tab);
