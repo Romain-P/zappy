@@ -16,15 +16,14 @@ void send_pie(player_t *player)
 	iter_t *it;
 	player_t *list;
 
-	if (player->is_gui == 0)
-		return;
 	if (packet == NULL)
 		exit(84);
 	sprintf(packet, "pie %zu %zu %zu",
 	player->x, player->y, player->level);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_unwrapped(list->client, packet);
+		if (list->is_gui)
+			send_unwrapped(list->client, packet);
 	}
 	free(packet);
 }

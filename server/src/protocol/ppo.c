@@ -18,8 +18,6 @@ void send_ppo(player_t *player)
 
 	if (packet == NULL)
 		exit(84);
-	if (player->is_gui == 0)
-		return;
 	sprintf(packet, "ppo %d %zu %zu %zu",
 	player->client->id, player->x, player->y, player->orientation);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {

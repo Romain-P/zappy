@@ -17,8 +17,6 @@ void send_pnw(player_t *player)
 	player_t *list;
 	iter_t *it;
 
-	if (player->is_gui == 0)
-		return;
 	if (packet == NULL)
 		exit(84);
 	sprintf(packet, "pnw %d %zu %zu %zu %zu %s",
@@ -27,7 +25,8 @@ void send_pnw(player_t *player)
 	(player->team)->name);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		send_unwrapped(list->client, packet);
+		if (list->is_gui)
+			send_unwrapped(list->client, packet);
 	}
 	free(packet);
 }

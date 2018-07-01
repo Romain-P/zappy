@@ -39,12 +39,19 @@ static void get_inventory_player(int nb, packet_pin_t *packet)
 void show_inventory(player_t *player)
 {
 	packet_pin_t *packet = malloc(sizeof(*packet));
+	player_t *each;
+	iter_t *it;
 
 	if (packet == NULL)
 		exit(84);
 	packet->player_number = player->client->id;
 	packet->cmd = strdup("pin");
-	pin_handler(player, packet);
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		each = it->data;
+
+		if (each->is_gui)
+			each = each; //TODO ?
+	}
 	free(packet);
 }
 

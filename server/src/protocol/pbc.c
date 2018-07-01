@@ -17,8 +17,6 @@ void send_pbc(player_t *player, char *text)
 	player_t *list;
 	iter_t *it;
 
-	if (player->is_gui == 0)
-		return;
 	if (packet == NULL)
 		exit(84);
 	sprintf(packet, "pbc %d %s", player->client->id, text);

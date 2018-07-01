@@ -16,8 +16,6 @@ void send_enw(player_t *player, size_t nb)
 	iter_t *it;
 	player_t *list;
 
-	if (player->is_gui == 0)
-		return;
 	if (packet == NULL)
 		exit(84);
 	sprintf(packet, "enw %zu %d %zu %zu", nb,
