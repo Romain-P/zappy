@@ -22,7 +22,7 @@ public:
     bool teamIsFull() const;
     void onCastingFailed();
     void alertReadyForCast(AIPlayer &player);
-    void leaveItemsForCast(AIPlayer &player);
+    void leaveItemsForCast();
     void broadcastSync();
 
     objects_t neededObjects(size_t custom = 0);

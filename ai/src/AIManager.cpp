@@ -3,7 +3,7 @@
 //
 
 #include <chrono>
-#include <network/AIData.h>
+#include "network/AIData.h"
 #include "AIManager.h"
 
 objects_t const AIManager::levels[] = {
@@ -122,21 +122,25 @@ void AIManager::alertReadyForCast(AIPlayer &caster) {
     _currentElevation = objects_t(levels[_level - 1]);
 }
 
-void AIManager::leaveItemsForCast(AIPlayer &player) {
-    for (auto &keyset: _currentElevation) {
-        ObjectType needed = keyset.first;
-        size_t count = keyset.second;
-        size_t playerCount = player.getObjects().at(needed);
+void AIManager::leaveItemsForCast() {
+    for (auto &keypair: _players) {
+        auto &player = *keypair.second;
 
-        if (playerCount > count)
-            playerCount = count;
+        for (auto &keyset: _currentElevation) {
+            ObjectType needed = keyset.first;
+            size_t count = keyset.second;
+            size_t playerCount = player.getObjects().at(needed);
 
-        if (playerCount > 0) {
-            std::string serialized = data::serialize(needed);
+            if (playerCount > count)
+                playerCount = count;
 
-            for (size_t i = 0; i < playerCount; ++i)
-                player.request(LEAVE, serialized);
-            player.delItem(needed, playerCount);
+            if (playerCount > 0) {
+                std::string serialized = data::serialize(needed);
+
+                for (size_t i = 0; i < playerCount; ++i)
+                    player.request(LEAVE, serialized);
+                player.delItem(needed, playerCount);
+            }
         }
     }
 }

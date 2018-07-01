@@ -14,6 +14,7 @@ void BasicAI::onSuccess(AIAction action) {
 
     switch (action) {
         case LOOK:
+
             if (moveAndDropItem()) break;
             _player->request(MOVE_FORWARD);
             _player->request(LOOK);
@@ -100,15 +101,17 @@ size_t BasicAI::neededFood() {
 bool BasicAI::enoughResourcesForCast(AIAction action) {
     if (!_manager->neededObjects().empty() && _player->getState() == AIPlayer::WORKING) return false;
 
+    if (_manager->getLevel() == 2)
+        printf("lol\n");
     if (_player->getState() == AIPlayer::CASTING)
         return true;
 
     if (_player->getState() == AIPlayer::WORKING) {
         _manager->alertReadyForCast(*_player);
-        _manager->broadcastSync();
+        _player->request(BROADCAST, _manager->getTeamName());
     }
 
-    if (action == MOVE_FORWARD || action == MOVE_LEFT || action == MOVE_RIGHT || action == NONE) {
+    if (action != BROADCAST) {
         if (!_player->gotPendingTasks()) {
             _player->readyToBroadcast() = true;
             _manager->broadcastSync();
@@ -118,7 +121,7 @@ bool BasicAI::enoughResourcesForCast(AIAction action) {
 
     if (_player->getState() == AIPlayer::CASTER_READY) {
         if (_manager->everyoneAreReadyToCast()){
-            _manager->leaveItemsForCast(*_player);
+            _manager->leaveItemsForCast();
             _player->request(CAST);
         }
     }
@@ -129,10 +132,6 @@ bool BasicAI::enoughResourcesForCast(AIAction action) {
         if (_player->getState() != AIPlayer::READY_TO_LEAVE_ITEMS &&
                  _player->getState() != AIPlayer::READY_TO_CAST)
             _player->getState() = AIPlayer::READY_TO_LEAVE_ITEMS;
-        else if (_manager->everyoneAreReadyToCast() && _player->getState() == AIPlayer::READY_TO_LEAVE_ITEMS) {
-            _manager->leaveItemsForCast(*_player);
-            _player->getState() = AIPlayer::READY_TO_CAST;
-        }
     }
     return true;
 }
