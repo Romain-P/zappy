@@ -32,6 +32,18 @@ void send_pic(player_t *player, size_t count, int *tab)
 	free(packet);
 }
 
+void show_inventory(player_t *player)
+{
+	packet_pin_t *packet = malloc(sizeof(*packet));
+
+	if (packet == NULL)
+		exit(84);
+	packet->player_number = player->client->id;
+	packet->cmd = strdup("pin");
+	pin_handler(player, packet);
+	free(packet);
+}
+
 packet_pic_t *pic_deserialize(char **args)
 {
 	packet_pic_t *packet = malloc(sizeof(*packet));

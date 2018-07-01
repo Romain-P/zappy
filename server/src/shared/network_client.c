@@ -20,8 +20,6 @@ void network_client_free(void *ptr)
 {
 	network_client_t *client = ptr;
 
-	//if (client->bstate != FREED)
-		//free(client->buffer);
 	free(client);
 }
 

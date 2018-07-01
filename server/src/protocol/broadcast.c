@@ -9,25 +9,6 @@
 #include "util.h"
 #include "zappy.h"
 
-/*player_t  *correct_orientation_player(player_t *player)
-{
-	player_t *p1 = malloc(sizeof(player_t));
-
-	if (p1 == NULL)
-		exit(84);
-	p1->x = player->x;
-	p1->y = player->y;
-	if (player->orientation == 1)
-		p1->orientation = 0;
-	if (player->orientation == 3)
-		p1->orientation = 1;
-	if (player->orientation == 2)
-		p1->orientation = 3;
-	if (player->orientation == 4)
-		p1->orientation = 2;
-	return (p1);
-}*/
-
 int get_sound(player_t *emitter, player_t *receiver)
 {
 	tile_t d;
@@ -72,7 +53,6 @@ packet_broadcast_t *broadcast_deserialize(char **args)
 	size_t i = 0;
 
 	if (str_array_length(args) != 1) {
-		puts("mé");
 		return (NULL);
 	}
 	if (packet == NULL)

@@ -9,15 +9,16 @@
 #include "util.h"
 #include "zappy.h"
 
-static void send_players(player_t *player) {
-    iter_t *it;
-    player_t *each;
+static void send_players(player_t *player)
+{
+	iter_t *it;
+	player_t *each;
 
-    for (it = iter_begin(&server.players); it; iter_next(it)) {
-        each = it->data;
-        if (player != each)
-            send_pnw(each);
-    }
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		each = it->data;
+		if (player != each)
+			send_pnw(each);
+	}
 }
 
 packet_welcome_t *welcome_deserialize(char **args)
@@ -32,10 +33,10 @@ packet_welcome_t *welcome_deserialize(char **args)
 bool welcome_handler(player_t *player, packet_welcome_t *packet)
 {
 	player->is_gui = 1;
-    send_msz(player);
-    send_tna(player);
-    send_players(player);
-    send_bct(player);
+	send_msz(player);
+	send_tna(player);
+	send_players(player);
+	send_bct(player);
 	return (true);
 }
 

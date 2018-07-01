@@ -46,7 +46,7 @@ void set_type(char *str, char *type, size_t nb, size_t *tmp)
 			strcat(str, " ");
 		i += 1;
 	}
-	*tmp =1;
+	*tmp = 1;
 }
 
 void increment_ressource(packet_look_t *packet, resource_type_t type)

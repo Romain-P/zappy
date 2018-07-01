@@ -22,7 +22,7 @@ packet_forward_t *forward_deserialize(char **args)
 bool forward_handler(player_t *player, packet_forward_t *packet)
 {
 	size_t tile;
-	
+
 	if (!packet->delayed) {
 		delay(packet,
 		(handler_t) &forward_handler, player, 7);

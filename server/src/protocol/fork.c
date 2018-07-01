@@ -48,7 +48,8 @@ void add_spawn_team(player_t *player, packet_fork_t *packet)
 	spawn->y = player->y;
 	(player->team)->spawn.size += 1;
 	list_add(&(player->team)->spawn, spawn);
-	for (iter_t *it = iter_begin(&server.pending_players); it; iter_next(it)) {
+	for (iter_t *it = iter_begin(&server.pending_players);
+			it; iter_next(it)) {
 		each = it->data;
 		if (player->team == each->team) {
 			send_unwrapped(each->client,

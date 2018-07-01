@@ -51,7 +51,7 @@
 	typedef struct packet_set_s packet_set_t;
 	typedef struct packet_incantation_s packet_incantation_t;
 	typedef struct packet_welcome_s packet_welcome_t;
-	
+
 	struct __attribute__((__packed__)) packet_example_s {
 		PACKET_HEADER;
 		int64_t some;

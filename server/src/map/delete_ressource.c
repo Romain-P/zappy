@@ -31,7 +31,7 @@ size_t check_condition_incantation(player_t *player)
 	count = check_ressource_tile(player);
 	if (count != 1)
 		send_pic(player, nb, tab);
-	return (check_ressource_tile(player));	
+	return (check_ressource_tile(player));
 }
 
 size_t get_need_level(size_t level)

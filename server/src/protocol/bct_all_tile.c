@@ -27,7 +27,7 @@ void send_to_all_bct(packet_bct_tile_t *packet)
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
 		if (list->is_gui == 1)
-			send_packet(list->client, packet,0);
+			send_packet(list->client, packet, 0);
 	}
 }
 

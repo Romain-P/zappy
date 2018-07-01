@@ -24,8 +24,9 @@ bool inventory_handler(player_t *player, packet_inventory_t *packet)
 		delay(packet,
 		(handler_t) &inventory_handler, player, 1);
 	} else {
-		sprintf(packet->result, "[food %zu, linemate %zu, deraumere %zu,"
-			" sibur %zu, mendiane %zu, phiras %zu, thystame %zu]",
+		sprintf(packet->result,
+		"[food %zu, linemate %zu, deraumere %zu,"
+		" sibur %zu, mendiane %zu, phiras %zu, thystame %zu]",
 		(player->inventory).q0,
 		(player->inventory).q1,
 		(player->inventory).q2,

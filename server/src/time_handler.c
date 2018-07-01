@@ -59,7 +59,6 @@ void check_delayed_tasks(void)
 			waiting->packet);
 			list_remove(&server.pending, waiting);
 			waiting->player->waiting_commands--;
-			//free(waiting->packet);
 			free(waiting);
 		} else
 			break;
