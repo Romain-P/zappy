@@ -13,7 +13,8 @@ zappy_instance_t zappy_instance = {
         .ai_handlers = {0},
         .gui_handlers = {0},
         .connected = false,
-
+        .onConnect = 0,
+        .onDisconnect = 0
 };
 
 static void on_close() {}
@@ -85,6 +86,13 @@ EXPORT session_t zappy_new_connection() {
 }
 
 EXPORT void zappy_sync_poll() {
+    if (zappy_instance.onDisconnect) {
+        zappy_instance.gui_handlers.on_disconnect(zappy_instance.onDisconnect);
+        zappy_instance.onDisconnect = 0;
+    } else if (zappy_instance.onConnect) {
+        zappy_instance.gui_handlers.on_connect(zappy_instance.onConnect);
+        zappy_instance.onConnect = 0;
+    }
     list_t *queue = &zappy_instance.pending;
     size_t size;
     pthread_mutex_lock(&zappy_instance.locker);

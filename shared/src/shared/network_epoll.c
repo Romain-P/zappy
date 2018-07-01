@@ -26,10 +26,7 @@ void epoll_listen(session_t epoll_instance, epoll_config_t *config, void *networ
 
         if (config->on_unblocked)
             config->on_unblocked();
-        if (rdy < 0) {
-            config->on_data(-1, network_ptr);
-            break;
-        } else if (rdy) {
+        if (rdy) {
             int client_notifier = ev.data.fd;
             config->on_data((session_t) client_notifier, network_ptr);
         }

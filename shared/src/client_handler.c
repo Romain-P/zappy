@@ -15,8 +15,11 @@ static void on_connect(network_client_t *client) {
         pthread_mutex_lock(&zappy_instance.locker);
         zappy_instance.connected = true;
     }
-        pthread_mutex_unlock(&zappy_instance.locker);
-    zappy_instance.gui_handlers.on_connect(client->id);
+    pthread_mutex_unlock(&zappy_instance.locker);
+    if (!zappy_instance.thread_sync)
+        zappy_instance.gui_handlers.on_connect(client->id);
+    else
+        zappy_instance.onConnect = client->id;
 }
 
 static void on_disconnect(network_client_t *client) {

@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <sys/epoll.h>
+#include <lib.h>
 #include "network.h"
 #include "network_epoll.h"
 #include "stderr.h"
@@ -50,7 +51,10 @@ static void read_data(network_instance_t *instance, int client) {
         network_client_read(instance, found, buffer, (size_t) bytes);
 
     if (found->closed) {
-        instance->client_handler.on_disconnect(found);
+        if (!zappy_instance.thread_sync)
+            instance->client_handler.on_disconnect(found);
+        else
+            zappy_instance.onDisconnect = found->id;
         list_remove(&instance->clients, found);
         network_client_free(found);
 
@@ -65,9 +69,11 @@ static void on_client_ready(session_t client, void *server_ptr) {
     if (client == ERROR) {
         for (iter_t *it = iter_begin(&server->clients); it; iter_next(it)) {
             network_client_t *nc = it->data;
-            server->client_handler.on_disconnect(nc);
+            if (!zappy_instance.thread_sync)
+                server->client_handler.on_disconnect(nc);
             network_client_close(nc);
         }
+        zappy_instance.onDisconnect = client;
         list_clear(&server->clients, &network_client_free);
         server->config->on_server_close();
     }

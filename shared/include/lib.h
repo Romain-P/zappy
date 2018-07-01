@@ -18,6 +18,8 @@ struct zappy_instance_s {
     bool thread_sync;
     pthread_mutex_t locker;
     bool connected;
+    uint32_t onDisconnect;
+    uint32_t onConnect;
 };
 
 extern zappy_instance_t zappy_instance;

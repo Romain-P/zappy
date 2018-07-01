@@ -13,8 +13,8 @@ packet_message_t *deserialize_message(char **args) {
         return (NULL);
     size_t len = strlen(args[0]);
     char tile_str[len];
-    strcpy(packet->text, args[0]);
-    tile_str[len - 2] = 0;
+    strcpy(tile_str, args[0]);
+    tile_str[len - 1] = 0;
     parse_uint(tile_str, &packet->tile);
     strcpy(packet->text, args[1]);
     return (packet);

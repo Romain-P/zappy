@@ -198,13 +198,14 @@ void send_packet(session_t id, void *msg) {
     for (iter_t *it = iter_begin(&buffer); it; iter_next(it)) {
         char *arg = it->data;
         size_t len = strlen(arg) + 1;
-        packet = realloc(packet, len);
+        packet = realloc(packet, len + 1);
         strcpy(packet + pos, ZAPPY_PARAM_SEPARATOR);
         strcpy(packet + pos + 1, arg);
         pos += len;
     }
-    packet = realloc(packet, strlen(packet) + 1);
+    packet = realloc(packet, strlen(packet) + 2);
     packet[pos] = '\n';
+    packet[pos] = 0;
     network_client_t *client = network_client_find(&zappy_instance.net.clients, id);
     network_client_send(client, packet, strlen(packet));
     free(packet);
