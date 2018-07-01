@@ -18,8 +18,8 @@ void send_pie(player_t *player)
 
 	if (packet == NULL)
 		exit(84);
-	sprintf(packet, "pie %zu %zu %zu",
-	player->x, player->y, player->level);
+	sprintf(packet, "pie %zu %zu %zu %zu",
+	player->x, player->y, player->level, count);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
 		if (list->is_gui)

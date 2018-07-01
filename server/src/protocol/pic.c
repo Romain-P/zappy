@@ -19,8 +19,8 @@ void send_pic(player_t *player, size_t count, int *tab)
 
 	if (packet == NULL)
 		exit(84);
-	sprintf(packet, "pic %zu %zu %zu",
-	player->x, player->y, player->level + 1);
+	sprintf(packet, "pic %zu %zu %zu %zu",
+	player->x, player->y, player->level + 1, count);
 	while (i < count)
 		sprintf(packet + strlen(packet),
 		" %d", tab[i++]);

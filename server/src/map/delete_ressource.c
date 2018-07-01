@@ -23,9 +23,9 @@ size_t check_condition_incantation(player_t *player)
 		list = it->data;
 		if (list->x == player->x && list->y == player->y &&
 		player->level == list->level)
-			tab[count++] = player->client->id;
+			tab[count++] = list->client->id;
 	}
-	if (count != get_need_level(player->level))
+	if (count < get_need_level(player->level))
 		return (1);
 	nb = count;
 	count = check_ressource_tile(player);

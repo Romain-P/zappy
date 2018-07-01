@@ -27,7 +27,7 @@ static void send_to_all_tile(char *message, player_t *player)
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
 		if (list->x == player->x && list->y == player->y)
-			send_unwrapped(player->client, message);
+			send_unwrapped(list->client, message);
 	}
 }
 
