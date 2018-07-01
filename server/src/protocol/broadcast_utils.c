@@ -58,7 +58,7 @@ int get_valid_broadcast_direction(int orientation)
 	return (orientation);
 }
 
-int get_direction_by_angle(double angle, int orien)
+int get_direction_by_angle(double angle, size_t orien)
 {
 	if (angle >= (-M_PI_4 - (M_PI / 8)) &&
 	angle <= (-M_PI_4 + (M_PI / 8)))

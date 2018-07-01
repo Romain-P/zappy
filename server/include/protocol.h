@@ -355,7 +355,7 @@
 	int get_good_orientation(int, size_t, int);
 	int get_broadcast_orientation(int, int, size_t);
 	int get_valid_broadcast_direction(int);
-	int get_direction_by_angle(double, int);
+	int get_direction_by_angle(double, size_t);
 	int get_sound_player(player_t *, player_t *);
 	player_t  *correct_orientation_player(player_t *);
 
