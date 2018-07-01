@@ -23,10 +23,8 @@ static void on_connect(network_client_t *client)
 	player->state = AWAIT_TEAM_NAME;
 	player->waiting_commands = 0;
 	list_add(&server.players, player);
-	player->is_gui = 1;
+	player->is_gui = 0;
 	send_unwrapped(client, "WELCOME");
-	send_msz(player);
-	send_tna(player);
 }
 
 static void on_disconnect(network_client_t *client)

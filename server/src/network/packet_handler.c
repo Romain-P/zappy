@@ -255,7 +255,7 @@ int check_command_packet(const message_t *message,
 	player_t *player = find_player(client);
 
 	if (!strcmp(message->named, cmd)) {
-		if (player->state != VALID_PLAYER) {
+		if (player->state != VALID_PLAYER && strcmp(cmd, "WELCOME")) {
 			network_client_close(client);
 			return (1);
 		}

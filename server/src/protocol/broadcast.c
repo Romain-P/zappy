@@ -37,7 +37,7 @@ void loop_broadcast_player(player_t *player, char *text)
 	send_pbc(player, text);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		if (list->client->id != player->client->id) {
+		if (list->client->id != player->client->id && !player->is_gui) {
 			sprintf(packet, "message %d, %s",
 			get_sound_player(player, list), text);
 			send_unwrapped(list->client, packet);
