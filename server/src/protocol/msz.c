@@ -9,6 +9,16 @@
 #include "util.h"
 #include "zappy.h"
 
+void send_msz(player_t *player)
+{
+	packet_msz_t *packet = malloc(sizeof(packet_msz_t));
+
+	if (packet == NULL)
+		exit(84);
+	packet->cmd = strdup("msz");
+	msz_handler(player, packet);
+}
+
 bool msz_handler(player_t *player, packet_msz_t *packet)
 {
 	if (player->is_gui == 0)

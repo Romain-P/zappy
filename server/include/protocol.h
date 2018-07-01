@@ -373,6 +373,7 @@
 	void set_ressource(player_t *, size_t);
 
 	// MSZ COMMAND
+	void send_msz(player_t *);
 	bool msz_handler(player_t *, packet_msz_t *);
 	packet_msz_t *msz_deserialize(char **);
 	void msz_serialize(packet_msz_t *, list_t *);
