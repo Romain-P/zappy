@@ -76,8 +76,6 @@ objects_t AIManager::neededObjects(size_t custom) {
     objects_t needed(levels[level - 1]);
     objects_t cleared;
 
-    if (true)
-        return cleared;
     for (auto &pair: _players) {
         auto &player = pair.second;
 
@@ -106,7 +104,7 @@ size_t &AIManager::getLevel() {
 }
 
 bool AIManager::mustFork() {
-    if (_forks < data::PLAYERS_FOR_WIN) {
+    if (_forks < data::PLAYERS_FOR_WIN - 1) {
         _forks++;
         return true;
     }
@@ -116,7 +114,8 @@ bool AIManager::mustFork() {
 void AIManager::alertReadyForCast(AIPlayer &caster) {
     for (auto &keyset: _players) {
         auto &player = keyset.second;
-        player->abortTasks();
+        if (player.get() != &caster)
+            player->abortTasks();
         player->getState() = AIPlayer::MOVING_TO_CASTER;
     }
     caster.getState() = AIPlayer::CASTER_READY;

@@ -123,8 +123,8 @@ namespace AINetworkController {
 
                     for (size_t i = 0; i < data::PLAYERS_FOR_WIN - size; ++i)
                         zappy_new_connection();
-                    player.getNetworkState() = AIPlayer::AWAIT_MAP_SIZE;
                 }
+                player.getNetworkState() = AIPlayer::AWAIT_MAP_SIZE;
                 break;
             case AINetworkClient::AWAIT_MAP_SIZE:
                 player.getNetworkState() = AINetworkClient::READY;

@@ -85,12 +85,9 @@ BasicAI::ItemTarget BasicAI::findNearestInterestingCell(objects_t &needed, cells
 }
 
 bool BasicAI::mustFork() {
-    static bool must = true;
     if (_manager->mustFork()) {
-    //if (must) {
         _player->request(FORK);
         _player->request(MOVE_FORWARD);
-        must = false;
         return true;
     }
     return false;
