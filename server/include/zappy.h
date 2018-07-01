@@ -146,7 +146,7 @@
 
 	struct waiting_s {
 		player_t *player;
-		time_t start_time;
+		double start_time;
 		int tics;
 		handler_t command_handler;
 		void *packet;
@@ -179,7 +179,7 @@
 	void send_packet(network_client_t *, void *, int);
 	void send_unwrapped(network_client_t *, char *);
 	player_t *find_player(network_client_t *);
-	int to_seconds(int);
+	double to_seconds(double);
 	bool delay(void *, handler_t, player_t *, int);
 	void check_delayed_tasks();
 

@@ -39,7 +39,7 @@ void loop_broadcast_player(player_t *player, char *text)
 		list = it->data;
 		if (list->client->id != player->client->id && !list->is_gui) {
 			sprintf(packet, "message %d, %s",
-			get_sound(list, player), text);
+			get_sound(player, list), text);
 			send_unwrapped(list->client, packet);
 		}
 	}
