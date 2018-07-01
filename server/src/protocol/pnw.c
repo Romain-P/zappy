@@ -21,7 +21,7 @@ void send_pnw(player_t *player)
 		exit(84);
 	sprintf(packet, "pnw %d %zu %zu %zu %zu %s",
 	(player->client)->id, player->x, player->y,
-	convert_orientation(player->orientation), player->level,
+	player->orientation - 1, player->level,
 	(player->team)->name);
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
