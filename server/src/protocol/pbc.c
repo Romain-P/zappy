@@ -65,8 +65,8 @@ void change_value(int *x, int *y, int dx, int dy)
 
 void loop_segment2(int *x, int *y, int save_x, int save_y)
 {
-	int map_x = (server.map).width;
-	int map_y = (server.map).height;
+	int map_x = (int) (server.map).width;
+	int map_y = (int) (server.map).height;
 	int value = set_segment(save_x - map_x, save_y + map_y, *x, *y);
 
 	if (value == 1)
