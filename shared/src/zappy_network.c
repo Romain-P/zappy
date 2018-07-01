@@ -12,6 +12,7 @@
 #include <pthread.h>
 #include <stderr.h>
 #include <time.h>
+#include <linked_list.h>
 
 zappy_instance_t zappy_instance = {
 		.pending = list_init,
