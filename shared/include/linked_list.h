@@ -22,8 +22,10 @@
 	#define iter_value(it_ptr) ((it)->data)
 	#define list_init (list_t) {NULL, NULL, 0}
 
-	#define ERROR_OUTOFBOUND ("list_at error: index %zu out of bound, list size: %zu\n")
-	#define ERROR_NULL ("data_null_check: NULL pointer cant be added or removed from a list\n")
+	#define ERROR_OUTOFBOUND \
+	("list_at error: index %zu out of bound, list size: %zu\n")
+	#define ERROR_NULL \
+	("data_null_check: NULL pointer cant be added or removed from a list\n")
 
 	struct iter_s {
 		ptr_t data;
@@ -36,14 +38,15 @@
 		size_t size;
 	};
 
-	list_t *list_new();
-	void list_add(list_t *list, ptr_t elem);
-	void list_remove(list_t *list, ptr_t elem);
-	ptr_t list_at(list_t *list, size_t index);
-	ptr_t list_pop(list_t *list);
-	void list_clear(list_t *list, free_callback_t free_it);
-	void list_insert(list_t *list, ptr_t data, predicate_t callback);
-
-
+	list_t *list_new(void);
+	void list_add(list_t *, ptr_t);
+	void list_remove(list_t *, ptr_t);
+	ptr_t list_at(list_t *, size_t);
+	void list_clear(list_t *, free_callback_t);
+	void list_insert(list_t *, ptr_t, predicate_t);
+	void check_data_nullity(ptr_t);
+	void check_nullity(list_t *);
+	bool list_exists(list_t *, ptr_t);
+	void set_new(list_t *, iter_t *, iter_t *, ptr_t);
 #endif
 
