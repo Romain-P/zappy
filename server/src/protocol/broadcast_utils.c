@@ -93,9 +93,8 @@ int get_sound_player(player_t *p1, player_t *p2)
 
 	pl1 = correct_orientation_player(p1);
 	pl2 = correct_orientation_player(p2);
-	x = pl1->x - pl2->x;
-	y = pl1->y - pl2->y;
-	loop_segment(&x, &y, (server.map).width, (server.map).height);
+	x = (int) pl1->x - (int) pl2->x;
+	y = (int) pl1->y - (int) pl2->y;
 	valid =
 	get_valid_broadcast_direction(
 		get_broadcast_orientation(x, y, pl2->orientation));
