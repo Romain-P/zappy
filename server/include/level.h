@@ -9,8 +9,9 @@
 	#define LEVEL_H_
 
 	#include "zappy.h"
+	#include "protocol.h"
 
-	size_t check_condition_incantation(player_t *);
+	size_t check_condition_incantation(player_t *, packet_incantation_t *packet);
 	size_t check_ressource_tile(player_t *);
 	size_t get_ressource_tile_incan(const level_t *, size_t, size_t);
 	size_t compare_level(const level_t *, level_t *);

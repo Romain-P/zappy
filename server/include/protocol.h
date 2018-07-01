@@ -143,6 +143,7 @@
 		size_t incantation_level;
 		size_t player_nb1;
 		size_t player_nb2;
+		int *player;
 	};
 
 	struct __attribute__((__packed__)) packet_pie_s {
@@ -246,6 +247,8 @@
 
 	struct __attribute__((__packed__)) packet_incantation_s {
 		PACKET_HEADER;
+		int *player;
+		size_t nb;
 	};
 
 	struct __attribute__((__packed__)) packet_eject_s {
@@ -451,7 +454,7 @@
 	packet_pie_t *pie_deserialize(char **);
 	bool pie_handler(player_t *, packet_pie_t *);
 	void pie_serialize(packet_pie_t *, list_t *);
-	void send_pie(player_t *);
+	void send_pie(player_t *, packet_incantation_t *);
 
 	// PFK COMMAND
 	packet_pfk_t *pfk_deserialize(char **);
