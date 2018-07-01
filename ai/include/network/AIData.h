@@ -27,6 +27,7 @@ namespace data {
     ObjectType deserialize(std::string const &type);
 
     vision_t const &getVisionRange();
+    std::string concatenateUnwrapped(char **unwrapped);
 }
 
 #endif //ZAPPY_MAPTYPE_H

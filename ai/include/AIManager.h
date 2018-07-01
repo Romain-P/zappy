@@ -17,13 +17,13 @@ class AIManager {
 public:
 
     bool mustFork();
-    bool askRemainingConnections();
-    void unblockAsking();
     bool everyoneAreReadyToCast() const;
     bool noneReadyToCast() const;
+    bool teamIsFull() const;
     void onCastingFailed();
     void alertReadyForCast(AIPlayer &player);
     void leaveItemsForCast(AIPlayer &player);
+    void broadcastSync();
 
     objects_t neededObjects(size_t custom = 0);
 
@@ -43,6 +43,7 @@ private:
     size_t _forks = 0;
     bool _ask = true;
     objects_t _currentElevation;
+    ssize_t _broadcast;
 };
 
 

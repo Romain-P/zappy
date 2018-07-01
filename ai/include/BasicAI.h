@@ -23,17 +23,13 @@ public:
 
 private:
 
-    static constexpr size_t MIN_FOOD = 10;
-    static constexpr size_t ACTIONS_COUNT_BEFORE_INVENTORY = 10;
-
-    size_t _actionsBeforeCheckFood = 0;
+    static constexpr size_t MIN_FOOD = 0;
 
     void defaultRotation();
-    bool enoughResourcesForCast();
+    bool enoughResourcesForCast(AIAction action);
     bool mustFork();
     bool moveAndDropItem();
     size_t neededFood();
-    void updateInventory();
     ItemTarget findNearestInterestingCell(objects_t &needed, cells_t &cells);
 };
 

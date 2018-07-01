@@ -20,7 +20,9 @@ public:
             AINetworkClient(id),
             _inventory(),
             _ai(std::make_unique<BasicAI>(*this)),
-            _looked()
+            _looked(),
+            _lastSource(DIR_UNKNOWN),
+            _readyToBroadcast(true)
     {
         for (size_t type = LINEMATE; type != UNDEFINED; type++)
             _inventory[static_cast<ObjectType>(type)] = 0;
@@ -38,6 +40,7 @@ public:
     void addItem(ObjectType type, size_t count = 1);
     void delItem(ObjectType type, size_t count = 1);
     void updateItems(objects_t &&items);
+    bool &readyToBroadcast();
 
     objects_t const &getObjects() const;
     State &getState();
@@ -51,6 +54,7 @@ private:
     std::unique_ptr<AbstractAI> _ai;
     cells_t _looked;
     SoundSource _lastSource;
+    bool _readyToBroadcast;
 };
 
 

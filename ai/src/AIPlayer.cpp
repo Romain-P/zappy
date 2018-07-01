@@ -36,3 +36,7 @@ cells_t &AIPlayer::getLooked() {
 SoundSource &AIPlayer::getLastSoundSource() {
     return _lastSource;
 }
+
+bool &AIPlayer::readyToBroadcast() {
+    return _readyToBroadcast;
+}

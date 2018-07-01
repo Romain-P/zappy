@@ -70,10 +70,10 @@ int main(int ac, char **args) {
             &AINetworkController::onConnect,
             &AINetworkController::onDisconnect,
             &AINetworkController::onWelcome,
-            &AINetworkController::onLookReply,
+            nullptr,
             &AINetworkController::onBroadcast,
-            &AINetworkController::onConnectNumberReply,
-            &AINetworkController::onInventoryReply,
+            nullptr,
+            nullptr,
             &AINetworkController::onUnwrapped
     };
     if (!zappy_init_connector_ai(&host[0], port, handlers, 5)) {

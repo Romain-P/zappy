@@ -18,6 +18,8 @@ void AbstractAI::leaveObject(ObjectType type, size_t count) {
 }
 
 void AbstractAI::gotoTeamEmitter() {
+    if (_player->gotPendingTasks()) return;
+
     switch(_player->getLastSoundSource()) {
         case DIR_TOP_LEFT:
             _player->request(MOVE_FORWARD);

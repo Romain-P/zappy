@@ -34,7 +34,8 @@ enum AIAction {
     EJECT,
     TAKE,
     LEAVE,
-    CAST
+    CAST,
+    NONE
 };
 
 enum SoundSource {
@@ -46,7 +47,8 @@ enum SoundSource {
     DIR_BOTTOM,
     DIR_BOTTOM_RIGHT,
     DIR_RIGHT,
-    DIR_TOP_RIGHT
+    DIR_TOP_RIGHT,
+    DIR_UNKNOWN
 };
 
 struct VisionLine {

@@ -27,6 +27,8 @@ void AINetworkClient::request(AIAction action, std::string const &param) {
             "Incantation"
     };
 
+    if (_state != READY) return;
+
     std::string data(serialized[action]);
     if (!param.empty()) {
         data += " ";

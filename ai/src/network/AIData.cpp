@@ -50,6 +50,7 @@ namespace data {
         for (size_t i = 0; i < UNDEFINED; ++i)
             if (!strcmp(types[i], type.c_str()))
                 return static_cast<ObjectType>(i);
+        printf("undefined type: %s", type.c_str());
         return UNDEFINED;
     }
 
@@ -67,7 +68,11 @@ namespace data {
                 { THYSTAME, 0 },
                 { FOOD, 0 }
         };
+
         objects_t list(base);
+
+        serialized.erase(0, 1);
+        serialized.erase(serialized.size() - 1, 1);
 
         auto items = split(serialized, DELIMITER_INVENTORY_ITEM);
         for (auto &item: items) {
@@ -85,6 +90,8 @@ namespace data {
     cells_t deserializeCells(std::string &&serialized) {
         cells_t list;
 
+        serialized.erase(0, 1);
+        serialized.erase(serialized.size() - 1, 1);
         auto cells = split(serialized, DELIMITER_CELL, false);
         for (auto &cell: cells) {
             auto items = split(cell, DELIMITER_CELL_OBJECT);
@@ -122,5 +129,17 @@ namespace data {
             }
         }
         return vision;
+    }
+
+    std::string concatenateUnwrapped(char **unwrapped) {
+        std::string concatenated;
+
+        for (size_t i = 0; unwrapped[i]; ++i) {
+            if (i)
+                concatenated += " ";
+            concatenated += unwrapped[i];
+        }
+
+        return concatenated;
     }
 }

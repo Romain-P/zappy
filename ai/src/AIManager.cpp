@@ -37,7 +37,8 @@ bool AIManager::everyoneAreReadyToCast() const {
 
     for (auto &keyset: _players) {
         auto &player = keyset.second;
-        if (player->getState() != AIPlayer::READY_TO_LEAVE_ITEMS &&
+        if (player->getState() != AIPlayer::CASTER_READY &&
+                player->getState() != AIPlayer::READY_TO_LEAVE_ITEMS &&
                 player->getState() != AIPlayer::READY_TO_CAST) {
             ready = false;
             break;
@@ -75,6 +76,8 @@ objects_t AIManager::neededObjects(size_t custom) {
     objects_t needed(levels[level - 1]);
     objects_t cleared;
 
+    if (true)
+        return cleared;
     for (auto &pair: _players) {
         auto &player = pair.second;
 
@@ -82,14 +85,18 @@ objects_t AIManager::neededObjects(size_t custom) {
             ObjectType type = keyset.first;
             size_t count = keyset.second;
 
+            if (type == FOOD) continue;
+
             size_t &neededCount = needed.at(type);
             if (neededCount > 0)
                 neededCount -= count > neededCount ? neededCount : count;
             if (neededCount > 0)
                 cleared[type] = neededCount;
+            else if (cleared.find(type) != cleared.end())
+                cleared.erase(type);
         }
     }
-    if (mustFork() && cleared.empty() && level < data::PLAYER_MAX_LEVEL)
+    if (!teamIsFull() && cleared.empty() && level < data::PLAYER_MAX_LEVEL)
         return neededObjects(level + 1);
     return cleared;
 }
@@ -104,17 +111,6 @@ bool AIManager::mustFork() {
         return true;
     }
     return false;
-}
-
-bool AIManager::askRemainingConnections() {
-    bool needAsk = _ask && _players.size() < data::PLAYERS_FOR_WIN;
-    if (_ask)
-        _ask = !_ask;
-    return needAsk;
-}
-
-void AIManager::unblockAsking() {
-    _ask = true;
 }
 
 void AIManager::alertReadyForCast(AIPlayer &caster) {
@@ -142,6 +138,37 @@ void AIManager::leaveItemsForCast(AIPlayer &player) {
             for (size_t i = 0; i < playerCount; ++i)
                 player.request(LEAVE, serialized);
             player.delItem(needed, playerCount);
+        }
+    }
+}
+
+bool AIManager::teamIsFull() const {
+    for (auto &keyset: _players) {
+        auto &player = keyset.second;
+        if (player->getNetworkState() != AIPlayer::READY)
+            return false;
+    }
+    return true;
+}
+
+void AIManager::broadcastSync() {
+    bool rdy = true;
+    AIPlayer *caster = nullptr;
+
+    for (auto &keyset: _players) {
+        auto &p = keyset.second;
+
+        if (p->getNetworkState() == AIPlayer::READY && p->getState() != AIPlayer::CASTER_READY
+            && !p->readyToBroadcast()) {
+            rdy = false;
+        }
+        if (p->getState() == AIPlayer::CASTER_READY)
+            caster = p.get();
+    }
+    if (rdy && caster) {
+        caster->request(BROADCAST, _teamName);
+        for (auto &keyset: _players) {
+            keyset.second->readyToBroadcast() = false;
         }
     }
 }

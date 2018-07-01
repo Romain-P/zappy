@@ -10,7 +10,7 @@ BasicAI::BasicAI(AIPlayer &player) : AbstractAI(player, AINetworkController::man
 
 void BasicAI::onSuccess(AIAction action) {
     if (mustFork()) return;
-    if (enoughResourcesForCast()) return;
+    if (enoughResourcesForCast(action)) return;
 
     switch (action) {
         case LOOK:
@@ -21,23 +21,15 @@ void BasicAI::onSuccess(AIAction action) {
         case TAKE:
         case LEAVE:
             _player->request(INVENTORY);
-            _actionsBeforeCheckFood = 0;
             break;
-        case MOVE_FORWARD:
-        case MOVE_RIGHT:
-        case MOVE_LEFT:
-            updateInventory();
         default:
             defaultRotation();
             break;
     }
-
-    if (_manager->askRemainingConnections())
-        _player->request(CONNECT_NUMBER);
 }
 
 void BasicAI::onFailure(AIAction action) {
-    if (enoughResourcesForCast()) return;
+    if (enoughResourcesForCast(action)) return;
 
     switch (action) {
         default:
@@ -47,7 +39,8 @@ void BasicAI::onFailure(AIAction action) {
 }
 
 void BasicAI::defaultRotation() {
-    _player->request(LOOK);
+    if (!_player->gotPendingTasks())
+        _player->request(LOOK);
 }
 
 bool BasicAI::moveAndDropItem() {
@@ -92,9 +85,12 @@ BasicAI::ItemTarget BasicAI::findNearestInterestingCell(objects_t &needed, cells
 }
 
 bool BasicAI::mustFork() {
+    static bool must = true;
     if (_manager->mustFork()) {
+    //if (must) {
         _player->request(FORK);
         _player->request(MOVE_FORWARD);
+        must = false;
         return true;
     }
     return false;
@@ -104,38 +100,42 @@ size_t BasicAI::neededFood() {
     return MIN_FOOD - _player->getObjects().at(FOOD);
 }
 
-void BasicAI::updateInventory() {
-    if (_actionsBeforeCheckFood < ACTIONS_COUNT_BEFORE_INVENTORY)
-        _actionsBeforeCheckFood++;
-    else {
-        _player->request(INVENTORY);
-        _actionsBeforeCheckFood = ACTIONS_COUNT_BEFORE_INVENTORY;
-    }
-}
-
-bool BasicAI::enoughResourcesForCast() {
-    if (!_manager->neededObjects().empty() || _player->getState() != AIPlayer::WORKING) return false;
+bool BasicAI::enoughResourcesForCast(AIAction action) {
+    if (!_manager->neededObjects().empty() && _player->getState() == AIPlayer::WORKING) return false;
 
     if (_player->getState() == AIPlayer::CASTING)
         return true;
 
-    if (_player->getState() == AIPlayer::WORKING)
+    if (_player->getState() == AIPlayer::WORKING) {
         _manager->alertReadyForCast(*_player);
+        _manager->broadcastSync();
+    }
+
+    if (action == MOVE_FORWARD || action == MOVE_LEFT || action == MOVE_RIGHT || action == NONE) {
+        if (!_player->gotPendingTasks()) {
+            _player->readyToBroadcast() = true;
+            _manager->broadcastSync();
+        }
+        return true;
+    }
+
     if (_player->getState() == AIPlayer::CASTER_READY) {
-        if (!_manager->everyoneAreReadyToCast())
-            _player->request(BROADCAST, _manager->getTeamName());
-        else {
+        if (_manager->everyoneAreReadyToCast()){
             _manager->leaveItemsForCast(*_player);
             _player->request(CAST);
         }
     }
     else if (_player->getLastSoundSource() != ON_CELL)
         gotoTeamEmitter();
-    else if (_player->getState() != AIPlayer::READY_TO_LEAVE_ITEMS && _player->getState() != AIPlayer::READY_TO_CAST)
-        _player->getState() = AIPlayer::READY_TO_LEAVE_ITEMS;
-    else if (_manager->everyoneAreReadyToCast() && _player->getState() == AIPlayer::READY_TO_LEAVE_ITEMS) {
-        _manager->leaveItemsForCast(*_player);
-        _player->getState() = AIPlayer::READY_TO_CAST;
+    else {
+        _player->readyToBroadcast() = true;
+        if (_player->getState() != AIPlayer::READY_TO_LEAVE_ITEMS &&
+                 _player->getState() != AIPlayer::READY_TO_CAST)
+            _player->getState() = AIPlayer::READY_TO_LEAVE_ITEMS;
+        else if (_manager->everyoneAreReadyToCast() && _player->getState() == AIPlayer::READY_TO_LEAVE_ITEMS) {
+            _manager->leaveItemsForCast(*_player);
+            _player->getState() = AIPlayer::READY_TO_CAST;
+        }
     }
     return true;
 }
