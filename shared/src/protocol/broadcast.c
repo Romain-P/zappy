@@ -10,5 +10,4 @@
 
 void serialize_broadcast(packet_broadcast_t *packet, list_t *buffer)
 {
-
 }
