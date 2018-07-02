@@ -14,8 +14,8 @@ void BasicAI::onSuccess(AIAction action) {
 
     switch (action) {
         case LOOK:
-
             if (moveAndDropItem()) break;
+            gotoRandomDirection();
             _player->request(MOVE_FORWARD);
             _player->request(LOOK);
             break;
@@ -33,6 +33,13 @@ void BasicAI::onFailure(AIAction action) {
     if (enoughResourcesForCast(action)) return;
 
     switch (action) {
+        case LOOK:
+        case TAKE:
+            gotoRandomDirection();
+            _player->request(MOVE_FORWARD);
+            gotoRandomDirection(false);
+            _player->request(MOVE_FORWARD);
+            break;
         default:
             defaultRotation();
             break;
@@ -101,8 +108,6 @@ size_t BasicAI::neededFood() {
 bool BasicAI::enoughResourcesForCast(AIAction action) {
     if (!_manager->neededObjects().empty() && _player->getState() == AIPlayer::WORKING) return false;
 
-    if (_manager->getLevel() == 2)
-        printf("lol\n");
     if (_player->getState() == AIPlayer::CASTING)
         return true;
 

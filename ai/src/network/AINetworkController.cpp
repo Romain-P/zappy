@@ -80,6 +80,8 @@ namespace AINetworkController {
     void onCastingSuccess(AIPlayer &player, char **data) {
         manager.getLevel() = static_cast<size_t>(atoi(data[2]));
         player.getState() = AIPlayer::WORKING;
+        if (player.gotPendingTasks())
+            player.popPending();
         player.getAI().onSuccess(CAST);
     }
 

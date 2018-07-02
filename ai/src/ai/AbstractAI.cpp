@@ -3,6 +3,7 @@
 //
 
 #include <network/AIData.h>
+#include <random>
 #include "AbstractAI.h"
 #include "AIPlayer.h"
 #include "AIManager.h"
@@ -85,4 +86,22 @@ void AbstractAI::moveToTile(size_t tileId) {
         _player->request(MOVE_LEFT);
     for (size_t i = 0; i < std::abs(right); ++i)
         _player->request(MOVE_FORWARD);
+}
+
+void AbstractAI::gotoRandomDirection(bool backward) {
+    std::mt19937 rng;
+    rng.seed(std::random_device()());
+    std::uniform_int_distribution<std::mt19937::result_type> dist(1, backward ? 3 : 2);
+    size_t result = dist(rng);
+
+    switch (result) {
+        case 1:
+        case 2:
+            _player->request(static_cast<AIAction>(result));
+            break;
+        case 3:
+            _player->request(MOVE_RIGHT);
+            _player->request(MOVE_RIGHT);
+            break;
+    }
 }

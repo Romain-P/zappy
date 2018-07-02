@@ -25,6 +25,7 @@ protected:
     void leaveObject(ObjectType type, size_t count = 1);
     void gotoTeamEmitter();
     void moveToTile(size_t tileId);
+    void gotoRandomDirection(bool backward = true);
 
     AIPlayer *_player;
     AIManager *_manager;

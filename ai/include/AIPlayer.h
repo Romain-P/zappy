@@ -22,7 +22,7 @@ public:
             _ai(std::make_unique<BasicAI>(*this)),
             _looked(),
             _lastSource(DIR_UNKNOWN),
-            _readyToBroadcast(true)
+            _readyToBroadcast(false)
     {
         for (size_t type = LINEMATE; type != UNDEFINED; type++)
             _inventory[static_cast<ObjectType>(type)] = 0;
