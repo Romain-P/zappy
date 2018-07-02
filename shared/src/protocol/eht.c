@@ -1,9 +1,6 @@
-/*
-** EPITECH PROJECT, 2018
-** ZAPPY
-** File description:
-** eht
-*/
+//
+// Created by Clement.Gomis on 6/21/18.
+//
 
 #include <zappy_network.h>
 #include <stdlib.h>
@@ -11,10 +8,9 @@
 
 packet_eht_t *deserialize_eht(char **args)
 {
-	packet_eht_t *packet = malloc(sizeof(*packet));
-
-	if (!packet)
-		return (NULL);
-	parse_uint(args[0], &packet->egg);
-	return (packet);
+    packet_eht_t *packet = malloc(sizeof(*packet));
+    if (!packet)
+        return (NULL);
+    parse_uint(args[0], &packet->egg);
+    return (packet);
 }

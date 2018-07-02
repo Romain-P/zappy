@@ -1,9 +1,6 @@
-/*
-** EPITECH PROJECT, 2018
-** Zappy
-** File description:
-** sst
-*/
+//
+// Created by Clement.Gomis on 6/21/18.
+//
 
 #include <zappy_network.h>
 #include <stdlib.h>
@@ -12,15 +9,14 @@
 
 packet_sst_t *deserialize_sst(char **args)
 {
-	packet_sst_t *packet = malloc(sizeof(*packet));
-
-	if (!packet)
-		return (NULL);
-	parse_uint(args[0], &packet->time);
-	return (packet);
+    packet_sst_t *packet = malloc(sizeof(*packet));
+    if (!packet)
+        return (NULL);
+    parse_uint(args[0], &packet->time);
+    return (packet);
 }
 
 void serialize_sst(packet_sst_t *msg, list_t *buffer)
 {
-	list_add(buffer, to_string((size_t) msg->time));
+    list_add(buffer, to_string((size_t) msg->time));
 }
