@@ -84,7 +84,7 @@ void AbstractAI::moveToTile(size_t tileId) {
         _player->request(MOVE_RIGHT);
     else if (right < 0)
         _player->request(MOVE_LEFT);
-    for (size_t i = 0; i < std::abs(right); ++i)
+    for (ssize_t i = 0; i < std::abs(right); ++i)
         _player->request(MOVE_FORWARD);
 }
 
