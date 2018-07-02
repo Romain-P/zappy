@@ -16,7 +16,8 @@ zappy_instance_t server = {
 	.players = list_init,
 	.pending = list_init,
 	.teams = list_init,
-	.pending = list_init
+	.pending = list_init,
+	.next_index = 1
 };
 
 //free anything we want (players already

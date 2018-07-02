@@ -32,8 +32,7 @@ void create_egg(player_t *player, packet_fork_t *packet)
 	egg->layed = false;
 	packet->egg = egg;
 	(server.map).nb_eggs += 1;
-	send_enw(player, (server.map).nb_eggs);
-	send_pfk(player);
+	send_enw(player, egg->id);
 }
 
 void add_spawn_team(player_t *player, packet_fork_t *packet)

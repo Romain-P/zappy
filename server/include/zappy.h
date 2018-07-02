@@ -138,6 +138,7 @@
 		map_t map;
 		size_t number_egg;
 		list_t pending;
+		size_t next_index;
 	};
 
 	typedef bool (*handler_t)(player_t *, void *);
