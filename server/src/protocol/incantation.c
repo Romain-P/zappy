@@ -20,15 +20,20 @@ packet_incantation_t *incantation_deserialize(char **args)
 	return (packet);
 }
 
-static void send_to_all_tile(char *message, player_t *player)
+static void send_to_all_tile(char *message, player_t *player, bool success)
 {
 	player_t *list;
 	iter_t *it;
 
 	for (it = iter_begin(&server.players); it; iter_next(it)) {
 		list = it->data;
-		if (list->x == player->x && list->y == player->y)
+		if (list->x == player->x && list->y == player->y) {
 			send_unwrapped(list->client, message);
+			if (success) {
+				list->level++;
+				send_plv(list);
+			}
+		}
 	}
 }
 
@@ -38,7 +43,7 @@ static char *send_current_level(player_t *player)
 
 	if (level == NULL)
 		exit(84);
-	sprintf(level, "Current level: %zu", player->level);
+	sprintf(level, "Current level: %zu", player->level + 1);
 	return (level);
 }
 
@@ -51,15 +56,13 @@ bool incantation_handler(player_t *player, packet_incantation_t *packet)
 		return (false);
 	}
 	if (!packet->delayed) {
-		send_to_all_tile("Elevation underway", player);
+		send_to_all_tile("Elevation underway", player, false);
 		delay(packet,
 		(handler_t) &incantation_handler, player, 300);
 	} else {
 		delete_ressource(player);
-		player->level++;
-		send_plv(player);
-		send_to_all_tile(send_current_level(player), player);
-		send_pie(player, packet);
+        send_pie(player, packet);
+		send_to_all_tile(send_current_level(player), player, true);
 	}
 	return (false);
 }

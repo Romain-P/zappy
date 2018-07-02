@@ -32,11 +32,14 @@ packet_welcome_t *welcome_deserialize(char **args)
 
 bool welcome_handler(player_t *player, packet_welcome_t *packet)
 {
+	packet_sst_t freq_msg = { .cmd = "sst", .time = server.freq };
+
 	player->is_gui = 1;
 	send_msz(player);
 	send_tna(player);
 	send_players(player);
 	send_bct(player);
+	send_packet(player->client, &freq_msg, 0);
 	return (true);
 }
 

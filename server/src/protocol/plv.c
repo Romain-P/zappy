@@ -11,14 +11,19 @@
 
 void send_plv(player_t *player)
 {
-	packet_plv_t *packet =
-	malloc(sizeof(*packet));
+	player_t *each;
+	iter_t *it;
+	packet_plv_t packet = {
+			.cmd = strdup("plv"),
+			.level = player->level,
+			.player_number = player->client->id
+	};
 
-	if (packet == NULL)
-		exit(84);
-	packet->cmd = strdup("plv");
-	packet->player_number = player->client->id;
-	plv_handler(player, packet);
+	for (it = iter_begin(&server.players); it; iter_next(it)) {
+		each = it->data;
+		if (each->is_gui)
+			send_packet(each->client, &packet, 0);
+	}
 }
 
 static void player_get_level(int nb, packet_plv_t *packet)

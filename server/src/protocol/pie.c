@@ -12,7 +12,7 @@
 void send_pie(player_t *player, packet_incantation_t *packett)
 {
 	char *packet = malloc(sizeof(char) * (strlen("pie") +
-	20));
+	200));
 	iter_t *it;
 	size_t i = 0;
 	player_t *list;
